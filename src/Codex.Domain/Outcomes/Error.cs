@@ -1,4 +1,4 @@
-﻿namespace Codex.Domain.Abstractions;
+﻿namespace Codex.Domain.Outcomes;
 
 public sealed class Error(string Code, string Message)
 {

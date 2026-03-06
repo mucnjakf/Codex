@@ -1,4 +1,4 @@
-﻿using Codex.Domain.Abstractions;
+﻿using Codex.Domain.Events;
 
 namespace Codex.Domain.Entities.Base;
 

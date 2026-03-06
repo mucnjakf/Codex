@@ -1,6 +1,10 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/Codex.Application/Codex.Application.csproj" />
     <Project Path="src/Codex.Domain/Codex.Domain.csproj" />
+    <Project Path="src/Codex.Infrastructure/Codex.Infrastructure.csproj" />
   </Folder>
-  <Folder Name="/test/" />
+  <Folder Name="/test/">
+    <Project Path="test/Codex.ArchitectureTests/Codex.ArchitectureTests.csproj" />
+  </Folder>
 </Solution>

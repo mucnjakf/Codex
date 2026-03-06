@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Codex.Domain.Abstractions;
+namespace Codex.Domain.Outcomes;
 
 public class Result
 {

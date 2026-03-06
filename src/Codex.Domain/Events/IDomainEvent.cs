@@ -1,5 +1,5 @@
 ﻿using MediatR;
 
-namespace Codex.Domain.Abstractions;
+namespace Codex.Domain.Events;
 
 public interface IDomainEvent : INotification;
