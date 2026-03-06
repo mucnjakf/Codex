@@ -1,4 +1,4 @@
-using Codex.ArchitectureTests.Infrastructure;
+using Codex.ArchitectureTests.Bootstrapper;
 using NetArchTest.Rules;
 using Shouldly;
 

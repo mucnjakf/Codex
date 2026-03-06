@@ -13,4 +13,6 @@ public sealed class Category : Entity
         DateTimeOffset createdAtUtc,
         DateTimeOffset updatedAtUtc,
         string name) : base(id, createdAtUtc, updatedAtUtc) => Name = name;
+    
+    
 }

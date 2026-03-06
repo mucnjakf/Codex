@@ -3,7 +3,7 @@ using Codex.Application;
 using Codex.Domain;
 using Codex.Infrastructure;
 
-namespace Codex.ArchitectureTests.Infrastructure;
+namespace Codex.ArchitectureTests.Bootstrapper;
 
 public abstract class BaseTest
 {

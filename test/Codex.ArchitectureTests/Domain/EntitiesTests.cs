@@ -1,5 +1,5 @@
 using System.Reflection;
-using Codex.ArchitectureTests.Infrastructure;
+using Codex.ArchitectureTests.Bootstrapper;
 using Codex.Domain.Entities.Base;
 using NetArchTest.Rules;
 using Shouldly;
