@@ -1,4 +1,6 @@
 ﻿using Codex.Domain.Entities.Base;
+using Codex.Domain.Errors;
+using Codex.Domain.Outcomes;
 
 namespace Codex.Domain.Entities;
 
@@ -22,5 +24,27 @@ public sealed class Author : Entity
         FirstName = firstName;
         LastName = lastName;
         Biography = biography;
+    }
+
+    public static Result<Author> Create(string firstName, string lastName, string biography)
+    {
+        if (string.IsNullOrWhiteSpace(firstName))
+        {
+            return Result.Failure<Author>(AuthorErrors.FirstNameIsRequired);
+        }
+
+        if (string.IsNullOrWhiteSpace(lastName))
+        {
+            return Result.Failure<Author>(AuthorErrors.LastNameIsRequired);
+        }
+
+        if (string.IsNullOrWhiteSpace(biography))
+        {
+            return Result.Failure<Author>(AuthorErrors.BiographyIsRequired);
+        }
+
+        Author author = new(Guid.CreateVersion7(), firstName, lastName, biography, DateTimeOffset.UtcNow);
+
+        return Result.Success(author);
     }
 }

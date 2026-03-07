@@ -40,7 +40,7 @@ public sealed class CategoryTests : BaseTest
     [Theory]
     [InlineData("")]
     [InlineData(" ")]
-    public void Create_ShouldReturnFailureAndNameIsRequiredError_WhenNameIsEmptyOrWhitespace(string name)
+    public void Create_ShouldReturnNameIsRequiredError_WhenNameIsEmptyOrWhitespace(string name)
     {
         Result<Category> result = Category.Create(name);
 
@@ -82,7 +82,7 @@ public sealed class CategoryTests : BaseTest
     [Theory]
     [InlineData("")]
     [InlineData(" ")]
-    public void Update_ShouldReturnFailureAndNameIsRequiredError_WhenNameIsEmptyOrWhitespace(string name)
+    public void Update_ShouldReturnNameIsRequiredError_WhenNameIsEmptyOrWhitespace(string name)
     {
         Category category = Category.Create(CategoryData.Name).Value;
 

@@ -35,7 +35,7 @@ public sealed class CommentTests : BaseTest
     [Theory]
     [InlineData("")]
     [InlineData(" ")]
-    public void Create_ShouldReturnFailureAndContentIsRequiredError_WhenContentIsEmptyOrWhitespace(string content)
+    public void Create_ShouldReturnContentIsRequiredError_WhenContentIsEmptyOrWhitespace(string content)
     {
         Guid postId = CommentData.PostId;
         Guid readerId = CommentData.ReaderId;
@@ -50,7 +50,7 @@ public sealed class CommentTests : BaseTest
     }
 
     [Fact]
-    public void Create_ShouldReturnFailureAndPostIdIsRequiredError_WhenPostIdIsEmpty()
+    public void Create_ShouldReturnPostIdIsRequiredError_WhenPostIdIsEmpty()
     {
         Result<Comment> result = Comment.Create(CommentData.Content, Guid.Empty, CommentData.ReaderId);
 
@@ -62,7 +62,7 @@ public sealed class CommentTests : BaseTest
     }
 
     [Fact]
-    public void Create_ShouldReturnFailureAndReaderIdIsRequiredError_WhenReaderIdIsEmpty()
+    public void Create_ShouldReturnReaderIdIsRequiredError_WhenReaderIdIsEmpty()
     {
         Result<Comment> result = Comment.Create(CommentData.Content, CommentData.PostId, Guid.Empty);
 
@@ -87,7 +87,7 @@ public sealed class CommentTests : BaseTest
     [Theory]
     [InlineData("")]
     [InlineData(" ")]
-    public void Update_ShouldReturnFailureAndContentIsRequiredError_WhenContentIsEmptyOrWhitespace(string content)
+    public void Update_ShouldReturnContentIsRequiredError_WhenContentIsEmptyOrWhitespace(string content)
     {
         Comment comment = Comment.Create(CommentData.Content, CommentData.PostId, CommentData.ReaderId).Value;
 
