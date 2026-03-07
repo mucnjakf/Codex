@@ -67,4 +67,63 @@ public sealed class AuthorTests : BaseTest
         result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(AuthorErrors.BiographyIsRequired);
     }
+
+    [Fact]
+    public void Update_ShouldReturnSuccess_WhenParametersAreValid()
+    {
+        Author author = Author.Create(AuthorData.FirstName, AuthorData.LastName, AuthorData.Biography).Value;
+
+        Result result = author.Update("New first name", "new last name", "New biography");
+
+        result.IsSuccess.ShouldBeTrue();
+        result.IsFailure.ShouldBeFalse();
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void Update_ShouldReturnFirstNameIsRequiredError_WhenFirstNameIsEmptyOrWhitespace(string firstName)
+    {
+        Author author = Author.Create(AuthorData.FirstName, AuthorData.LastName, AuthorData.Biography).Value;
+
+        Result result = author.Update(firstName, "New last name", "New biography");
+
+        result.IsSuccess.ShouldBeFalse();
+        result.IsFailure.ShouldBeTrue();
+
+        result.Error.ShouldNotBeNull();
+        result.Error.ShouldBe(AuthorErrors.FirstNameIsRequired);
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void Update_ShouldReturnLastNameIsRequiredError_WhenLastNameIsEmptyOrWhitespace(string lastName)
+    {
+        Author author = Author.Create(AuthorData.FirstName, AuthorData.LastName, AuthorData.Biography).Value;
+
+        Result result = author.Update("New first name", lastName, "New biography");
+
+        result.IsSuccess.ShouldBeFalse();
+        result.IsFailure.ShouldBeTrue();
+
+        result.Error.ShouldNotBeNull();
+        result.Error.ShouldBe(AuthorErrors.LastNameIsRequired);
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void Update_ShouldReturnBiographyIsRequiredError_WhenBiographyIsEmptyOrWhitespace(string biography)
+    {
+        Author author = Author.Create(AuthorData.FirstName, AuthorData.LastName, AuthorData.Biography).Value;
+
+        Result result = author.Update("New first name", "New last name", biography);
+
+        result.IsSuccess.ShouldBeFalse();
+        result.IsFailure.ShouldBeTrue();
+
+        result.Error.ShouldNotBeNull();
+        result.Error.ShouldBe(AuthorErrors.BiographyIsRequired);
+    }
 }

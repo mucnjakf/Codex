@@ -78,7 +78,7 @@ public sealed class CommentTests : BaseTest
     {
         Comment comment = Comment.Create(CommentData.Content, CommentData.PostId, CommentData.ReaderId).Value;
 
-        Result result = comment.Update("New comment content");
+        Result result = comment.Update("New content");
 
         result.IsSuccess.ShouldBeTrue();
         result.IsFailure.ShouldBeFalse();

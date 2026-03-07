@@ -73,7 +73,7 @@ public sealed class CategoryTests : BaseTest
     {
         Category category = Category.Create(CategoryData.Name).Value;
 
-        Result result = category.Update("New category name");
+        Result result = category.Update("New name");
 
         result.IsSuccess.ShouldBeTrue();
         result.IsFailure.ShouldBeFalse();

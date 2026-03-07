@@ -47,4 +47,30 @@ public sealed class Author : Entity
 
         return Result.Success(author);
     }
+
+    public Result Update(string firstName, string lastName, string biography)
+    {
+        if (string.IsNullOrWhiteSpace(firstName))
+        {
+            return Result.Failure<Author>(AuthorErrors.FirstNameIsRequired);
+        }
+
+        if (string.IsNullOrWhiteSpace(lastName))
+        {
+            return Result.Failure<Author>(AuthorErrors.LastNameIsRequired);
+        }
+
+        if (string.IsNullOrWhiteSpace(biography))
+        {
+            return Result.Failure<Author>(AuthorErrors.BiographyIsRequired);
+        }
+
+        FirstName = firstName;
+        LastName = lastName;
+        Biography = biography;
+
+        UpdateUpdatedAtUtc(DateTimeOffset.UtcNow);
+
+        return Result.Success();
+    }
 }
