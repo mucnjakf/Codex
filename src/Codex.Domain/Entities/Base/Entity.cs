@@ -12,7 +12,7 @@ public abstract class Entity(Guid id, DateTimeOffset createdAtUtc)
 
     public DateTimeOffset? UpdatedAtUtc { get; private set; }
 
-    public void UpdateUpdatedAtUtc(DateTimeOffset updatedAtUtc) => UpdatedAtUtc = updatedAtUtc;
+    protected void UpdateUpdatedAtUtc(DateTimeOffset updatedAtUtc) => UpdatedAtUtc = updatedAtUtc;
 
     public IReadOnlyList<IDomainEvent> GetDomainEvents() => _domainEvents.ToList();
 

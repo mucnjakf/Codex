@@ -49,4 +49,18 @@ public sealed class Comment : Entity
 
         return Result.Success(comment);
     }
+
+    public Result Update(string content)
+    {
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            return Result.Failure<Comment>(CommentErrors.ContentIsRequired);
+        }
+
+        Content = content;
+
+        UpdateUpdatedAtUtc(DateTimeOffset.UtcNow);
+
+        return Result.Success();
+    }
 }

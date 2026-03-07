@@ -72,4 +72,31 @@ public sealed class CommentTests : BaseTest
         result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CommentErrors.ReaderIdIsRequired);
     }
+
+    [Fact]
+    public void Update_ShouldReturnSuccess_WhenParametersAreValid()
+    {
+        Comment comment = Comment.Create(CommentData.Content, CommentData.PostId, CommentData.ReaderId).Value;
+
+        Result result = comment.Update("New comment content");
+
+        result.IsSuccess.ShouldBeTrue();
+        result.IsFailure.ShouldBeFalse();
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void Update_ShouldReturnFailureAndContentIsRequiredError_WhenContentIsEmptyOrWhitespace(string content)
+    {
+        Comment comment = Comment.Create(CommentData.Content, CommentData.PostId, CommentData.ReaderId).Value;
+
+        Result result = comment.Update(content);
+
+        result.IsSuccess.ShouldBeFalse();
+        result.IsFailure.ShouldBeTrue();
+
+        result.Error.ShouldNotBeNull();
+        result.Error.ShouldBe(CommentErrors.ContentIsRequired);
+    }
 }
