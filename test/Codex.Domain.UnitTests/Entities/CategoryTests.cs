@@ -14,18 +14,17 @@ public sealed class CategoryTests : BaseTest
     public void Create_ShouldReturnCategory_WhenParametersAreValid()
     {
         Result<Category> result = Category.Create(
-            CategoryData.Name,
-            CategoryData.CreatedAtUtc);
+            CategoryData.Name);
 
         result.IsSuccess.ShouldBeTrue();
+        result.IsFailure.ShouldBeFalse();
+
         result.Value.ShouldNotBeNull();
         result.Value.Id.ShouldNotBe(Guid.Empty);
         result.Value.Name.ShouldBe(CategoryData.Name);
         result.Value.Posts.ShouldBeEmpty();
-        result.Value.CreatedAtUtc.ShouldBe(CategoryData.CreatedAtUtc);
         result.Value.UpdatedAtUtc.ShouldBeNull();
 
-        result.IsFailure.ShouldBeFalse();
         result.Error.ShouldBe(Error.None);
     }
 
@@ -33,8 +32,7 @@ public sealed class CategoryTests : BaseTest
     public void Create_ShouldRaiseCategoryCreatedDomainEvent_WhenCreatedSuccessfully()
     {
         Result<Category> result = Category.Create(
-            CategoryData.Name,
-            CategoryData.CreatedAtUtc);
+            CategoryData.Name);
 
         result.IsSuccess.ShouldBeTrue();
         result.Value.ShouldNotBeNull();
@@ -43,16 +41,17 @@ public sealed class CategoryTests : BaseTest
         domainEvent.CategoryId.ShouldBe(result.Value.Id);
     }
 
-    [Fact]
-    public void Create_ShouldReturnFailureAndNameIsRequiredError_WhenNameIsWhitespace()
+    [Theory]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void Create_ShouldReturnFailureAndNameIsRequiredError_WhenNameIsEmptyOrWhitespace(string name)
     {
         Result<Category> result = Category.Create(
-            string.Empty,
-            CategoryData.CreatedAtUtc);
+            name);
 
         result.IsSuccess.ShouldBeFalse();
-
         result.IsFailure.ShouldBeTrue();
+
         result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CategoryErrors.NameIsRequired);
     }
@@ -60,15 +59,44 @@ public sealed class CategoryTests : BaseTest
     [Fact]
     public void Create_ShouldGenerateUniqueIds_WhenCreatedMultipleTimes()
     {
-        Result<Category> result1 = Category.Create(CategoryData.Name, CategoryData.CreatedAtUtc);
-        Result<Category> result2 = Category.Create(CategoryData.Name, CategoryData.CreatedAtUtc);
+        Result<Category> result1 = Category.Create(CategoryData.Name);
+        Result<Category> result2 = Category.Create(CategoryData.Name);
 
         result1.IsSuccess.ShouldBeTrue();
-        result1.IsFailure.ShouldBeFalse();
         result2.IsSuccess.ShouldBeTrue();
+
+        result1.IsFailure.ShouldBeFalse();
         result2.IsFailure.ShouldBeFalse();
+
         result1.Value.ShouldNotBeNull();
         result2.Value.ShouldNotBeNull();
         result1.Value.Id.ShouldNotBe(result2.Value.Id);
+    }
+
+    [Fact]
+    public void Update_ShouldReturnSuccess_WhenParametersAreValid()
+    {
+        Category category = Category.Create(CategoryData.Name).Value;
+
+        Result result = category.Update("New category name");
+
+        result.IsSuccess.ShouldBeTrue();
+        result.IsFailure.ShouldBeFalse();
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void Update_ShouldReturnFailureAndNameIsRequiredError_WhenNameIsEmptyOrWhitespace(string name)
+    {
+        Category category = Category.Create(CategoryData.Name).Value;
+
+        Result result = category.Update(name);
+
+        result.IsSuccess.ShouldBeFalse();
+        result.IsFailure.ShouldBeTrue();
+
+        result.Error.ShouldNotBeNull();
+        result.Error.ShouldBe(CategoryErrors.NameIsRequired);
     }
 }
