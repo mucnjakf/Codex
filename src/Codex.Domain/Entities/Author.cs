@@ -14,11 +14,10 @@ public sealed class Author : Entity
 
     private Author(
         Guid id,
-        DateTimeOffset createdAtUtc,
-        DateTimeOffset updatedAtUtc,
         string firstName,
         string lastName,
-        string biography) : base(id, createdAtUtc, updatedAtUtc)
+        string biography,
+        DateTimeOffset createdAtUtc) : base(id, createdAtUtc)
     {
         FirstName = firstName;
         LastName = lastName;

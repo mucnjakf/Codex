@@ -25,12 +25,11 @@ public sealed class Post : Entity
 
     private Post(
         Guid id,
-        DateTimeOffset createdAtUtc,
-        DateTimeOffset updatedAtUtc,
         string title,
         string content,
         Guid authorId,
-        Guid categoryId) : base(id, createdAtUtc, updatedAtUtc)
+        Guid categoryId,
+        DateTimeOffset createdAtUtc) : base(id, createdAtUtc)
     {
         Title = title;
         Content = content;

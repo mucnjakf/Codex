@@ -2,7 +2,7 @@
 
 namespace Codex.Domain.Entities.Base;
 
-public abstract class Entity(Guid id, DateTimeOffset createdAtUtc, DateTimeOffset updatedAtUtc)
+public abstract class Entity(Guid id, DateTimeOffset createdAtUtc)
 {
     private readonly List<IDomainEvent> _domainEvents = [];
 
@@ -10,7 +10,9 @@ public abstract class Entity(Guid id, DateTimeOffset createdAtUtc, DateTimeOffse
 
     public DateTimeOffset CreatedAtUtc { get; private set; } = createdAtUtc;
 
-    public DateTimeOffset UpdatedAtUtc { get; private set; } = updatedAtUtc;
+    public DateTimeOffset? UpdatedAtUtc { get; private set; }
+
+    public void UpdateUpdatedAtUtc(DateTimeOffset updatedAtUtc) => UpdatedAtUtc = updatedAtUtc;
 
     public IReadOnlyList<IDomainEvent> GetDomainEvents() => _domainEvents.ToList();
 

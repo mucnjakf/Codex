@@ -12,10 +12,9 @@ public sealed class Reader : Entity
 
     private Reader(
         Guid id,
-        DateTimeOffset createdAtUtc,
-        DateTimeOffset updatedAtUtc,
         string firstName,
-        string lastName) : base(id, createdAtUtc, updatedAtUtc)
+        string lastName,
+        DateTimeOffset createdAtUtc) : base(id, createdAtUtc)
     {
         FirstName = firstName;
         LastName = lastName;

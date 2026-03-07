@@ -16,11 +16,10 @@ public sealed class Comment : Entity
 
     private Comment(
         Guid id,
-        DateTimeOffset createdAtUtc,
-        DateTimeOffset updatedAtUtc,
         string content,
         Guid postId,
-        Guid readerId) : base(id, createdAtUtc, updatedAtUtc)
+        Guid readerId,
+        DateTimeOffset createdAtUtc) : base(id, createdAtUtc)
     {
         Content = content;
         PostId = postId;

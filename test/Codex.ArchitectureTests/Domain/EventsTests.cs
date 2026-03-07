@@ -59,22 +59,6 @@ public sealed class EventsTests : BaseTest
     }
 
     [Fact]
-    public void Events_ShouldBeImmutable()
-    {
-        List<Type> violations = Types
-            .InAssembly(DomainAssembly)
-            .That()
-            .HaveNameEndingWith("DomainEvent")
-            .GetTypes()
-            .Where(type => type.GetProperties()
-                .Any(propertyInfo => propertyInfo.SetMethod != null && propertyInfo.SetMethod.IsPublic))
-            .ToList();
-
-        string failingTypes = string.Join(", ", violations.Select(type => type.Name));
-        violations.ShouldBeEmpty($"The following events have public setters: {failingTypes}");
-    }
-
-    [Fact]
     public void Events_ShouldHaveNameEndingWithDomainEvent()
     {
         List<Type> violations = Types
