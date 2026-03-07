@@ -1,4 +1,6 @@
 ﻿using Codex.Domain.Entities.Base;
+using Codex.Domain.Errors;
+using Codex.Domain.Outcomes;
 
 namespace Codex.Domain.Entities;
 
@@ -24,5 +26,27 @@ public sealed class Comment : Entity
         Content = content;
         PostId = postId;
         ReaderId = readerId;
+    }
+
+    public static Result<Comment> Create(string content, Guid postId, Guid readerId)
+    {
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            return Result.Failure<Comment>(CommentErrors.ContentIsRequired);
+        }
+
+        if (postId == Guid.Empty)
+        {
+            return Result.Failure<Comment>(CommentErrors.PostIdIsRequired);
+        }
+
+        if (readerId == Guid.Empty)
+        {
+            return Result.Failure<Comment>(CommentErrors.ReaderIdIsRequired);
+        }
+
+        Comment comment = new(Guid.CreateVersion7(), content, postId, readerId, DateTimeOffset.UtcNow);
+
+        return Result.Success(comment);
     }
 }

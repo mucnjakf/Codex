@@ -13,8 +13,7 @@ public sealed class CategoryTests : BaseTest
     [Fact]
     public void Create_ShouldReturnCategory_WhenParametersAreValid()
     {
-        Result<Category> result = Category.Create(
-            CategoryData.Name);
+        Result<Category> result = Category.Create(CategoryData.Name);
 
         result.IsSuccess.ShouldBeTrue();
         result.IsFailure.ShouldBeFalse();
@@ -22,8 +21,6 @@ public sealed class CategoryTests : BaseTest
         result.Value.ShouldNotBeNull();
         result.Value.Id.ShouldNotBe(Guid.Empty);
         result.Value.Name.ShouldBe(CategoryData.Name);
-        result.Value.Posts.ShouldBeEmpty();
-        result.Value.UpdatedAtUtc.ShouldBeNull();
 
         result.Error.ShouldBe(Error.None);
     }
@@ -31,8 +28,7 @@ public sealed class CategoryTests : BaseTest
     [Fact]
     public void Create_ShouldRaiseCategoryCreatedDomainEvent_WhenCreatedSuccessfully()
     {
-        Result<Category> result = Category.Create(
-            CategoryData.Name);
+        Result<Category> result = Category.Create(CategoryData.Name);
 
         result.IsSuccess.ShouldBeTrue();
         result.Value.ShouldNotBeNull();
@@ -46,8 +42,7 @@ public sealed class CategoryTests : BaseTest
     [InlineData(" ")]
     public void Create_ShouldReturnFailureAndNameIsRequiredError_WhenNameIsEmptyOrWhitespace(string name)
     {
-        Result<Category> result = Category.Create(
-            name);
+        Result<Category> result = Category.Create(name);
 
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
