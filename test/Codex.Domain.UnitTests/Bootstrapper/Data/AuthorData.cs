@@ -1,3 +1,5 @@
+using Codex.Domain.Entities;
+
 namespace Codex.Domain.UnitTests.Bootstrapper.Data;
 
 internal static class AuthorData
@@ -9,4 +11,6 @@ internal static class AuthorData
     internal static string LastName => "Author last name";
 
     internal static string Biography => "Author biography";
+
+    internal static Author Author => Author.Create(FirstName, LastName, Biography).Value;
 }

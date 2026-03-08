@@ -9,22 +9,6 @@ namespace Codex.ArchitectureTests.Domain;
 public sealed class ErrorsTests : BaseTest
 {
     [Fact]
-    public void Errors_ShouldResideInErrorsNamespace()
-    {
-        TestResult testResult = Types
-            .InAssembly(DomainAssembly)
-            .That()
-            .ResideInNamespace("Domain.Errors")
-            .Should()
-            .ResideInNamespaceContaining("Errors")
-            .GetResult();
-
-        string failingTypes = string.Join(", ", testResult.FailingTypeNames ?? []);
-        testResult.IsSuccessful.ShouldBeTrue(
-            $"The following error types do not reside in the correct namespace: {failingTypes}");
-    }
-
-    [Fact]
     public void Errors_ShouldBeStaticClasses()
     {
         List<Type> violations = Types

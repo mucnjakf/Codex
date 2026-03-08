@@ -6,13 +6,13 @@ internal static class AuthorErrors
 {
     internal static readonly Error FirstNameIsRequired = new(
         "Author.FirstNameIsRequired",
-        "The author first name is required");
+        "Author first name is required");
 
     internal static readonly Error LastNameIsRequired = new(
         "Author.LastNameIsRequired",
-        "The author last name is required");
+        "Author last name is required");
 
     internal static readonly Error BiographyIsRequired = new(
         "Author.BiographyIsRequired",
-        "The author biography is required");
+        "Author biography is required");
 }

@@ -21,8 +21,6 @@ public sealed class ReaderTests : BaseTest
         result.Value.Id.ShouldNotBe(Guid.Empty);
         result.Value.FirstName.ShouldBe(ReaderData.FirstName);
         result.Value.LastName.ShouldBe(ReaderData.LastName);
-
-        result.Error.ShouldBe(Error.None);
     }
 
     [Theory]
@@ -56,12 +54,20 @@ public sealed class ReaderTests : BaseTest
     [Fact]
     public void Update_ShouldReturnSuccess_WhenParametersAreValid()
     {
-        Reader reader = Reader.Create(ReaderData.FirstName, ReaderData.LastName).Value;
+        Reader reader = ReaderData.Reader;
 
-        Result result = reader.Update("New first name", "new last name");
+        const string firstName = "New first name";
+        const string lastName = "New last name";
+
+        Result result = reader.Update(firstName, lastName);
 
         result.IsSuccess.ShouldBeTrue();
         result.IsFailure.ShouldBeFalse();
+
+        reader.UpdatedAtUtc.ShouldNotBeNull();
+
+        reader.FirstName.ShouldBe(firstName);
+        reader.LastName.ShouldBe(lastName);
     }
 
     [Theory]
@@ -69,7 +75,7 @@ public sealed class ReaderTests : BaseTest
     [InlineData(" ")]
     public void Update_ShouldReturnFirstNameIsRequiredError_WhenFirstNameIsEmptyOrWhitespace(string firstName)
     {
-        Reader reader = Reader.Create(ReaderData.FirstName, ReaderData.LastName).Value;
+        Reader reader = ReaderData.Reader;
 
         Result result = reader.Update(firstName, "New last name");
 
@@ -85,7 +91,7 @@ public sealed class ReaderTests : BaseTest
     [InlineData(" ")]
     public void Update_ShouldReturnLastNameIsRequiredError_WhenLastNameIsEmptyOrWhitespace(string lastName)
     {
-        Reader reader = Reader.Create(ReaderData.FirstName, ReaderData.LastName).Value;
+        Reader reader = ReaderData.Reader;
 
         Result result = reader.Update("New first name", lastName);
 

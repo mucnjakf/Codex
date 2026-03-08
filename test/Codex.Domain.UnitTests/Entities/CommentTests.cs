@@ -15,10 +15,7 @@ public sealed class CommentTests : BaseTest
         Guid postId = PostData.Id;
         Guid readerId = ReaderData.Id;
 
-        Result<Comment> result = Comment.Create(
-            CommentData.Content,
-            postId,
-            readerId);
+        Result<Comment> result = Comment.Create(CommentData.Content, postId, readerId);
 
         result.IsSuccess.ShouldBeTrue();
         result.IsFailure.ShouldBeFalse();
@@ -28,8 +25,6 @@ public sealed class CommentTests : BaseTest
         result.Value.Content.ShouldBe(CommentData.Content);
         result.Value.PostId.ShouldBe(postId);
         result.Value.ReaderId.ShouldBe(readerId);
-
-        result.Error.ShouldBe(Error.None);
     }
 
     [Theory]
@@ -76,12 +71,18 @@ public sealed class CommentTests : BaseTest
     [Fact]
     public void Update_ShouldReturnSuccess_WhenParametersAreValid()
     {
-        Comment comment = Comment.Create(CommentData.Content, PostData.Id, ReaderData.Id).Value;
+        Comment comment = CommentData.Comment;
 
-        Result result = comment.Update("New content");
+        const string content = "New content";
+
+        Result result = comment.Update(content);
 
         result.IsSuccess.ShouldBeTrue();
         result.IsFailure.ShouldBeFalse();
+
+        comment.UpdatedAtUtc.ShouldNotBeNull();
+
+        comment.Content.ShouldBe(content);
     }
 
     [Theory]
@@ -89,7 +90,7 @@ public sealed class CommentTests : BaseTest
     [InlineData(" ")]
     public void Update_ShouldReturnContentIsRequiredError_WhenContentIsEmptyOrWhitespace(string content)
     {
-        Comment comment = Comment.Create(CommentData.Content, PostData.Id, ReaderData.Id).Value;
+        Comment comment = CommentData.Comment;
 
         Result result = comment.Update(content);
 

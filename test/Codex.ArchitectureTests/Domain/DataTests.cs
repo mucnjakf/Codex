@@ -7,22 +7,6 @@ namespace Codex.ArchitectureTests.Domain;
 public sealed class DataTests : BaseTest
 {
     [Fact]
-    public void Data_ShouldResideInDataNamespace()
-    {
-        TestResult testResult = Types
-            .InAssembly(DomainAssembly)
-            .That()
-            .ResideInNamespace("Domain.Data")
-            .Should()
-            .ResideInNamespaceContaining("Data")
-            .GetResult();
-
-        string failingTypes = string.Join(", ", testResult.FailingTypeNames ?? []);
-        testResult.IsSuccessful.ShouldBeTrue(
-            $"The following data types do not reside in the correct namespace: {failingTypes}");
-    }
-
-    [Fact]
     public void Data_ShouldBePublic()
     {
         TestResult testResult = Types

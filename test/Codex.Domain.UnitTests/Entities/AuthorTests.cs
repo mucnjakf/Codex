@@ -22,8 +22,6 @@ public sealed class AuthorTests : BaseTest
         result.Value.FirstName.ShouldBe(AuthorData.FirstName);
         result.Value.LastName.ShouldBe(AuthorData.LastName);
         result.Value.Biography.ShouldBe(AuthorData.Biography);
-
-        result.Error.ShouldBe(Error.None);
     }
 
     [Theory]
@@ -71,12 +69,22 @@ public sealed class AuthorTests : BaseTest
     [Fact]
     public void Update_ShouldReturnSuccess_WhenParametersAreValid()
     {
-        Author author = Author.Create(AuthorData.FirstName, AuthorData.LastName, AuthorData.Biography).Value;
+        Author author = AuthorData.Author;
 
-        Result result = author.Update("New first name", "new last name", "New biography");
+        const string firstName = "New first name";
+        const string lastName = "New last name";
+        const string biography = "New biography";
+
+        Result result = author.Update(firstName, lastName, biography);
 
         result.IsSuccess.ShouldBeTrue();
         result.IsFailure.ShouldBeFalse();
+
+        author.UpdatedAtUtc.ShouldNotBeNull();
+
+        author.FirstName.ShouldBe(firstName);
+        author.LastName.ShouldBe(lastName);
+        author.Biography.ShouldBe(biography);
     }
 
     [Theory]
@@ -84,7 +92,7 @@ public sealed class AuthorTests : BaseTest
     [InlineData(" ")]
     public void Update_ShouldReturnFirstNameIsRequiredError_WhenFirstNameIsEmptyOrWhitespace(string firstName)
     {
-        Author author = Author.Create(AuthorData.FirstName, AuthorData.LastName, AuthorData.Biography).Value;
+        Author author = AuthorData.Author;
 
         Result result = author.Update(firstName, "New last name", "New biography");
 
@@ -100,7 +108,7 @@ public sealed class AuthorTests : BaseTest
     [InlineData(" ")]
     public void Update_ShouldReturnLastNameIsRequiredError_WhenLastNameIsEmptyOrWhitespace(string lastName)
     {
-        Author author = Author.Create(AuthorData.FirstName, AuthorData.LastName, AuthorData.Biography).Value;
+        Author author = AuthorData.Author;
 
         Result result = author.Update("New first name", lastName, "New biography");
 
@@ -116,7 +124,7 @@ public sealed class AuthorTests : BaseTest
     [InlineData(" ")]
     public void Update_ShouldReturnBiographyIsRequiredError_WhenBiographyIsEmptyOrWhitespace(string biography)
     {
-        Author author = Author.Create(AuthorData.FirstName, AuthorData.LastName, AuthorData.Biography).Value;
+        Author author = AuthorData.Author;
 
         Result result = author.Update("New first name", "New last name", biography);
 

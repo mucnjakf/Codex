@@ -8,7 +8,7 @@ namespace Codex.ArchitectureTests.Domain;
 public sealed class OutcomesTests : BaseTest
 {
     [Fact]
-    public void Outcomes_ShouldResideInOutcomesNamespace()
+    public void Outcomes_ShouldResideInCorrectNamespace()
     {
         TestResult testResult = Types
             .InAssembly(DomainAssembly)

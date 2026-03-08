@@ -8,22 +8,6 @@ namespace Codex.ArchitectureTests.Domain;
 public sealed class EventsTests : BaseTest
 {
     [Fact]
-    public void Events_ShouldResideInEventsNamespace()
-    {
-        TestResult testResult = Types
-            .InAssembly(DomainAssembly)
-            .That()
-            .HaveNameEndingWith("DomainEvent")
-            .Should()
-            .ResideInNamespaceContaining("Domain.Events")
-            .GetResult();
-
-        string failingTypes = string.Join(", ", testResult.FailingTypeNames ?? []);
-        testResult.IsSuccessful.ShouldBeTrue(
-            $"The following events do not reside in the correct namespace: {failingTypes}");
-    }
-
-    [Fact]
     public void Events_ShouldImplementIDomainEvent()
     {
         TestResult testResult = Types

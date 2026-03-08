@@ -2,9 +2,13 @@ using Codex.Domain.Outcomes;
 
 namespace Codex.Domain.Errors;
 
-internal static class CategoryErrors
+public static class CategoryErrors
 {
     internal static readonly Error NameIsRequired = new(
         "Category.NameIsRequired",
-        "The category name is required");
+        "Category name is required");
+
+    public static readonly Error NotFound = new(
+        "Category.NotFound",
+        "Category not found");
 }

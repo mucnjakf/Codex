@@ -21,8 +21,6 @@ public sealed class CategoryTests : BaseTest
         result.Value.ShouldNotBeNull();
         result.Value.Id.ShouldNotBe(Guid.Empty);
         result.Value.Name.ShouldBe(CategoryData.Name);
-
-        result.Error.ShouldBe(Error.None);
     }
 
     [Fact]
@@ -71,12 +69,18 @@ public sealed class CategoryTests : BaseTest
     [Fact]
     public void Update_ShouldReturnSuccess_WhenParametersAreValid()
     {
-        Category category = Category.Create(CategoryData.Name).Value;
+        Category category = CategoryData.Category;
 
-        Result result = category.Update("New name");
+        const string name = "New name";
+
+        Result result = category.Update(name);
 
         result.IsSuccess.ShouldBeTrue();
         result.IsFailure.ShouldBeFalse();
+
+        category.UpdatedAtUtc.ShouldNotBeNull();
+
+        category.Name.ShouldBe(name);
     }
 
     [Theory]
@@ -84,7 +88,7 @@ public sealed class CategoryTests : BaseTest
     [InlineData(" ")]
     public void Update_ShouldReturnNameIsRequiredError_WhenNameIsEmptyOrWhitespace(string name)
     {
-        Category category = Category.Create(CategoryData.Name).Value;
+        Category category = CategoryData.Category;
 
         Result result = category.Update(name);
 

@@ -13,7 +13,7 @@ public sealed class Post : Entity
 
     public PostStatus Status { get; private set; } = PostStatus.Draft;
 
-    public DateTimeOffset? PublishedAtUtc { get; private set; } = null;
+    public DateTimeOffset? PublishedAtUtc { get; private set; }
 
     public Guid AuthorId { get; private set; }
 
@@ -64,5 +64,47 @@ public sealed class Post : Entity
         Post post = new(Guid.CreateVersion7(), title, content, authorId, categoryId, DateTimeOffset.UtcNow);
 
         return Result.Success(post);
+    }
+
+    public Result Update(string title, string content, Guid categoryId)
+    {
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            return Result.Failure<Post>(PostErrors.TitleIsRequired);
+        }
+
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            return Result.Failure<Post>(PostErrors.ContentIsRequired);
+        }
+
+        if (categoryId == Guid.Empty)
+        {
+            return Result.Failure<Post>(PostErrors.CategoryIdIsRequired);
+        }
+
+        Title = title;
+        Content = content;
+        CategoryId = categoryId;
+
+        UpdateUpdatedAtUtc(DateTimeOffset.UtcNow);
+
+        return Result.Success();
+    }
+
+    public Result Publish()
+    {
+        if (Status is not PostStatus.Draft)
+        {
+            return Result.Failure(PostErrors.PublishOnlyDraft);
+        }
+
+        Status = PostStatus.Published;
+
+        DateTimeOffset now = DateTimeOffset.UtcNow;
+        PublishedAtUtc = now;
+        UpdateUpdatedAtUtc(now);
+
+        return Result.Success();
     }
 }
