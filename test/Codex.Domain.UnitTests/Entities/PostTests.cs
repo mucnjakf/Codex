@@ -3,7 +3,7 @@ using Codex.Domain.Enumerations;
 using Codex.Domain.Errors;
 using Codex.Domain.Outcomes;
 using Codex.Domain.UnitTests.Bootstrapper;
-using Codex.Domain.UnitTests.Bootstrapper.Data;
+using Codex.Tests.Data;
 using Shouldly;
 
 namespace Codex.Domain.UnitTests.Entities;

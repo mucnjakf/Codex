@@ -7,12 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Codex.Domain\Codex.Domain.csproj" />
+        <ProjectReference Include="..\Codex.Domain\Codex.Domain.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="MediatR" Version="14.1.0" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.3" />
+        <PackageReference Include="MediatR" Version="14.1.0"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.3"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Codex.Application.UnitTests"/>
     </ItemGroup>
 
 </Project>

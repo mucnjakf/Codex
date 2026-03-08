@@ -5,7 +5,9 @@
     <Project Path="src/Codex.Infrastructure/Codex.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/test/">
+    <Project Path="test/Codex.Application.UnitTests/Codex.Application.UnitTests.csproj" />
     <Project Path="test/Codex.ArchitectureTests/Codex.ArchitectureTests.csproj" />
     <Project Path="test/Codex.Domain.UnitTests/Codex.Domain.UnitTests.csproj" />
+    <Project Path="test/Codex.Tests/Codex.Tests.csproj" />
   </Folder>
 </Solution>
