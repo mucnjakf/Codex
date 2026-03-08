@@ -12,8 +12,8 @@ public sealed class CommentTests : BaseTest
     [Fact]
     public void Create_ShouldReturnComment_WhenParametersAreValid()
     {
-        Guid postId = CommentData.PostId;
-        Guid readerId = CommentData.ReaderId;
+        Guid postId = PostData.Id;
+        Guid readerId = ReaderData.Id;
 
         Result<Comment> result = Comment.Create(
             CommentData.Content,
@@ -37,8 +37,8 @@ public sealed class CommentTests : BaseTest
     [InlineData(" ")]
     public void Create_ShouldReturnContentIsRequiredError_WhenContentIsEmptyOrWhitespace(string content)
     {
-        Guid postId = CommentData.PostId;
-        Guid readerId = CommentData.ReaderId;
+        Guid postId = PostData.Id;
+        Guid readerId = ReaderData.Id;
 
         Result<Comment> result = Comment.Create(content, postId, readerId);
 
@@ -52,7 +52,7 @@ public sealed class CommentTests : BaseTest
     [Fact]
     public void Create_ShouldReturnPostIdIsRequiredError_WhenPostIdIsEmpty()
     {
-        Result<Comment> result = Comment.Create(CommentData.Content, Guid.Empty, CommentData.ReaderId);
+        Result<Comment> result = Comment.Create(CommentData.Content, Guid.Empty, ReaderData.Id);
 
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
@@ -64,7 +64,7 @@ public sealed class CommentTests : BaseTest
     [Fact]
     public void Create_ShouldReturnReaderIdIsRequiredError_WhenReaderIdIsEmpty()
     {
-        Result<Comment> result = Comment.Create(CommentData.Content, CommentData.PostId, Guid.Empty);
+        Result<Comment> result = Comment.Create(CommentData.Content, PostData.Id, Guid.Empty);
 
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
@@ -76,7 +76,7 @@ public sealed class CommentTests : BaseTest
     [Fact]
     public void Update_ShouldReturnSuccess_WhenParametersAreValid()
     {
-        Comment comment = Comment.Create(CommentData.Content, CommentData.PostId, CommentData.ReaderId).Value;
+        Comment comment = Comment.Create(CommentData.Content, PostData.Id, ReaderData.Id).Value;
 
         Result result = comment.Update("New content");
 
@@ -89,7 +89,7 @@ public sealed class CommentTests : BaseTest
     [InlineData(" ")]
     public void Update_ShouldReturnContentIsRequiredError_WhenContentIsEmptyOrWhitespace(string content)
     {
-        Comment comment = Comment.Create(CommentData.Content, CommentData.PostId, CommentData.ReaderId).Value;
+        Comment comment = Comment.Create(CommentData.Content, PostData.Id, ReaderData.Id).Value;
 
         Result result = comment.Update(content);
 
