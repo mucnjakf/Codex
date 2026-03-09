@@ -1,4 +1,4 @@
-using Codex.Application.Dtos.Mapper;
+using Codex.Application.Dtos.Mappers;
 using Codex.Domain.Entities;
 using Codex.Tests.Data;
 using Shouldly;

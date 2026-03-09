@@ -1,6 +1,6 @@
 using Codex.Domain.Entities;
 
-namespace Codex.Application.Dtos.Mapper;
+namespace Codex.Application.Dtos.Mappers;
 
 internal static class CategoryMapper
 {

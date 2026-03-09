@@ -1,6 +1,6 @@
 using Codex.Application.Data;
 using Codex.Application.Dtos;
-using Codex.Application.Dtos.Mapper;
+using Codex.Application.Dtos.Mappers;
 using Codex.Application.Mediator;
 using Codex.Domain.Entities;
 using Codex.Domain.Errors;
