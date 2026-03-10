@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <InternalsVisibleTo Include="Codex.Domain.UnitTests"/>
+        <InternalsVisibleTo Include="Codex.Application.UnitTests"/>
     </ItemGroup>
 
 </Project>

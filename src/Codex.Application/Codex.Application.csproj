@@ -17,6 +17,7 @@
 
     <ItemGroup>
         <InternalsVisibleTo Include="Codex.Application.UnitTests"/>
+        <InternalsVisibleTo Include="Codex.ArchitectureTests"/>
     </ItemGroup>
 
 </Project>

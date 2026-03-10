@@ -10,4 +10,6 @@ public interface ICategoryRepository
         CancellationToken cancellationToken = default);
 
     Task<Category?> GetAsync(Guid id, CancellationToken cancellationToken = default);
+
+    Task CreateAsync(Category category, CancellationToken cancellationToken = default);
 }

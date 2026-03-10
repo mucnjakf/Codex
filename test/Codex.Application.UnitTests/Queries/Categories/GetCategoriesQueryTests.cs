@@ -59,5 +59,9 @@ public sealed class GetCategoriesQueryTests
         result.Value.TotalPages.ShouldBe(paginatedCategories.TotalPages);
         result.Value.HasPreviousPage.ShouldBe(paginatedCategories.HasPreviousPage);
         result.Value.HasNextPage.ShouldBe(paginatedCategories.HasNextPage);
+
+        await _categoryRepositoryMock
+            .Received(1)
+            .GetPaginatedAsync(pageNumber, pageSize);
     }
 }
