@@ -30,22 +30,20 @@ public sealed class GetCategoriesQueryTests
         const int pageNumber = 1;
         const int pageSize = 1;
 
-        var paginatedCategories = new PaginationDto<Category>()
-        {
-            Items = categories,
-            PageNumber = pageNumber,
-            PageSize = pageSize,
-            TotalCount = categories.Count
-        };
+        var paginatedCategories = new PaginationDto<Category>(
+            categories,
+            pageNumber,
+            pageSize,
+            categories.Count);
 
         _categoryRepositoryMock
             .GetPaginatedAsync(
-                paginatedCategories.PageNumber,
-                paginatedCategories.PageSize,
+                pageNumber,
+                pageSize,
                 Arg.Any<CancellationToken>())
-            .Returns(paginatedCategories);
+            .Returns((categories, 1));
 
-        GetCategoriesQuery query = new(paginatedCategories.PageNumber, paginatedCategories.PageSize);
+        GetCategoriesQuery query = new(pageNumber, pageSize);
 
         Result<PaginationDto<CategoryDto>> result = await _queryHandler.Handle(query, CancellationToken.None);
 

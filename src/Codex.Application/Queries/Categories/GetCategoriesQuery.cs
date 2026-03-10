@@ -18,15 +18,13 @@ internal sealed class GetCategoriesQueryHandler(
         GetCategoriesQuery query,
         CancellationToken cancellationToken)
     {
-        PaginationDto<Category> paginatedCategories = await categoryRepository
+        (IReadOnlyList<Category> categories, int totalCount) = await categoryRepository
             .GetPaginatedAsync(query.PageNumber, query.PageSize, cancellationToken);
 
-        return new PaginationDto<CategoryDto>
-        {
-            Items = paginatedCategories.Items.Select(category => category.ToCategoryDto()).ToList(),
-            PageNumber = paginatedCategories.PageNumber,
-            PageSize = paginatedCategories.PageSize,
-            TotalCount = paginatedCategories.TotalCount
-        };
+        return new PaginationDto<CategoryDto>(
+            categories.Select(category => category.ToCategoryDto()).ToList(),
+            query.PageNumber,
+            query.PageSize,
+            totalCount);
     }
 }

@@ -1,11 +1,10 @@
-using Codex.Application.Dtos.Pagination;
 using Codex.Domain.Entities;
 
 namespace Codex.Application.Data;
 
 public interface ICategoryRepository
 {
-    Task<PaginationDto<Category>> GetPaginatedAsync(
+    Task<(IReadOnlyList<Category>, int)> GetPaginatedAsync(
         int pageNumber,
         int pageSize,
         CancellationToken cancellationToken = default);

@@ -1,15 +1,7 @@
 namespace Codex.Application.Dtos.Pagination;
 
-public sealed record PaginationDto<T>
+public sealed record PaginationDto<T>(IReadOnlyList<T> Items, int PageNumber, int PageSize, int TotalCount)
 {
-    public required IReadOnlyList<T> Items { get; init; }
-
-    public required int PageNumber { get; init; }
-
-    public required int PageSize { get; init; }
-
-    public required int TotalCount { get; init; }
-
     public int TotalPages => (int)Math.Ceiling(TotalCount / (double)PageSize);
 
     public bool HasPreviousPage => PageNumber > 1;
