@@ -41,7 +41,7 @@ public sealed class GetCategoriesQueryTests
                 pageNumber,
                 pageSize,
                 Arg.Any<CancellationToken>())
-            .Returns((categories, 1));
+            .Returns((categories, categories.Count));
 
         GetCategoriesQuery query = new(pageNumber, pageSize);
 
