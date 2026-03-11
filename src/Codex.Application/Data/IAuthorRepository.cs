@@ -11,5 +11,7 @@ public interface IAuthorRepository
 
     Task<Author?> GetAsNoTrackingAsync(Guid id, CancellationToken cancellationToken = default);
 
+    Task<Author?> GetAsync(Guid id, CancellationToken cancellationToken = default);
+
     Task CreateAsync(Author author, CancellationToken cancellationToken = default);
 }
