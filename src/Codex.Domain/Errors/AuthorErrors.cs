@@ -19,4 +19,8 @@ public static class AuthorErrors
     public static readonly Error NotFound = new(
         "Author.NotFound",
         "Author not found");
+
+    public static readonly Error CannotDeleteContainsPosts = new(
+        "Author.CannotDeleteContainsPosts",
+        "Cannot delete author that contains posts");
 }

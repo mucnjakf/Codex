@@ -85,7 +85,7 @@ public sealed class DeleteCategoryCommandTests
     }
 
     [Fact]
-    public async Task Handle_ShouldReturnCannotDeleteContainsPostsError_WhenCategoryContainsErrors()
+    public async Task Handle_ShouldReturnCannotDeleteContainsPostsError_WhenCategoryContainsPosts()
     {
         Category category = CategoryData.CategoryWithPosts();
 

@@ -13,5 +13,9 @@ public interface IAuthorRepository
 
     Task<Author?> GetAsync(Guid id, CancellationToken cancellationToken = default);
 
+    Task<Author?> GetWithPostsAsync(Guid id, CancellationToken cancellationToken = default);
+
     Task CreateAsync(Author author, CancellationToken cancellationToken = default);
+
+    Task DeleteAsync(Author author, CancellationToken cancellationToken = default);
 }
