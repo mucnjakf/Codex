@@ -40,7 +40,6 @@ public sealed class CommentTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CommentErrors.ContentIsRequired);
     }
 
@@ -52,7 +51,6 @@ public sealed class CommentTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CommentErrors.PostIdIsRequired);
     }
 
@@ -64,7 +62,6 @@ public sealed class CommentTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CommentErrors.ReaderIdIsRequired);
     }
 
@@ -97,7 +94,6 @@ public sealed class CommentTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CommentErrors.ContentIsRequired);
     }
 }

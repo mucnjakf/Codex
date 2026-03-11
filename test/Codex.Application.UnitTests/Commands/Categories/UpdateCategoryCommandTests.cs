@@ -69,7 +69,6 @@ public sealed class UpdateCategoryCommandTests
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CategoryErrors.NotFound);
 
         await _categoryRepositoryMock
@@ -95,7 +94,6 @@ public sealed class UpdateCategoryCommandTests
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CategoryErrors.NameIsRequired);
 
         await _categoryRepositoryMock

@@ -33,7 +33,6 @@ public sealed class ReaderTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(ReaderErrors.FirstNameIsRequired);
     }
 
@@ -47,7 +46,6 @@ public sealed class ReaderTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(ReaderErrors.LastNameIsRequired);
     }
 
@@ -82,7 +80,6 @@ public sealed class ReaderTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(ReaderErrors.FirstNameIsRequired);
     }
 
@@ -98,7 +95,6 @@ public sealed class ReaderTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(ReaderErrors.LastNameIsRequired);
     }
 }

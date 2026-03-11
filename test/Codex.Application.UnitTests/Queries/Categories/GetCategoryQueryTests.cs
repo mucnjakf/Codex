@@ -66,7 +66,6 @@ public sealed class GetCategoryQueryTests
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CategoryErrors.NotFound);
 
         await _categoryRepositoryMock

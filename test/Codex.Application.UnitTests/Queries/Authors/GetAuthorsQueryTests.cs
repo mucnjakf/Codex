@@ -10,13 +10,13 @@ using Shouldly;
 
 namespace Codex.Application.UnitTests.Queries.Authors;
 
-public sealed class GetAuthorsQueryHandlerTests
+public sealed class GetAuthorsQueryTests
 {
     private readonly GetAuthorsQueryHandler _queryHandler;
 
     private readonly IAuthorRepository _authorRepositoryMock;
 
-    public GetAuthorsQueryHandlerTests()
+    public GetAuthorsQueryTests()
     {
         _authorRepositoryMock = Substitute.For<IAuthorRepository>();
 

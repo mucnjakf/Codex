@@ -77,7 +77,6 @@ public sealed class DeleteCategoryCommandTests
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CategoryErrors.NotFound);
 
         await _categoryRepositoryMock
@@ -101,7 +100,6 @@ public sealed class DeleteCategoryCommandTests
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CategoryErrors.CannotDeleteContainsPosts);
 
         await _categoryRepositoryMock

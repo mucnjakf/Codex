@@ -64,7 +64,6 @@ public sealed class GetAuthorQueryTests
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(AuthorErrors.NotFound);
 
         await _authorRepositoryMock

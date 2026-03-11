@@ -18,6 +18,8 @@ add github things
 
 --
 
+handler pipeline validation
+
 authors
 - get
 - get paginated

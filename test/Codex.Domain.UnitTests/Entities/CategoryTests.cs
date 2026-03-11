@@ -45,7 +45,6 @@ public sealed class CategoryTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CategoryErrors.NameIsRequired);
     }
 
@@ -95,7 +94,6 @@ public sealed class CategoryTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CategoryErrors.NameIsRequired);
     }
 }

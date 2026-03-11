@@ -34,7 +34,6 @@ public sealed class AuthorTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(AuthorErrors.FirstNameIsRequired);
     }
 
@@ -48,7 +47,6 @@ public sealed class AuthorTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(AuthorErrors.LastNameIsRequired);
     }
 
@@ -62,7 +60,6 @@ public sealed class AuthorTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(AuthorErrors.BiographyIsRequired);
     }
 
@@ -99,7 +96,6 @@ public sealed class AuthorTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(AuthorErrors.FirstNameIsRequired);
     }
 
@@ -115,7 +111,6 @@ public sealed class AuthorTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(AuthorErrors.LastNameIsRequired);
     }
 
@@ -131,7 +126,6 @@ public sealed class AuthorTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(AuthorErrors.BiographyIsRequired);
     }
 }

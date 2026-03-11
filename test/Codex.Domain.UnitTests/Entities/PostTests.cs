@@ -41,7 +41,6 @@ public sealed class PostTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(PostErrors.TitleIsRequired);
     }
 
@@ -55,7 +54,6 @@ public sealed class PostTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(PostErrors.ContentIsRequired);
     }
 
@@ -67,7 +65,6 @@ public sealed class PostTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(PostErrors.AuthorIdIsRequired);
     }
 
@@ -79,7 +76,6 @@ public sealed class PostTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(PostErrors.CategoryIdIsRequired);
     }
 
@@ -116,7 +112,6 @@ public sealed class PostTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(PostErrors.TitleIsRequired);
     }
 
@@ -132,7 +127,6 @@ public sealed class PostTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(PostErrors.ContentIsRequired);
     }
 
@@ -146,7 +140,6 @@ public sealed class PostTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(PostErrors.CategoryIdIsRequired);
     }
 
@@ -176,7 +169,6 @@ public sealed class PostTests : BaseTest
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(PostErrors.PublishOnlyDraft);
     }
 }

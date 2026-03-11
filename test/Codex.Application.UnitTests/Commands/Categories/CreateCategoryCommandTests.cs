@@ -43,6 +43,7 @@ public sealed class CreateCategoryCommandTests
         result.IsSuccess.ShouldBeTrue();
         result.IsFailure.ShouldBeFalse();
 
+        result.Value.Id.ShouldNotBe(Guid.Empty);
         result.Value.Name.ShouldBe(CategoryData.Name);
 
         await _categoryRepositoryMock
@@ -66,7 +67,6 @@ public sealed class CreateCategoryCommandTests
         result.IsSuccess.ShouldBeFalse();
         result.IsFailure.ShouldBeTrue();
 
-        result.Error.ShouldNotBeNull();
         result.Error.ShouldBe(CategoryErrors.NameIsRequired);
 
         await _categoryRepositoryMock
