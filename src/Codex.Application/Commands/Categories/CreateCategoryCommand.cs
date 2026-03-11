@@ -19,17 +19,17 @@ internal sealed class CreateCategoryCommandHandler(
         CreateCategoryCommand command,
         CancellationToken cancellationToken)
     {
-        Result<Category> result = Category.Create(command.Name);
+        Result<Category> categoryCreateResult = Category.Create(command.Name);
 
-        if (result.IsFailure)
+        if (categoryCreateResult.IsFailure)
         {
-            return Result.Failure<CategoryDto>(result.Error);
+            return Result.Failure<CategoryDto>(categoryCreateResult.Error);
         }
 
-        await categoryRepository.CreateAsync(result.Value, cancellationToken);
+        await categoryRepository.CreateAsync(categoryCreateResult.Value, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        var categoryDto = result.Value.ToCategoryDto();
+        var categoryDto = categoryCreateResult.Value.ToCategoryDto();
 
         return Result.Success(categoryDto);
     }

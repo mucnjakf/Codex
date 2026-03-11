@@ -51,11 +51,11 @@ public sealed class CommandsTests : BaseTest
             .And()
             .AreNotInterfaces()
             .Should()
-            .ImplementInterface(typeof(ICommand<>))
+            .ImplementInterface(typeof(IBaseCommand))
             .GetResult();
 
         string failingTypes = string.Join(", ", testResult.FailingTypeNames ?? []);
-        testResult.IsSuccessful.ShouldBeTrue($"The following commands do not implement ICommand: {failingTypes}");
+        testResult.IsSuccessful.ShouldBeTrue($"The following commands do not implement IBaseCommand: {failingTypes}");
     }
 
     [Fact]
@@ -83,6 +83,8 @@ public sealed class CommandsTests : BaseTest
             .InAssembly(ApplicationAssembly)
             .That()
             .HaveNameEndingWith("CommandHandler")
+            .And()
+            .AreNotInterfaces()
             .Should()
             .BeSealed()
             .GetResult();
@@ -113,8 +115,10 @@ public sealed class CommandsTests : BaseTest
             .InAssembly(ApplicationAssembly)
             .That()
             .HaveNameEndingWith("CommandHandler")
+            .And()
+            .AreNotInterfaces()
             .Should()
-            .ImplementInterface(typeof(ICommandHandler<,>))
+            .ImplementInterface(typeof(IBaseCommandHandler))
             .GetResult();
 
         string failingTypes = string.Join(", ", testResult.FailingTypeNames ?? []);
@@ -129,6 +133,8 @@ public sealed class CommandsTests : BaseTest
             .InAssembly(ApplicationAssembly)
             .That()
             .HaveNameEndingWith("CommandHandler")
+            .And()
+            .AreNotInterfaces()
             .Should()
             .ResideInNamespaceContaining("Application.Commands")
             .GetResult();

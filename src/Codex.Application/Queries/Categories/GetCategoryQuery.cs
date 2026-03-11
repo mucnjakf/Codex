@@ -8,7 +8,7 @@ using Codex.Domain.Outcomes;
 
 namespace Codex.Application.Queries.Categories;
 
-public sealed record GetCategoryQuery(Guid CategoryId) : IQuery<CategoryDto>;
+public sealed record GetCategoryQuery(Guid Id) : IQuery<CategoryDto>;
 
 internal sealed class GetCategoryQueryHandler(
     ICategoryRepository categoryRepository)
@@ -16,7 +16,7 @@ internal sealed class GetCategoryQueryHandler(
 {
     public async Task<Result<CategoryDto>> Handle(GetCategoryQuery query, CancellationToken cancellationToken)
     {
-        Category? category = await categoryRepository.GetAsync(query.CategoryId, cancellationToken);
+        Category? category = await categoryRepository.GetAsNoTrackingAsync(query.Id, cancellationToken);
 
         if (category is null)
         {

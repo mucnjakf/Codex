@@ -19,7 +19,7 @@ internal sealed class GetCategoriesQueryHandler(
         CancellationToken cancellationToken)
     {
         (IReadOnlyList<Category> categories, int totalCount) = await categoryRepository
-            .GetPaginatedAsync(query.PageNumber, query.PageSize, cancellationToken);
+            .GetPaginatedAsNoTrackingAsync(query.PageNumber, query.PageSize, cancellationToken);
 
         return new PaginationDto<CategoryDto>(
             categories.Select(category => category.ToCategoryDto()).ToList(),

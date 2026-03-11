@@ -37,7 +37,7 @@ public sealed class GetCategoriesQueryTests
             categories.Count);
 
         _categoryRepositoryMock
-            .GetPaginatedAsync(
+            .GetPaginatedAsNoTrackingAsync(
                 pageNumber,
                 pageSize,
                 Arg.Any<CancellationToken>())
@@ -62,6 +62,6 @@ public sealed class GetCategoriesQueryTests
 
         await _categoryRepositoryMock
             .Received(1)
-            .GetPaginatedAsync(pageNumber, pageSize);
+            .GetPaginatedAsNoTrackingAsync(pageNumber, pageSize);
     }
 }
