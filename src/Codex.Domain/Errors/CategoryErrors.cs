@@ -11,4 +11,8 @@ public static class CategoryErrors
     public static readonly Error NotFound = new(
         "Category.NotFound",
         "Category not found");
+
+    public static readonly Error CannotDeleteContainsPosts = new(
+        "Category.CannotDeleteContainsPosts",
+        "Cannot delete category that contains posts");
 }

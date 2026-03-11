@@ -12,7 +12,9 @@ public sealed class Author : Entity
 
     public string Biography { get; private set; }
 
-    public IReadOnlyList<Post> Posts { get; private set; } = [];
+    private readonly List<Post> _posts = [];
+
+    public IReadOnlyList<Post> Posts => _posts.AsReadOnly();
 
     private Author(
         Guid id,

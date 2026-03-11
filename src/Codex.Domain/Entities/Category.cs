@@ -9,7 +9,9 @@ public sealed class Category : Entity
 {
     public string Name { get; private set; }
 
-    public IReadOnlyList<Post> Posts { get; private set; } = [];
+    private readonly List<Post> _posts = [];
+
+    public IReadOnlyList<Post> Posts => _posts.AsReadOnly();
 
     private Category(
         Guid id,

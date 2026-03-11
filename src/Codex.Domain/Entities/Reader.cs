@@ -10,7 +10,9 @@ public sealed class Reader : Entity
 
     public string LastName { get; private set; }
 
-    public IReadOnlyList<Comment> Comments { get; private set; } = [];
+    private readonly List<Comment> _comments = [];
+
+    public IReadOnlyList<Comment> Comments => _comments.AsReadOnly();
 
     private Reader(
         Guid id,

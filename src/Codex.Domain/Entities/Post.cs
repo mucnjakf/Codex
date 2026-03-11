@@ -23,7 +23,9 @@ public sealed class Post : Entity
 
     public Category Category { get; private set; } = null!;
 
-    public IReadOnlyList<Comment> Comments { get; private set; } = [];
+    private readonly List<Comment> _comments = [];
+
+    public IReadOnlyList<Comment> Comments => _comments.AsReadOnly();
 
     private Post(
         Guid id,
