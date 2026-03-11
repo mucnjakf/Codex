@@ -2,7 +2,6 @@ using Codex.Application.Data;
 using Codex.Application.Dtos;
 using Codex.Application.Dtos.Mappers;
 using Codex.Application.Mediator;
-using Codex.Domain.Data;
 using Codex.Domain.Entities;
 using Codex.Domain.Outcomes;
 

@@ -40,8 +40,7 @@ public sealed class Category : Entity
         }
 
         Name = name;
-
-        UpdateUpdatedAtUtc(DateTimeOffset.UtcNow);
+        UpdatedAtUtc = DateTimeOffset.UtcNow;
 
         return Result.Success();
     }

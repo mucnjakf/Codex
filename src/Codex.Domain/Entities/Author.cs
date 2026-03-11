@@ -70,8 +70,7 @@ public sealed class Author : Entity
         FirstName = firstName;
         LastName = lastName;
         Biography = biography;
-
-        UpdateUpdatedAtUtc(DateTimeOffset.UtcNow);
+        UpdatedAtUtc = DateTimeOffset.UtcNow;
 
         return Result.Success();
     }

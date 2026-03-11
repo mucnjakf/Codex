@@ -19,6 +19,5 @@ public sealed class CategoryMapperTests
         categoryDto.CreatedAtUtc.ShouldBe(category.CreatedAtUtc);
         categoryDto.UpdatedAtUtc.ShouldBe(category.UpdatedAtUtc);
         categoryDto.Name.ShouldBe(category.Name);
-        categoryDto.PostsCount.ShouldBe(category.Posts.Count);
     }
 }

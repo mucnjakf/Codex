@@ -1,6 +1,5 @@
 using Codex.Application.Data;
 using Codex.Application.Mediator;
-using Codex.Domain.Data;
 using Codex.Domain.Entities;
 using Codex.Domain.Errors;
 using Codex.Domain.Outcomes;

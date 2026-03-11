@@ -88,8 +88,7 @@ public sealed class Post : Entity
         Title = title;
         Content = content;
         CategoryId = categoryId;
-
-        UpdateUpdatedAtUtc(DateTimeOffset.UtcNow);
+        UpdatedAtUtc = DateTimeOffset.UtcNow;
 
         return Result.Success();
     }
@@ -105,7 +104,7 @@ public sealed class Post : Entity
 
         DateTimeOffset now = DateTimeOffset.UtcNow;
         PublishedAtUtc = now;
-        UpdateUpdatedAtUtc(now);
+        UpdatedAtUtc = now;
 
         return Result.Success();
     }

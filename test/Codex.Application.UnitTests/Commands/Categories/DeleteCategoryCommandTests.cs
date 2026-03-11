@@ -1,6 +1,5 @@
 using Codex.Application.Commands.Categories;
 using Codex.Application.Data;
-using Codex.Domain.Data;
 using Codex.Domain.Entities;
 using Codex.Domain.Errors;
 using Codex.Domain.Outcomes;

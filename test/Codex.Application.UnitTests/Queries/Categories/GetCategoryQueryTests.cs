@@ -44,7 +44,6 @@ public sealed class GetCategoryQueryTests
         result.Value.CreatedAtUtc.ShouldBe(category.CreatedAtUtc);
         result.Value.UpdatedAtUtc.ShouldBe(category.UpdatedAtUtc);
         result.Value.Name.ShouldBe(category.Name);
-        result.Value.PostsCount.ShouldBe(category.Posts.Count);
 
         await _categoryRepositoryMock
             .Received(1)

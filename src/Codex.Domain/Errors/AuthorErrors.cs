@@ -2,7 +2,7 @@ using Codex.Domain.Outcomes;
 
 namespace Codex.Domain.Errors;
 
-internal static class AuthorErrors
+public static class AuthorErrors
 {
     internal static readonly Error FirstNameIsRequired = new(
         "Author.FirstNameIsRequired",
@@ -15,4 +15,8 @@ internal static class AuthorErrors
     internal static readonly Error BiographyIsRequired = new(
         "Author.BiographyIsRequired",
         "Author biography is required");
+
+    public static readonly Error NotFound = new(
+        "Author.NotFound",
+        "Author not found");
 }

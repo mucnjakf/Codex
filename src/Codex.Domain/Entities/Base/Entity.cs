@@ -4,17 +4,15 @@ namespace Codex.Domain.Entities.Base;
 
 public abstract class Entity(Guid id, DateTimeOffset createdAtUtc)
 {
-    private readonly List<IDomainEvent> _domainEvents = [];
-
     public Guid Id { get; private set; } = id;
 
     public DateTimeOffset CreatedAtUtc { get; private set; } = createdAtUtc;
 
-    public DateTimeOffset? UpdatedAtUtc { get; private set; }
+    public DateTimeOffset? UpdatedAtUtc { get; protected set; }
 
-    protected void UpdateUpdatedAtUtc(DateTimeOffset updatedAtUtc) => UpdatedAtUtc = updatedAtUtc;
+    private readonly List<IDomainEvent> _domainEvents = [];
 
-    public IReadOnlyList<IDomainEvent> GetDomainEvents() => _domainEvents.ToList();
+    public IReadOnlyList<IDomainEvent> GetDomainEvents() => _domainEvents.AsReadOnly();
 
     public void ClearDomainEvents() => _domainEvents.Clear();
 

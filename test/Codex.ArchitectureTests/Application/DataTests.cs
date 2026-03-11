@@ -12,13 +12,13 @@ public sealed class DataTests : BaseTest
         TestResult testResult = Types
             .InAssembly(ApplicationAssembly)
             .That()
-            .HaveNameEndingWith("Repository")
+            .ResideInNamespaceContaining("Application.Data")
             .Should()
             .BeInterfaces()
             .GetResult();
 
         string failingTypes = string.Join(", ", testResult.FailingTypeNames ?? []);
-        testResult.IsSuccessful.ShouldBeTrue($"The following repositories are not interfaces: {failingTypes}");
+        testResult.IsSuccessful.ShouldBeTrue($"The following types are not interfaces: {failingTypes}");
     }
 
     [Fact]
@@ -27,12 +27,12 @@ public sealed class DataTests : BaseTest
         TestResult testResult = Types
             .InAssembly(ApplicationAssembly)
             .That()
-            .HaveNameEndingWith("Repository")
+            .ResideInNamespaceContaining("Application.Data")
             .Should()
             .BePublic()
             .GetResult();
 
         string failingTypes = string.Join(", ", testResult.FailingTypeNames ?? []);
-        testResult.IsSuccessful.ShouldBeTrue($"The following repositories are not public: {failingTypes}");
+        testResult.IsSuccessful.ShouldBeTrue($"The following types are not public: {failingTypes}");
     }
 }

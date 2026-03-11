@@ -1,4 +1,4 @@
-namespace Codex.Domain.Data;
+namespace Codex.Application.Data;
 
 public interface IUnitOfWork
 {

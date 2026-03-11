@@ -58,8 +58,7 @@ public sealed class Comment : Entity
         }
 
         Content = content;
-
-        UpdateUpdatedAtUtc(DateTimeOffset.UtcNow);
+        UpdatedAtUtc = DateTimeOffset.UtcNow;
 
         return Result.Success();
     }

@@ -10,7 +10,6 @@ internal static class CategoryMapper
             category.Id,
             category.CreatedAtUtc,
             category.UpdatedAtUtc,
-            category.Name,
-            category.Posts.Count);
+            category.Name);
     }
 }

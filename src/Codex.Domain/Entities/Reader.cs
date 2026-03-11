@@ -55,8 +55,7 @@ public sealed class Reader : Entity
 
         FirstName = firstName;
         LastName = lastName;
-
-        UpdateUpdatedAtUtc(DateTimeOffset.UtcNow);
+        UpdatedAtUtc = DateTimeOffset.UtcNow;
 
         return Result.Success();
     }
