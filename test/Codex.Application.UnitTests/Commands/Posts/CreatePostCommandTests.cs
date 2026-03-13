@@ -46,6 +46,10 @@ public sealed class CreatePostCommandTests
             .ExistsByIdAsync(post.Category.Id, Arg.Any<CancellationToken>())
             .Returns(true);
 
+        _unitOfWorkMock
+            .SaveChangesAsync(Arg.Any<CancellationToken>())
+            .Returns(Task.FromResult(1));
+
         _postRepositoryMock
             .GetByIdAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>())
             .Returns(post);
