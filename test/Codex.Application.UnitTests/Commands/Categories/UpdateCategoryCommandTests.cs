@@ -30,7 +30,7 @@ public sealed class UpdateCategoryCommandTests
         Category category = CategoryData.Category;
 
         _categoryRepositoryMock
-            .GetAsync(category.Id, Arg.Any<CancellationToken>())
+            .GetByIdAsync(category.Id, Arg.Any<CancellationToken>())
             .Returns(category);
 
         _unitOfWorkMock
@@ -46,7 +46,7 @@ public sealed class UpdateCategoryCommandTests
 
         await _categoryRepositoryMock
             .Received(1)
-            .GetAsync(category.Id, Arg.Any<CancellationToken>());
+            .GetByIdAsync(category.Id, Arg.Any<CancellationToken>());
 
         await _unitOfWorkMock
             .Received(1)
@@ -59,7 +59,7 @@ public sealed class UpdateCategoryCommandTests
         Guid categoryId = CategoryData.Id;
 
         _categoryRepositoryMock
-            .GetAsync(categoryId, Arg.Any<CancellationToken>())
+            .GetByIdAsync(categoryId, Arg.Any<CancellationToken>())
             .Returns((Category)null!);
 
         UpdateCategoryCommand command = new(categoryId, "New category name");
@@ -73,7 +73,7 @@ public sealed class UpdateCategoryCommandTests
 
         await _categoryRepositoryMock
             .Received(1)
-            .GetAsync(categoryId, Arg.Any<CancellationToken>());
+            .GetByIdAsync(categoryId, Arg.Any<CancellationToken>());
     }
 
     [Theory]
@@ -84,7 +84,7 @@ public sealed class UpdateCategoryCommandTests
         Category category = CategoryData.Category;
 
         _categoryRepositoryMock
-            .GetAsync(category.Id, Arg.Any<CancellationToken>())
+            .GetByIdAsync(category.Id, Arg.Any<CancellationToken>())
             .Returns(category);
 
         UpdateCategoryCommand command = new(category.Id, name);
@@ -98,6 +98,6 @@ public sealed class UpdateCategoryCommandTests
 
         await _categoryRepositoryMock
             .Received(1)
-            .GetAsync(category.Id, Arg.Any<CancellationToken>());
+            .GetByIdAsync(category.Id, Arg.Any<CancellationToken>());
     }
 }

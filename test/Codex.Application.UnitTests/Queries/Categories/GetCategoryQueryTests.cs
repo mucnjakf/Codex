@@ -29,7 +29,7 @@ public sealed class GetCategoryQueryTests
         Category category = CategoryData.Category;
 
         _categoryRepositoryMock
-            .GetAsNoTrackingAsync(category.Id, Arg.Any<CancellationToken>())
+            .GetByIdAsync(category.Id, Arg.Any<CancellationToken>())
             .Returns(category);
 
         GetCategoryQuery query = new(category.Id);
@@ -47,7 +47,7 @@ public sealed class GetCategoryQueryTests
 
         await _categoryRepositoryMock
             .Received(1)
-            .GetAsNoTrackingAsync(category.Id);
+            .GetByIdAsync(category.Id);
     }
 
     [Fact]
@@ -56,7 +56,7 @@ public sealed class GetCategoryQueryTests
         Guid categoryId = CategoryData.Id;
 
         _categoryRepositoryMock
-            .GetAsNoTrackingAsync(categoryId, Arg.Any<CancellationToken>())
+            .GetByIdAsync(categoryId, Arg.Any<CancellationToken>())
             .Returns((Category)null!);
 
         GetCategoryQuery query = new(categoryId);
@@ -70,6 +70,6 @@ public sealed class GetCategoryQueryTests
 
         await _categoryRepositoryMock
             .Received(1)
-            .GetAsNoTrackingAsync(categoryId);
+            .GetByIdAsync(categoryId);
     }
 }

@@ -19,7 +19,7 @@ internal sealed class GetAuthorsQueryHandler(
         CancellationToken cancellationToken)
     {
         (IReadOnlyList<Author> authors, int totalCount) = await authorRepository
-            .GetPaginatedAsNoTrackingAsync(query.PageNumber, query.PageSize, cancellationToken);
+            .GetPaginatedAsync(query.PageNumber, query.PageSize, cancellationToken);
 
         return new PaginationDto<AuthorDto>(
             authors.Select(author => author.ToAuthorDto()).ToList(),

@@ -16,7 +16,7 @@ internal sealed class GetPostQueryHandler(
 {
     public async Task<Result<PostDto>> Handle(GetPostQuery query, CancellationToken cancellationToken)
     {
-        Post? post = await postRepository.GetAsync(query.Id, cancellationToken);
+        Post? post = await postRepository.GetByIdAsync(query.Id, cancellationToken);
 
         if (post is null)
         {

@@ -14,14 +14,19 @@ public sealed class DeleteCategoryCommandTests
     private readonly DeleteCategoryCommandHandler _commandHandler;
 
     private readonly ICategoryRepository _categoryRepositoryMock;
+    private readonly IPostRepository _postRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
 
     public DeleteCategoryCommandTests()
     {
         _categoryRepositoryMock = Substitute.For<ICategoryRepository>();
+        _postRepositoryMock = Substitute.For<IPostRepository>();
         _unitOfWorkMock = Substitute.For<IUnitOfWork>();
 
-        _commandHandler = new DeleteCategoryCommandHandler(_categoryRepositoryMock, _unitOfWorkMock);
+        _commandHandler = new DeleteCategoryCommandHandler(
+            _categoryRepositoryMock,
+            _postRepositoryMock,
+            _unitOfWorkMock);
     }
 
     [Fact]
@@ -30,8 +35,12 @@ public sealed class DeleteCategoryCommandTests
         Category category = CategoryData.Category;
 
         _categoryRepositoryMock
-            .GetWithPostsAsync(category.Id, Arg.Any<CancellationToken>())
+            .GetByIdAsync(category.Id, Arg.Any<CancellationToken>())
             .Returns(category);
+
+        _postRepositoryMock
+            .ExistsByCategoryIdAsync(category.Id, Arg.Any<CancellationToken>())
+            .Returns(false);
 
         _categoryRepositoryMock
             .DeleteAsync(category, Arg.Any<CancellationToken>())
@@ -50,7 +59,11 @@ public sealed class DeleteCategoryCommandTests
 
         await _categoryRepositoryMock
             .Received(1)
-            .GetWithPostsAsync(category.Id, Arg.Any<CancellationToken>());
+            .GetByIdAsync(category.Id, Arg.Any<CancellationToken>());
+
+        await _postRepositoryMock
+            .Received(1)
+            .ExistsByCategoryIdAsync(category.Id, Arg.Any<CancellationToken>());
 
         await _categoryRepositoryMock
             .Received(1)
@@ -67,7 +80,7 @@ public sealed class DeleteCategoryCommandTests
         Guid categoryId = CategoryData.Id;
 
         _categoryRepositoryMock
-            .GetWithPostsAsync(categoryId, Arg.Any<CancellationToken>())
+            .GetByIdAsync(categoryId, Arg.Any<CancellationToken>())
             .Returns((Category)null!);
 
         DeleteCategoryCommand command = new(categoryId);
@@ -81,7 +94,7 @@ public sealed class DeleteCategoryCommandTests
 
         await _categoryRepositoryMock
             .Received(1)
-            .GetWithPostsAsync(categoryId, Arg.Any<CancellationToken>());
+            .GetByIdAsync(categoryId, Arg.Any<CancellationToken>());
     }
 
     [Fact]
@@ -90,8 +103,12 @@ public sealed class DeleteCategoryCommandTests
         Category category = CategoryData.CategoryWithPosts();
 
         _categoryRepositoryMock
-            .GetWithPostsAsync(category.Id, Arg.Any<CancellationToken>())
+            .GetByIdAsync(category.Id, Arg.Any<CancellationToken>())
             .Returns(category);
+
+        _postRepositoryMock
+            .ExistsByCategoryIdAsync(category.Id, Arg.Any<CancellationToken>())
+            .Returns(true);
 
         DeleteCategoryCommand command = new(category.Id);
 
@@ -104,6 +121,10 @@ public sealed class DeleteCategoryCommandTests
 
         await _categoryRepositoryMock
             .Received(1)
-            .GetWithPostsAsync(category.Id, Arg.Any<CancellationToken>());
+            .GetByIdAsync(category.Id, Arg.Any<CancellationToken>());
+
+        await _postRepositoryMock
+            .Received(1)
+            .ExistsByCategoryIdAsync(category.Id, Arg.Any<CancellationToken>());
     }
 }

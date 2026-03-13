@@ -29,7 +29,7 @@ public sealed class GetPostQueryTests
         Post post = PostData.PostWithAuthorAndCategory();
 
         _postRepositoryMock
-            .GetAsync(post.Id, Arg.Any<CancellationToken>())
+            .GetByIdAsync(post.Id, Arg.Any<CancellationToken>())
             .Returns(post);
 
         GetPostQuery query = new(post.Id);
@@ -52,7 +52,7 @@ public sealed class GetPostQueryTests
 
         await _postRepositoryMock
             .Received(1)
-            .GetAsync(post.Id);
+            .GetByIdAsync(post.Id);
     }
 
     [Fact]
@@ -61,7 +61,7 @@ public sealed class GetPostQueryTests
         Guid postId = PostData.Id;
 
         _postRepositoryMock
-            .GetAsync(postId, Arg.Any<CancellationToken>())
+            .GetByIdAsync(postId, Arg.Any<CancellationToken>())
             .Returns((Post)null!);
 
         GetPostQuery query = new(postId);
@@ -75,6 +75,6 @@ public sealed class GetPostQueryTests
 
         await _postRepositoryMock
             .Received(1)
-            .GetAsync(postId);
+            .GetByIdAsync(postId);
     }
 }

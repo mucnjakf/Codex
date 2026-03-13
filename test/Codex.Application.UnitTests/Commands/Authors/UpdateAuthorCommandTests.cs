@@ -30,7 +30,7 @@ public sealed class UpdateAuthorCommandTests
         Author author = AuthorData.Author;
 
         _authorRepositoryMock
-            .GetAsync(author.Id, Arg.Any<CancellationToken>())
+            .GetByIdAsync(author.Id, Arg.Any<CancellationToken>())
             .Returns(author);
 
         _unitOfWorkMock
@@ -50,7 +50,7 @@ public sealed class UpdateAuthorCommandTests
 
         await _authorRepositoryMock
             .Received(1)
-            .GetAsync(author.Id, Arg.Any<CancellationToken>());
+            .GetByIdAsync(author.Id, Arg.Any<CancellationToken>());
 
         await _unitOfWorkMock
             .Received(1)
@@ -63,7 +63,7 @@ public sealed class UpdateAuthorCommandTests
         Guid authorId = AuthorData.Id;
 
         _authorRepositoryMock
-            .GetAsync(authorId, Arg.Any<CancellationToken>())
+            .GetByIdAsync(authorId, Arg.Any<CancellationToken>())
             .Returns((Author)null!);
 
         UpdateAuthorCommand command = new(
@@ -79,7 +79,7 @@ public sealed class UpdateAuthorCommandTests
 
         await _authorRepositoryMock
             .Received(1)
-            .GetAsync(authorId, Arg.Any<CancellationToken>());
+            .GetByIdAsync(authorId, Arg.Any<CancellationToken>());
     }
 
     [Theory]
@@ -90,7 +90,7 @@ public sealed class UpdateAuthorCommandTests
         Author author = AuthorData.Author;
 
         _authorRepositoryMock
-            .GetAsync(author.Id, Arg.Any<CancellationToken>())
+            .GetByIdAsync(author.Id, Arg.Any<CancellationToken>())
             .Returns(author);
 
         UpdateAuthorCommand command = new(author.Id, firstName, author.LastName, author.Biography);
@@ -104,7 +104,7 @@ public sealed class UpdateAuthorCommandTests
 
         await _authorRepositoryMock
             .Received(1)
-            .GetAsync(author.Id, Arg.Any<CancellationToken>());
+            .GetByIdAsync(author.Id, Arg.Any<CancellationToken>());
     }
 
     [Theory]
@@ -115,7 +115,7 @@ public sealed class UpdateAuthorCommandTests
         Author author = AuthorData.Author;
 
         _authorRepositoryMock
-            .GetAsync(author.Id, Arg.Any<CancellationToken>())
+            .GetByIdAsync(author.Id, Arg.Any<CancellationToken>())
             .Returns(author);
 
         UpdateAuthorCommand command = new(author.Id, author.FirstName, lastName, author.Biography);
@@ -129,7 +129,7 @@ public sealed class UpdateAuthorCommandTests
 
         await _authorRepositoryMock
             .Received(1)
-            .GetAsync(author.Id, Arg.Any<CancellationToken>());
+            .GetByIdAsync(author.Id, Arg.Any<CancellationToken>());
     }
 
     [Theory]
@@ -140,7 +140,7 @@ public sealed class UpdateAuthorCommandTests
         Author author = AuthorData.Author;
 
         _authorRepositoryMock
-            .GetAsync(author.Id, Arg.Any<CancellationToken>())
+            .GetByIdAsync(author.Id, Arg.Any<CancellationToken>())
             .Returns(author);
 
         UpdateAuthorCommand command = new(author.Id, author.FirstName, author.LastName, biography);
@@ -154,6 +154,6 @@ public sealed class UpdateAuthorCommandTests
 
         await _authorRepositoryMock
             .Received(1)
-            .GetAsync(author.Id, Arg.Any<CancellationToken>());
+            .GetByIdAsync(author.Id, Arg.Any<CancellationToken>());
     }
 }

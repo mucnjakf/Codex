@@ -15,7 +15,7 @@ internal sealed class UpdateAuthorCommandHandler(
 {
     public async Task<Result> Handle(UpdateAuthorCommand command, CancellationToken cancellationToken)
     {
-        Author? author = await authorRepository.GetAsync(command.Id, cancellationToken);
+        Author? author = await authorRepository.GetByIdAsync(command.Id, cancellationToken);
 
         if (author is null)
         {

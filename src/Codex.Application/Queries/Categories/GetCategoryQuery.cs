@@ -16,7 +16,7 @@ internal sealed class GetCategoryQueryHandler(
 {
     public async Task<Result<CategoryDto>> Handle(GetCategoryQuery query, CancellationToken cancellationToken)
     {
-        Category? category = await categoryRepository.GetAsNoTrackingAsync(query.Id, cancellationToken);
+        Category? category = await categoryRepository.GetByIdAsync(query.Id, cancellationToken);
 
         if (category is null)
         {

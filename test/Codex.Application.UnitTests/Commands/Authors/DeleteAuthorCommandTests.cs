@@ -14,14 +14,16 @@ public sealed class DeleteAuthorCommandTests
     private readonly DeleteAuthorCommandHandler _commandHandler;
 
     private readonly IAuthorRepository _authorRepositoryMock;
+    private readonly IPostRepository _postRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
 
     public DeleteAuthorCommandTests()
     {
         _authorRepositoryMock = Substitute.For<IAuthorRepository>();
+        _postRepositoryMock = Substitute.For<IPostRepository>();
         _unitOfWorkMock = Substitute.For<IUnitOfWork>();
 
-        _commandHandler = new DeleteAuthorCommandHandler(_authorRepositoryMock, _unitOfWorkMock);
+        _commandHandler = new DeleteAuthorCommandHandler(_authorRepositoryMock, _postRepositoryMock, _unitOfWorkMock);
     }
 
     [Fact]
@@ -30,8 +32,12 @@ public sealed class DeleteAuthorCommandTests
         Author author = AuthorData.Author;
 
         _authorRepositoryMock
-            .GetWithPostsAsync(author.Id, Arg.Any<CancellationToken>())
+            .GetByIdAsync(author.Id, Arg.Any<CancellationToken>())
             .Returns(author);
+
+        _postRepositoryMock
+            .ExistsByAuthorIdAsync(author.Id, Arg.Any<CancellationToken>())
+            .Returns(false);
 
         _authorRepositoryMock
             .DeleteAsync(author, Arg.Any<CancellationToken>())
@@ -50,7 +56,11 @@ public sealed class DeleteAuthorCommandTests
 
         await _authorRepositoryMock
             .Received(1)
-            .GetWithPostsAsync(author.Id, Arg.Any<CancellationToken>());
+            .GetByIdAsync(author.Id, Arg.Any<CancellationToken>());
+
+        await _postRepositoryMock
+            .Received(1)
+            .ExistsByAuthorIdAsync(author.Id, Arg.Any<CancellationToken>());
 
         await _authorRepositoryMock
             .Received(1)
@@ -67,7 +77,7 @@ public sealed class DeleteAuthorCommandTests
         Guid authorId = AuthorData.Id;
 
         _authorRepositoryMock
-            .GetWithPostsAsync(authorId, Arg.Any<CancellationToken>())
+            .GetByIdAsync(authorId, Arg.Any<CancellationToken>())
             .Returns((Author)null!);
 
         DeleteAuthorCommand command = new(authorId);
@@ -81,7 +91,7 @@ public sealed class DeleteAuthorCommandTests
 
         await _authorRepositoryMock
             .Received(1)
-            .GetWithPostsAsync(authorId, Arg.Any<CancellationToken>());
+            .GetByIdAsync(authorId, Arg.Any<CancellationToken>());
     }
 
     [Fact]
@@ -90,8 +100,12 @@ public sealed class DeleteAuthorCommandTests
         Author author = AuthorData.AuthorWithPosts();
 
         _authorRepositoryMock
-            .GetWithPostsAsync(author.Id, Arg.Any<CancellationToken>())
+            .GetByIdAsync(author.Id, Arg.Any<CancellationToken>())
             .Returns(author);
+
+        _postRepositoryMock
+            .ExistsByAuthorIdAsync(author.Id, Arg.Any<CancellationToken>())
+            .Returns(true);
 
         DeleteAuthorCommand command = new(author.Id);
 
@@ -104,6 +118,10 @@ public sealed class DeleteAuthorCommandTests
 
         await _authorRepositoryMock
             .Received(1)
-            .GetWithPostsAsync(author.Id, Arg.Any<CancellationToken>());
+            .GetByIdAsync(author.Id, Arg.Any<CancellationToken>());
+
+        await _postRepositoryMock
+            .Received(1)
+            .ExistsByAuthorIdAsync(author.Id, Arg.Any<CancellationToken>());
     }
 }

@@ -15,7 +15,7 @@ internal sealed class UpdateCategoryCommandHandler(
 {
     public async Task<Result> Handle(UpdateCategoryCommand command, CancellationToken cancellationToken)
     {
-        Category? category = await categoryRepository.GetAsync(command.Id, cancellationToken);
+        Category? category = await categoryRepository.GetByIdAsync(command.Id, cancellationToken);
 
         if (category is null)
         {

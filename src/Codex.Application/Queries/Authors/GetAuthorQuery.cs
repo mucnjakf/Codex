@@ -16,7 +16,7 @@ internal sealed class GetAuthorQueryHandler(
 {
     public async Task<Result<AuthorDto>> Handle(GetAuthorQuery query, CancellationToken cancellationToken)
     {
-        Author? author = await authorRepository.GetAsNoTrackingAsync(query.Id, cancellationToken);
+        Author? author = await authorRepository.GetByIdAsync(query.Id, cancellationToken);
 
         if (author is null)
         {

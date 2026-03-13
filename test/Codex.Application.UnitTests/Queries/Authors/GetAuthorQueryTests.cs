@@ -29,7 +29,7 @@ public sealed class GetAuthorQueryTests
         Author author = AuthorData.Author;
 
         _authorRepositoryMock
-            .GetAsNoTrackingAsync(author.Id, Arg.Any<CancellationToken>())
+            .GetByIdAsync(author.Id, Arg.Any<CancellationToken>())
             .Returns(author);
 
         GetAuthorQuery query = new(author.Id);
@@ -54,7 +54,7 @@ public sealed class GetAuthorQueryTests
         Guid authorId = AuthorData.Id;
 
         _authorRepositoryMock
-            .GetAsNoTrackingAsync(authorId, Arg.Any<CancellationToken>())
+            .GetByIdAsync(authorId, Arg.Any<CancellationToken>())
             .Returns((Author)null!);
 
         GetAuthorQuery query = new(authorId);
@@ -68,6 +68,6 @@ public sealed class GetAuthorQueryTests
 
         await _authorRepositoryMock
             .Received(1)
-            .GetAsNoTrackingAsync(authorId);
+            .GetByIdAsync(authorId);
     }
 }

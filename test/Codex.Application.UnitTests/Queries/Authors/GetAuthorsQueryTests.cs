@@ -37,7 +37,7 @@ public sealed class GetAuthorsQueryTests
             authors.Count);
 
         _authorRepositoryMock
-            .GetPaginatedAsNoTrackingAsync(
+            .GetPaginatedAsync(
                 pageNumber,
                 pageSize,
                 Arg.Any<CancellationToken>())
@@ -61,6 +61,6 @@ public sealed class GetAuthorsQueryTests
 
         await _authorRepositoryMock
             .Received(1)
-            .GetPaginatedAsNoTrackingAsync(pageNumber, pageSize);
+            .GetPaginatedAsync(pageNumber, pageSize);
     }
 }

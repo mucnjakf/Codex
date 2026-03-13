@@ -10,20 +10,22 @@ public sealed record DeleteCategoryCommand(Guid Id) : ICommand;
 
 internal sealed class DeleteCategoryCommandHandler(
     ICategoryRepository categoryRepository,
+    IPostRepository postRepository,
     IUnitOfWork unitOfWork)
     : ICommandHandler<DeleteCategoryCommand>
 {
     public async Task<Result> Handle(DeleteCategoryCommand command, CancellationToken cancellationToken)
     {
-        Category? category = await categoryRepository.GetWithPostsAsync(command.Id, cancellationToken);
+        Category? category = await categoryRepository.GetByIdAsync(command.Id, cancellationToken);
 
         if (category is null)
         {
             return Result.Failure(CategoryErrors.NotFound);
         }
 
-        // TODO: maybe another call to database to check if contains posts
-        if (category.Posts.Any())
+        bool postsExist = await postRepository.ExistsByCategoryIdAsync(category.Id, cancellationToken);
+
+        if (postsExist)
         {
             return Result.Failure(CategoryErrors.CannotDeleteContainsPosts);
         }

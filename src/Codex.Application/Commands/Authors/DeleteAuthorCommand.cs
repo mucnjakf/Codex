@@ -10,20 +10,22 @@ public sealed record DeleteAuthorCommand(Guid Id) : ICommand;
 
 internal sealed class DeleteAuthorCommandHandler(
     IAuthorRepository authorRepository,
+    IPostRepository postRepository,
     IUnitOfWork unitOfWork)
     : ICommandHandler<DeleteAuthorCommand>
 {
     public async Task<Result> Handle(DeleteAuthorCommand command, CancellationToken cancellationToken)
     {
-        Author? author = await authorRepository.GetWithPostsAsync(command.Id, cancellationToken);
+        Author? author = await authorRepository.GetByIdAsync(command.Id, cancellationToken);
 
         if (author is null)
         {
             return Result.Failure(AuthorErrors.NotFound);
         }
 
-        // TODO: maybe another call to database to check if contains posts
-        if (author.Posts.Any())
+        bool postsExist = await postRepository.ExistsByAuthorIdAsync(author.Id, cancellationToken);
+
+        if (postsExist)
         {
             return Result.Failure(AuthorErrors.CannotDeleteContainsPosts);
         }
