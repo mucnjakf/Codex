@@ -8,7 +8,8 @@ using Codex.Domain.Outcomes;
 
 namespace Codex.Application.Queries.Categories;
 
-public sealed record GetCategoriesQuery(int PageNumber, int PageSize) : IQuery<PaginationDto<CategoryDto>>;
+public sealed record GetCategoriesQuery(int PageNumber, int PageSize)
+    : PaginationQueryDto(PageNumber, PageSize), IQuery<PaginationDto<CategoryDto>>;
 
 internal sealed class GetCategoriesQueryHandler(
     ICategoryRepository categoryRepository)

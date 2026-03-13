@@ -4,6 +4,11 @@ namespace Codex.Application.Data;
 
 public interface IPostRepository
 {
+    Task<(IReadOnlyList<Post>, int)> GetPaginatedAsync(
+        int pageNumber,
+        int pageSize,
+        CancellationToken cancellationToken = default);
+
     Task<Post?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
     Task<bool> ExistsByAuthorIdAsync(Guid authorId, CancellationToken cancellationToken = default);

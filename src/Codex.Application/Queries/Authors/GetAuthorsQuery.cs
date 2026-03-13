@@ -8,7 +8,8 @@ using Codex.Domain.Outcomes;
 
 namespace Codex.Application.Queries.Authors;
 
-public sealed record GetAuthorsQuery(int PageNumber, int PageSize) : IQuery<PaginationDto<AuthorDto>>;
+public sealed record GetAuthorsQuery(int PageNumber, int PageSize)
+    : PaginationQueryDto(PageNumber, PageSize), IQuery<PaginationDto<AuthorDto>>;
 
 internal sealed class GetAuthorsQueryHandler(
     IAuthorRepository authorRepository)
