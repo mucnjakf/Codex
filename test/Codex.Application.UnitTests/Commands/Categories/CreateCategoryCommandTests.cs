@@ -43,6 +43,7 @@ public sealed class CreateCategoryCommandTests
         result.IsSuccess.ShouldBeTrue();
         result.IsFailure.ShouldBeFalse();
 
+        result.Value.ShouldNotBeNull();
         result.Value.Id.ShouldNotBe(Guid.Empty);
         result.Value.Name.ShouldBe(CategoryData.Name);
 

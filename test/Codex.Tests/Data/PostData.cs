@@ -15,8 +15,6 @@ public static class PostData
 
     public static Post PostWithAuthorAndCategory()
     {
-        Post post = Post.Create(Title, Content, AuthorData.Id, CategoryData.Id).Value;
-
         Author author = Author.Create(
                 "Author first name",
                 "Author last name",
@@ -24,6 +22,8 @@ public static class PostData
             .Value;
 
         Category category = Category.Create("Category name").Value;
+
+        Post post = Post.Create(Title, Content, author.Id, category.Id).Value;
 
         typeof(Post)
             .GetProperty("Author", BindingFlags.Public | BindingFlags.Instance)!

@@ -11,7 +11,7 @@ public sealed class Post : Entity
 
     public string Content { get; private set; }
 
-    public PostStatus Status { get; private set; } = PostStatus.Draft;
+    public PostStatus Status { get; private set; }
 
     public DateTimeOffset? PublishedAtUtc { get; private set; }
 
@@ -39,6 +39,8 @@ public sealed class Post : Entity
         Content = content;
         AuthorId = authorId;
         CategoryId = categoryId;
+
+        Status = PostStatus.Draft;
     }
 
     public static Result<Post> Create(string title, string content, Guid authorId, Guid categoryId)

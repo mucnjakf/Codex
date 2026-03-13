@@ -14,4 +14,6 @@ public interface IAuthorRepository
     Task CreateAsync(Author author, CancellationToken cancellationToken = default);
 
     Task DeleteAsync(Author author, CancellationToken cancellationToken = default);
+
+    Task<bool> ExistsByIdAsync(Guid id, CancellationToken cancellationToken = default);
 }
