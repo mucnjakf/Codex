@@ -1,5 +1,6 @@
 using System.Reflection;
 using Codex.Domain.Entities;
+using Codex.Domain.Enumerations;
 
 namespace Codex.Tests.Data;
 
@@ -32,6 +33,17 @@ public static class PostData
         typeof(Post)
             .GetProperty("Category", BindingFlags.Public | BindingFlags.Instance)!
             .SetValue(post, category);
+
+        return post;
+    }
+
+    public static Post PostWithStatusPublished()
+    {
+        Post post = Post.Create(Title, Content, AuthorData.Id, CategoryData.Id).Value;
+
+        typeof(Post)
+            .GetProperty("Status", BindingFlags.Public | BindingFlags.Instance)!
+            .SetValue(post, PostStatus.Published);
 
         return post;
     }
