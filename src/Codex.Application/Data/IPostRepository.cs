@@ -16,4 +16,6 @@ public interface IPostRepository
     Task<bool> ExistsByCategoryIdAsync(Guid categoryId, CancellationToken cancellationToken = default);
 
     Task CreateAsync(Post post, CancellationToken cancellationToken = default);
+
+    Task DeleteAsync(Post post, CancellationToken cancellationToken = default);
 }

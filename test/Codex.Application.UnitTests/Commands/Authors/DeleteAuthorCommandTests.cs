@@ -97,7 +97,7 @@ public sealed class DeleteAuthorCommandTests
     [Fact]
     public async Task Handle_ShouldReturnCannotDeleteContainsPostsError_WhenAuthorContainsPosts()
     {
-        Author author = AuthorData.AuthorWithPosts();
+        Author author = AuthorData.Author;
 
         _authorRepositoryMock
             .GetByIdAsync(author.Id, Arg.Any<CancellationToken>())

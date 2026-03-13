@@ -27,4 +27,8 @@ public static class PostErrors
     public static readonly Error NotFound = new(
         "Post.NotFound",
         "Post not found");
+
+    public static readonly Error CannotDeleteContainsComments = new(
+        "Post.CannotDeleteContainsComments",
+        "Cannot delete post that contains comments");
 }
