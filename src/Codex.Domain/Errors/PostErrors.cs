@@ -2,7 +2,7 @@ using Codex.Domain.Outcomes;
 
 namespace Codex.Domain.Errors;
 
-internal static class PostErrors
+public static class PostErrors
 {
     internal static readonly Error TitleIsRequired = new(
         "Post.TitleIsRequired",
@@ -23,4 +23,8 @@ internal static class PostErrors
     internal static readonly Error PublishOnlyDraft = new(
         "Post.PublishOnlyDraft",
         "Post must be in draft status to be published");
+
+    public static readonly Error NotFound = new(
+        "Post.NotFound",
+        "Post not found");
 }

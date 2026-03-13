@@ -25,7 +25,7 @@ authors
 - get paginated
 - create
 - update
-- delete~~~~
+- delete
 
 readers
 - get
