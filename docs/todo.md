@@ -20,7 +20,7 @@ add github things
 
 handler pipeline validation
 
-authors
+authors-
 - get
 - get paginated
 - create
@@ -33,14 +33,14 @@ readers
 - create
 - update
 
-categories
+categories-
 - get
 - get paginated
 - create
 - update
 - delete
 
-comments
+comments-
 - get
 - get paginated
 - create
