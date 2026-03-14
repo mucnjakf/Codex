@@ -4,5 +4,10 @@ namespace Codex.Application.Data;
 
 public interface IReaderRepository
 {
+    Task<(IReadOnlyList<Reader>, int)> GetPaginatedAsync(
+        int pageNumber,
+        int pageSize,
+        CancellationToken cancellationToken = default);
+
     Task<Reader?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 }
