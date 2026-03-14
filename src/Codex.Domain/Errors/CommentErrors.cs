@@ -2,7 +2,7 @@ using Codex.Domain.Outcomes;
 
 namespace Codex.Domain.Errors;
 
-internal static class CommentErrors
+public static class CommentErrors
 {
     internal static readonly Error ContentIsRequired = new(
         "Comment.ContentIsRequired",
@@ -15,4 +15,8 @@ internal static class CommentErrors
     internal static readonly Error ReaderIdIsRequired = new(
         "Comment.ReaderIdIsRequired",
         "Comment reader ID is required");
+
+    public static readonly Error NotFound = new(
+        "Comment.NotFound",
+        "Comment not found");
 }
