@@ -19,8 +19,8 @@ add github things
 --
 
 handler pipeline validation
-~~~~
+
 pogledati ytbere i blogove etc da dodam sto vise stvari
 
-
+support for domain events in efcore and outbox
 
