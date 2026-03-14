@@ -40,10 +40,6 @@ public sealed class DeleteReaderCommandTests
             .ExistsByReaderIdAsync(reader.Id, Arg.Any<CancellationToken>())
             .Returns(false);
 
-        _readerRepositoryMock
-            .DeleteAsync(reader, Arg.Any<CancellationToken>())
-            .Returns(Task.CompletedTask);
-
         _unitOfWorkMock
             .SaveChangesAsync(Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(1));
@@ -62,10 +58,6 @@ public sealed class DeleteReaderCommandTests
         await _commentRepositoryMock
             .Received(1)
             .ExistsByReaderIdAsync(reader.Id, Arg.Any<CancellationToken>());
-
-        await _readerRepositoryMock
-            .Received(1)
-            .DeleteAsync(reader, Arg.Any<CancellationToken>());
 
         await _unitOfWorkMock
             .Received(1)

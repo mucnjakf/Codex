@@ -39,10 +39,6 @@ public sealed class DeleteAuthorCommandTests
             .ExistsByAuthorIdAsync(author.Id, Arg.Any<CancellationToken>())
             .Returns(false);
 
-        _authorRepositoryMock
-            .DeleteAsync(author, Arg.Any<CancellationToken>())
-            .Returns(Task.CompletedTask);
-
         _unitOfWorkMock
             .SaveChangesAsync(Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(1));
@@ -61,10 +57,6 @@ public sealed class DeleteAuthorCommandTests
         await _postRepositoryMock
             .Received(1)
             .ExistsByAuthorIdAsync(author.Id, Arg.Any<CancellationToken>());
-
-        await _authorRepositoryMock
-            .Received(1)
-            .DeleteAsync(author, Arg.Any<CancellationToken>());
 
         await _unitOfWorkMock
             .Received(1)

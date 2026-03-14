@@ -22,7 +22,7 @@ internal sealed class DeleteCommentCommandHandler(
             return Result.Failure(CommentErrors.NotFound);
         }
 
-        await commentRepository.DeleteAsync(comment, cancellationToken);
+        commentRepository.Delete(comment);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success();

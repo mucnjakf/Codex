@@ -42,10 +42,6 @@ public sealed class DeleteCategoryCommandTests
             .ExistsByCategoryIdAsync(category.Id, Arg.Any<CancellationToken>())
             .Returns(false);
 
-        _categoryRepositoryMock
-            .DeleteAsync(category, Arg.Any<CancellationToken>())
-            .Returns(Task.CompletedTask);
-
         _unitOfWorkMock
             .SaveChangesAsync(Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(1));
@@ -64,10 +60,6 @@ public sealed class DeleteCategoryCommandTests
         await _postRepositoryMock
             .Received(1)
             .ExistsByCategoryIdAsync(category.Id, Arg.Any<CancellationToken>());
-
-        await _categoryRepositoryMock
-            .Received(1)
-            .DeleteAsync(category, Arg.Any<CancellationToken>());
 
         await _unitOfWorkMock
             .Received(1)

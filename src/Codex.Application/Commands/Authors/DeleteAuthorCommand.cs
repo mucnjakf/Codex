@@ -30,7 +30,7 @@ internal sealed class DeleteAuthorCommandHandler(
             return Result.Failure(AuthorErrors.CannotDeleteContainsPosts);
         }
 
-        await authorRepository.DeleteAsync(author, cancellationToken);
+        authorRepository.Delete(author);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success();

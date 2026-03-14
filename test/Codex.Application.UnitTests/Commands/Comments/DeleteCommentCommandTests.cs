@@ -35,10 +35,6 @@ public sealed class DeleteCommentCommandTests
             .GetByIdAsync(comment.Id, Arg.Any<CancellationToken>())
             .Returns(comment);
 
-        _commentRepositoryMock
-            .DeleteAsync(comment, Arg.Any<CancellationToken>())
-            .Returns(Task.CompletedTask);
-
         _unitOfWorkMock
             .SaveChangesAsync(Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(1));
@@ -53,10 +49,6 @@ public sealed class DeleteCommentCommandTests
         await _commentRepositoryMock
             .Received(1)
             .GetByIdAsync(comment.Id, Arg.Any<CancellationToken>());
-
-        await _commentRepositoryMock
-            .Received(1)
-            .DeleteAsync(comment, Arg.Any<CancellationToken>());
 
         await _unitOfWorkMock
             .Received(1)

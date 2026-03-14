@@ -30,7 +30,7 @@ internal sealed class DeleteCategoryCommandHandler(
             return Result.Failure(CategoryErrors.CannotDeleteContainsPosts);
         }
 
-        await categoryRepository.DeleteAsync(category, cancellationToken);
+        categoryRepository.Delete(category);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success();

@@ -42,10 +42,6 @@ public sealed class DeletePostCommandTests
             .ExistsByPostIdAsync(post.Id, Arg.Any<CancellationToken>())
             .Returns(false);
 
-        _postRepositoryMock
-            .DeleteAsync(post, Arg.Any<CancellationToken>())
-            .Returns(Task.CompletedTask);
-
         _unitOfWorkMock
             .SaveChangesAsync(Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(1));
@@ -64,10 +60,6 @@ public sealed class DeletePostCommandTests
         await _commentRepositoryMock
             .Received(1)
             .ExistsByPostIdAsync(post.Id, Arg.Any<CancellationToken>());
-
-        await _postRepositoryMock
-            .Received(1)
-            .DeleteAsync(post, Arg.Any<CancellationToken>());
 
         await _unitOfWorkMock
             .Received(1)

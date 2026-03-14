@@ -30,7 +30,7 @@ internal sealed class DeleteReaderCommandHandler(
             return Result.Failure(ReaderErrors.CannotDeleteContainsComments);
         }
 
-        await readerRepository.DeleteAsync(reader, cancellationToken);
+        readerRepository.Delete(reader);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success();

@@ -2,7 +2,7 @@ using Codex.Domain.Entities;
 
 namespace Codex.Application.Data;
 
-public interface ICategoryRepository
+public interface ICategoryRepository : IBaseRepository
 {
     Task<(IReadOnlyList<Category>, int)> GetPaginatedAsync(
         int pageNumber,
@@ -13,7 +13,7 @@ public interface ICategoryRepository
 
     Task CreateAsync(Category category, CancellationToken cancellationToken = default);
 
-    Task DeleteAsync(Category category, CancellationToken cancellationToken = default);
+    void Delete(Category category);
 
     Task<bool> ExistsByIdAsync(Guid id, CancellationToken cancellationToken = default);
 }

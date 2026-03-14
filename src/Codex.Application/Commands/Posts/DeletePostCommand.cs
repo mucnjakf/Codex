@@ -30,7 +30,7 @@ internal sealed class DeletePostCommandHandler(
             return Result.Failure(PostErrors.CannotDeleteContainsComments);
         }
 
-        await postRepository.DeleteAsync(post, cancellationToken);
+        postRepository.Delete(post);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success();

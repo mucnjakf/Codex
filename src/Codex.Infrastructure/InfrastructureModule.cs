@@ -1,5 +1,6 @@
 using Codex.Application.Data;
 using Codex.Infrastructure.EfCore;
+using Codex.Infrastructure.EfCore.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,11 @@ public static class InfrastructureModule
         });
 
         services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<ApplicationDbContext>());
+
+        services.AddScoped<IAuthorRepository, AuthorEfCoreRepository>();
+        services.AddScoped<ICategoryRepository, CategoryEfCoreRepository>();
+        services.AddScoped<ICommentRepository, CommentEfCoreRepository>();
+        services.AddScoped<IPostRepository, PostEfCoreRepository>();
 
         return services;
     }

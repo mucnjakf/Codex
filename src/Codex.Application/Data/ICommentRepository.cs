@@ -2,7 +2,7 @@ using Codex.Domain.Entities;
 
 namespace Codex.Application.Data;
 
-public interface ICommentRepository
+public interface ICommentRepository : IBaseRepository
 {
     Task<(IReadOnlyList<Comment>, int)> GetPaginatedAsync(
         int pageNumber,
@@ -13,7 +13,7 @@ public interface ICommentRepository
 
     Task CreateAsync(Comment comment, CancellationToken cancellationToken = default);
 
-    Task DeleteAsync(Comment comment, CancellationToken cancellationToken = default);
+    void Delete(Comment comment);
 
     Task<bool> ExistsByPostIdAsync(Guid postId, CancellationToken cancellationToken = default);
 
