@@ -13,6 +13,8 @@ public interface ICommentRepository
 
     Task CreateAsync(Comment comment, CancellationToken cancellationToken = default);
 
+    Task DeleteAsync(Comment comment, CancellationToken cancellationToken = default);
+
     Task<bool> ExistsByPostIdAsync(Guid postId, CancellationToken cancellationToken = default);
 
     Task<bool> ExistsByReaderIdAsync(Guid readerId, CancellationToken cancellationToken = default);
