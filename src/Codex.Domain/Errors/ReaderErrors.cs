@@ -15,4 +15,8 @@ public static class ReaderErrors
     public static readonly Error NotFound = new(
         "Reader.NotFound",
         "Reader not found");
+
+    public static readonly Error CannotDeleteContainsComments = new(
+        "Reader.CannotDeleteContainsComments",
+        "Cannot delete reader that contains comments");
 }
