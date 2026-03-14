@@ -10,4 +10,6 @@ public interface IReaderRepository
         CancellationToken cancellationToken = default);
 
     Task<Reader?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+
+    Task CreateAsync(Reader reader, CancellationToken cancellationToken = default);
 }
