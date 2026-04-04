@@ -15,7 +15,7 @@ public static class InfrastructureModule
     {
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseNpgsql(configuration.GetConnectionString("Default"));
+            options.UseNpgsql(configuration.GetConnectionString("codex-db"));
         });
 
         services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<ApplicationDbContext>());
@@ -24,6 +24,7 @@ public static class InfrastructureModule
         services.AddScoped<ICategoryRepository, CategoryEfCoreRepository>();
         services.AddScoped<ICommentRepository, CommentEfCoreRepository>();
         services.AddScoped<IPostRepository, PostEfCoreRepository>();
+        services.AddScoped<IReaderRepository, ReaderEfCoreRepository>();
 
         return services;
     }

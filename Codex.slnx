@@ -1,5 +1,10 @@
 <Solution>
+  <Folder Name="/host/">
+    <Project Path="host/Codex.AppHost/Codex.AppHost.csproj" />
+    <Project Path="host/Codex.ServiceDefaults/Codex.ServiceDefaults.csproj" />
+  </Folder>
   <Folder Name="/src/">
+    <Project Path="src/Codex.Api/Codex.Api.csproj" />
     <Project Path="src/Codex.Application/Codex.Application.csproj" />
     <Project Path="src/Codex.Domain/Codex.Domain.csproj" />
     <Project Path="src/Codex.Infrastructure/Codex.Infrastructure.csproj" />

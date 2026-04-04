@@ -24,3 +24,6 @@ pogledati ytbere i blogove etc da dodam sto vise stvari
 
 support for domain events in efcore and outbox
 
+---
+
+add cancellation token to all things async
