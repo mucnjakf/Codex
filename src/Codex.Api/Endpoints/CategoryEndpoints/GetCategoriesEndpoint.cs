@@ -1,5 +1,6 @@
 using Codex.Api.Extensions;
 using Codex.Application.Dtos;
+using Codex.Application.Dtos.Pagination;
 using Codex.Application.Queries.Categories;
 using Codex.Domain.Outcomes;
 using MediatR;
@@ -7,28 +8,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Codex.Api.Endpoints.CategoryEndpoints;
 
-internal sealed class GetCategoryEndpoint : IEndpoint
+internal sealed class GetCategoriesEndpoint : IEndpoint
 {
-    private sealed record Response(CategoryDto Data);
-
-    internal const string EndpointName = "GetCategory";
+    private sealed record Response(PaginationDto<CategoryDto> Data);
 
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app
-            .MapGet("api/categories/{id:guid}", Handler)
-            .WithName(EndpointName)
+            .MapGet("api/categories", Handler)
+            .WithName("GetCategories")
             .WithTags("Categories");
     }
 
     private static async Task<IResult> Handler(
-        [FromRoute] Guid id,
+        [FromQuery] int pageNumber,
+        [FromQuery] int pageSize,
         [FromServices] ISender sender,
         CancellationToken cancellationToken)
     {
-        GetCategoryQuery query = new(id);
+        GetCategoriesQuery query = new(pageNumber, pageSize);
 
-        Result<CategoryDto> result = await sender.Send(query, cancellationToken);
+        Result<PaginationDto<CategoryDto>> result = await sender.Send(query, cancellationToken);
 
         Response response = new(result.Value);
 

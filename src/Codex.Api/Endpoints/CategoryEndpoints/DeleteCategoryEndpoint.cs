@@ -21,7 +21,7 @@ internal sealed class DeleteCategoryEndpoint : IEndpoint
         [FromServices] ISender sender,
         CancellationToken cancellationToken)
     {
-        var command = new DeleteCategoryCommand(id);
+        DeleteCategoryCommand command = new(id);
 
         Result result = await sender.Send(command, cancellationToken);
 

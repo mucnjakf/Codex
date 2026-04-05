@@ -28,7 +28,7 @@ public sealed class UpdateCategoryEndpoint : IEndpoint
     {
         await validator.ValidateAndThrowAsync(request, cancellationToken);
 
-        var command = new UpdateCategoryCommand(id, request.Name);
+        UpdateCategoryCommand command = new(id, request.Name);
 
         Result result = await sender.Send(command, cancellationToken);
 

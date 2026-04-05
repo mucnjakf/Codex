@@ -12,7 +12,7 @@ public sealed class CreateCategoryEndpoint : IEndpoint
 {
     public sealed record Request(string Name);
 
-    private sealed record Response(CategoryDto Category);
+    private sealed record Response(CategoryDto Data);
 
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
@@ -30,16 +30,16 @@ public sealed class CreateCategoryEndpoint : IEndpoint
     {
         await validator.ValidateAndThrowAsync(request, cancellationToken);
 
-        var command = new CreateCategoryCommand(request.Name);
+        CreateCategoryCommand command = new(request.Name);
 
         Result<CategoryDto> result = await sender.Send(command, cancellationToken);
 
-        var response = new Response(result.Value);
+        Response response = new(result.Value);
 
         return result.IsSuccess
             ? Results.CreatedAtRoute(
                 GetCategoryEndpoint.EndpointName,
-                new { id = response.Category.Id },
+                new { id = response.Data.Id },
                 response)
             : result.ToProblemDetails();
     }
