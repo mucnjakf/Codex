@@ -1,3 +1,4 @@
+using Codex.Domain.Outcomes;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
@@ -19,27 +20,27 @@ internal sealed class RequestValidationExceptionHandler(IProblemDetailsService p
 
         httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
 
-        var context = new ProblemDetailsContext
+        Error[] errors = validationException.Errors
+            .Select(failure => Error.RequestValidation(
+                $"RequestValidation.{failure.PropertyName}",
+                failure.ErrorMessage))
+            .ToArray();
+
+        return await problemDetailsService.TryWriteAsync(new ProblemDetailsContext
         {
             HttpContext = httpContext,
             Exception = exception,
             ProblemDetails = new ProblemDetails
             {
                 Status = StatusCodes.Status400BadRequest,
-                Title = "Request Validation",
-                Type = validationException.GetType().Name,
-                Detail = "Request validation error occured while processing your request"
+                Title = "Bad Request",
+                Type = nameof(ErrorType.RequestValidation),
+                Detail = "Request validation error occured while processing your request",
+                Extensions = new Dictionary<string, object?>
+                {
+                    { "errors", errors }
+                }
             }
-        };
-
-        Dictionary<string, string[]> errors = validationException.Errors
-            .GroupBy(validationFailure => validationFailure.PropertyName)
-            .ToDictionary(
-                group => group.Key.ToLowerInvariant(),
-                group => group.Select(failure => failure.ErrorMessage).ToArray());
-
-        context.ProblemDetails.Extensions.Add("errors", errors);
-
-        return await problemDetailsService.TryWriteAsync(context);
+        });
     }
 }

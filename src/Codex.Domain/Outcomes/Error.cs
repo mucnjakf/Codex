@@ -22,6 +22,9 @@ public sealed class Error
     public static Error Failure(string code, string description)
         => new(code, description, ErrorType.Failure);
 
+    public static Error RequestValidation(string code, string description)
+        => new(code, description, ErrorType.RequestValidation);
+
     public static Error Validation(string code, string description)
         => new(code, description, ErrorType.Validation);
 
@@ -35,6 +38,7 @@ public sealed class Error
 public enum ErrorType
 {
     Failure,
+    RequestValidation,
     Validation,
     NotFound,
     Conflict
