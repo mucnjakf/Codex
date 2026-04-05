@@ -33,3 +33,8 @@ internal static class EndpointExtensions
         return app;
     }
 }
+
+internal interface IEndpoint
+{
+    void MapEndpoint(IEndpointRouteBuilder app);
+}

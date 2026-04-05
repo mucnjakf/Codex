@@ -1,3 +1,4 @@
+using Codex.Api.Extensions;
 using Codex.Application.Dtos;
 using Codex.Application.Queries.Categories;
 using Codex.Domain.Outcomes;
@@ -6,10 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Codex.Api.Endpoints.CategoryEndpoints;
 
-internal sealed record GetCategoryResponse(CategoryDto Category);
-
 internal sealed class GetCategoryEndpoint : IEndpoint
 {
+    private sealed record Response(CategoryDto Category);
+
     internal const string EndpointName = "GetCategory";
 
     public void MapEndpoint(IEndpointRouteBuilder app)
@@ -29,10 +30,10 @@ internal sealed class GetCategoryEndpoint : IEndpoint
 
         Result<CategoryDto> result = await sender.Send(query, cancellationToken);
 
-        var response = new GetCategoryResponse(result.Value);
+        var response = new Response(result.Value);
 
         return result.IsSuccess
             ? Results.Ok(response)
-            : Results.BadRequest(result.Error); // TODO implement problem details
+            : result.ToProblemDetails();
     }
 }
