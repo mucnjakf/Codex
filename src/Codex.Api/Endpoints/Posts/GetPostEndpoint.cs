@@ -1,4 +1,5 @@
 using Codex.Api.Extensions;
+using Codex.Application.Commands.Posts;
 using Codex.Application.Dtos;
 using Codex.Application.Queries.Posts;
 using Codex.Domain.Outcomes;
@@ -32,6 +33,31 @@ internal sealed class GetPostEndpoint : IEndpoint
 
         return result.IsSuccess
             ? Results.Ok(new Response(result.Value))
+            : result.ToProblemDetails();
+    }
+}
+
+internal sealed class DeletePostEndpoint : IEndpoint
+{
+    public void MapEndpoint(IEndpointRouteBuilder app)
+    {
+        app
+            .MapDelete("api/posts/{id:guid}", Handler)
+            .WithName("DeletePost")
+            .WithTags("Posts");
+    }
+
+    private static async Task<IResult> Handler(
+        [FromRoute] Guid id,
+        [FromServices] ISender sender,
+        CancellationToken cancellationToken)
+    {
+        DeletePostCommand command = new(id);
+
+        Result result = await sender.Send(command, cancellationToken);
+
+        return result.IsSuccess
+            ? Results.NoContent()
             : result.ToProblemDetails();
     }
 }
