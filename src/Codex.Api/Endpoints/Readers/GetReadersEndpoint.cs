@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Codex.Api.Endpoints.Readers;
 
-internal sealed class GetAuthorsEndpoint : IEndpoint
+internal sealed class GetReadersEndpoint : IEndpoint
 {
     private sealed record Response(PaginationDto<ReaderDto> Data);
 
