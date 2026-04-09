@@ -25,3 +25,5 @@ add cancellation token to all things async
 dokumentirati koncepte, tehnologije, arhitekture, nacine, i generalno
 
 testirati 
+
+scalar docs
