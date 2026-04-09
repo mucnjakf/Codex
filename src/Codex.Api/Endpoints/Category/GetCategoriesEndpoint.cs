@@ -6,7 +6,7 @@ using Codex.Domain.Outcomes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Codex.Api.Endpoints.CategoryEndpoints;
+namespace Codex.Api.Endpoints.Category;
 
 internal sealed class GetCategoriesEndpoint : IEndpoint
 {

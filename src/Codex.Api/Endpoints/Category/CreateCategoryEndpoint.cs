@@ -6,7 +6,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Codex.Api.Endpoints.CategoryEndpoints;
+namespace Codex.Api.Endpoints.Category;
 
 public sealed class CreateCategoryEndpoint : IEndpoint
 {

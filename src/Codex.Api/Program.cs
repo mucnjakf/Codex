@@ -30,6 +30,8 @@ builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddApplicationModule(builder.Configuration);
 builder.Services.AddInfrastructureModule(builder.Configuration);
 
+// --------------------------------------------------------------------------------------------------------------------
+
 WebApplication app = builder.Build();
 
 // Minimal API
