@@ -4,7 +4,7 @@ using Codex.Domain.Outcomes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Codex.Api.Endpoints.Category;
+namespace Codex.Api.Endpoints.Categories;
 
 internal sealed class DeleteCategoryEndpoint : IEndpoint
 {

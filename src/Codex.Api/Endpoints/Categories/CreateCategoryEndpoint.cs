@@ -1,26 +1,28 @@
 using Codex.Api.Extensions;
 using Codex.Application.Commands.Categories;
+using Codex.Application.Dtos;
 using Codex.Domain.Outcomes;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Codex.Api.Endpoints.Category;
+namespace Codex.Api.Endpoints.Categories;
 
-public sealed class UpdateCategoryEndpoint : IEndpoint
+public sealed class CreateCategoryEndpoint : IEndpoint
 {
     public sealed record Request(string Name);
+
+    private sealed record Response(CategoryDto Data);
 
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app
-            .MapPut("api/categories/{id:guid}", Handler)
-            .WithName("UpdateCategory")
+            .MapPost("api/categories", Handler)
+            .WithName("CreateCategory")
             .WithTags("Categories");
     }
 
     private static async Task<IResult> Handler(
-        [FromRoute] Guid id,
         [FromBody] Request request,
         [FromServices] IValidator<Request> validator,
         [FromServices] ISender sender,
@@ -28,12 +30,17 @@ public sealed class UpdateCategoryEndpoint : IEndpoint
     {
         await validator.ValidateAndThrowAsync(request, cancellationToken);
 
-        UpdateCategoryCommand command = new(id, request.Name);
+        CreateCategoryCommand command = new(request.Name);
 
-        Result result = await sender.Send(command, cancellationToken);
+        Result<CategoryDto> result = await sender.Send(command, cancellationToken);
+
+        Response response = new(result.Value);
 
         return result.IsSuccess
-            ? Results.NoContent()
+            ? Results.CreatedAtRoute(
+                GetCategoryEndpoint.EndpointName,
+                new { id = response.Data.Id },
+                response)
             : result.ToProblemDetails();
     }
 
