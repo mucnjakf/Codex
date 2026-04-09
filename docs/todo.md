@@ -12,6 +12,8 @@ reporting of articles, readers
 
 content moderation
 
+auth
+
 ---
 
 add github things
