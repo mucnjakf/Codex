@@ -20,6 +20,7 @@ internal sealed class PostEfCoreRepository(ApplicationDbContext dbContext) : IPo
             .Include(post => post.Category)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
+            .OrderByDescending(post => post.CreatedAtUtc)
             .ToListAsync(cancellationToken);
 
         return (posts.AsReadOnly(), totalCount);

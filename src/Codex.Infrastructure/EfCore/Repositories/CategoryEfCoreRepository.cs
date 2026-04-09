@@ -18,6 +18,7 @@ internal sealed class CategoryEfCoreRepository(ApplicationDbContext dbContext) :
         List<Category> categories = await query
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
+            .OrderByDescending(category => category.CreatedAtUtc)
             .ToListAsync(cancellationToken);
 
         return (categories.AsReadOnly(), totalCount);

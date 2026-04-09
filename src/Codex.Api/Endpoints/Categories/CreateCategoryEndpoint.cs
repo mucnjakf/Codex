@@ -34,13 +34,11 @@ public sealed class CreateCategoryEndpoint : IEndpoint
 
         Result<CategoryDto> result = await sender.Send(command, cancellationToken);
 
-        Response response = new(result.Value);
-
         return result.IsSuccess
             ? Results.CreatedAtRoute(
                 GetCategoryEndpoint.EndpointName,
-                new { id = response.Data.Id },
-                response)
+                new { id = result.Value.Id },
+                new Response(result.Value))
             : result.ToProblemDetails();
     }
 

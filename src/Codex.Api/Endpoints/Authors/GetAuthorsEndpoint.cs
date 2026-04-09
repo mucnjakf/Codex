@@ -30,10 +30,8 @@ internal sealed class GetAuthorsEndpoint : IEndpoint
 
         Result<PaginationDto<AuthorDto>> result = await sender.Send(query, cancellationToken);
 
-        Response response = new(result.Value);
-
         return result.IsSuccess
-            ? Results.Ok(response)
+            ? Results.Ok(new Response(result.Value))
             : result.ToProblemDetails();
     }
 }

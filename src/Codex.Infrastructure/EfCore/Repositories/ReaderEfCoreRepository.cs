@@ -18,6 +18,7 @@ internal sealed class ReaderEfCoreRepository(ApplicationDbContext dbContext) : I
         List<Reader> readers = await query
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
+            .OrderByDescending(reader => reader.CreatedAtUtc)
             .ToListAsync(cancellationToken);
 
         return (readers.AsReadOnly(), totalCount);

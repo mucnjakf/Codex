@@ -18,6 +18,7 @@ internal sealed class AuthorEfCoreRepository(ApplicationDbContext dbContext) : I
         List<Author> authors = await query
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
+            .OrderByDescending(author => author.CreatedAtUtc)
             .ToListAsync(cancellationToken);
 
         return (authors.AsReadOnly(), totalCount);

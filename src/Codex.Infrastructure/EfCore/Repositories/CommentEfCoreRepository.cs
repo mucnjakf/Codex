@@ -23,6 +23,7 @@ internal sealed class CommentEfCoreRepository(ApplicationDbContext dbContext) : 
             .Include(comment => comment.Reader)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
+            .OrderByDescending(comment => comment.CreatedAtUtc)
             .ToListAsync(cancellationToken);
 
         return (comments.AsReadOnly(), totalCount);
