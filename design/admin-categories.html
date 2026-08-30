@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories — Codex Admin</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <div class="admin-layout">
+
+        <!-- ── Sidebar ────────────────────────────────────────────── -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="./admin-dashboard.html" class="nav-brand" style="font-size:1rem">
+                    <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+                        <rect width="28" height="28" rx="6" fill="hsl(240,5.9%,10%)" />
+                        <path d="M8 10l-3 4 3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M20 10l3 4-3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M16 8l-4 12" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity=".7" />
+                    </svg>
+                    Codex
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="./admin-dashboard.html" class="sidebar-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="7" height="9" x="3" y="3" rx="1" />
+                        <rect width="7" height="5" x="14" y="3" rx="1" />
+                        <rect width="7" height="9" x="14" y="12" rx="1" />
+                        <rect width="7" height="5" x="3" y="16" rx="1" />
+                    </svg>
+                    Dashboard
+                </a>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Content</div>
+                    <a href="./admin-categories.html" class="sidebar-item active">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" />
+                            <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
+                        </svg>
+                        Categories
+                    </a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Users</div>
+                    <a href="./admin-authors.html" class="sidebar-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                            <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                            <path d="M10 9H8" />
+                            <path d="M16 13H8" />
+                            <path d="M16 17H8" />
+                        </svg>
+                        Authors
+                    </a>
+                    <a href="./admin-readers.html" class="sidebar-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                        Readers
+                    </a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="./admin-login.html" class="sidebar-item" style="color:var(--muted-foreground)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    Sign out
+                </a>
+            </div>
+        </aside>
+
+        <!-- ── Main ──────────────────────────────────────────────── -->
+        <div class="admin-main">
+
+            <div class="admin-topbar">
+                <div class="flex items-center gap-3" style="margin-left:auto">
+                    <span class="text-sm text-muted">Admin</span>
+                    <div class="avatar avatar-sm" style="background:hsl(240,5.9%,10%);color:white;font-size:0.7rem">AD
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-content">
+
+                <div class="page-header">
+                    <div class="page-header-left">
+                        <h1 class="page-title">Categories</h1>
+                        <p class="page-desc">Organise content with categories. All posts must belong to one.</p>
+                    </div>
+                </div>
+
+                <!-- Top 5 categories -->
+                <div style="margin-bottom:1.5rem">
+                    <p class="page-desc" style="margin-bottom:0.75rem;font-weight:500;color:var(--foreground)">Top 5 by
+                        post count</p>
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.75rem">
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div style="font-size:1.75rem;font-weight:700;letter-spacing:-0.04em">28</div>
+                            <div class="text-sm font-medium" style="margin-top:0.25rem">Web Development</div>
+                            <div class="text-xs text-muted" style="margin-top:0.125rem">posts</div>
+                        </div>
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div style="font-size:1.75rem;font-weight:700;letter-spacing:-0.04em">14</div>
+                            <div class="text-sm font-medium" style="margin-top:0.25rem">DevOps &amp; Cloud</div>
+                            <div class="text-xs text-muted" style="margin-top:0.125rem">posts</div>
+                        </div>
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div style="font-size:1.75rem;font-weight:700;letter-spacing:-0.04em">11</div>
+                            <div class="text-sm font-medium" style="margin-top:0.25rem">Security</div>
+                            <div class="text-xs text-muted" style="margin-top:0.125rem">posts</div>
+                        </div>
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div style="font-size:1.75rem;font-weight:700;letter-spacing:-0.04em">9</div>
+                            <div class="text-sm font-medium" style="margin-top:0.25rem">AI &amp; Machine Learning</div>
+                            <div class="text-xs text-muted" style="margin-top:0.125rem">posts</div>
+                        </div>
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div style="font-size:1.75rem;font-weight:700;letter-spacing:-0.04em">7</div>
+                            <div class="text-sm font-medium" style="margin-top:0.25rem">Database Design</div>
+                            <div class="text-xs text-muted" style="margin-top:0.125rem">posts</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toolbar -->
+                <div class="toolbar">
+                    <div class="toolbar-left">
+                        <div class="search-wrap" style="max-width:280px;flex:1">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="m21 21-4.35-4.35" />
+                            </svg>
+                            <input class="input" type="search" placeholder="Search categories…" style="height:2.25rem"
+                                id="catSearch" oninput="filterTable()">
+                        </div>
+                        <select class="select" style="width:165px;height:2.25rem">
+                            <option>Sort: Most posts</option>
+                            <option>Sort: Fewest posts</option>
+                            <option>Sort: Name A → Z</option>
+                            <option>Sort: Newest</option>
+                        </select>
+                    </div>
+                    <div class="toolbar-right">
+                        <button class="btn btn-default btn-sm" onclick="openDialog('addDialog')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+                            Add category
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="table-container" style="overflow:visible">
+                    <table class="table" id="catTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Posts</th>
+                                <th>Created</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="catBody">
+                            <tr data-name="Web Development">
+                                <td><span class="font-medium">Web Development</span></td>
+                                <td class="text-sm">28 posts</td>
+                                <td class="text-sm text-muted">Jan 10, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block">
+                                        <button class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem;letter-spacing:.05em">···</button>
+                                        <div class="dropdown-content">
+                                            <button class="dropdown-item"
+                                                onclick="openEditDialog('Web Development')"><svg width="13" height="13"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                                </svg> Edit</button>
+                                            <div class="dropdown-sep"></div>
+                                            <button class="dropdown-item destructive"
+                                                onclick="openDeleteDialog('Web Development', this)"><svg width="13"
+                                                    height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M3 6h18" />
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                                </svg> Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr data-name="DevOps & Cloud">
+                                <td><span class="font-medium">DevOps &amp; Cloud</span></td>
+                                <td class="text-sm">14 posts</td>
+                                <td class="text-sm text-muted">Jan 10, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block">
+                                        <button class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem;letter-spacing:.05em">···</button>
+                                        <div class="dropdown-content">
+                                            <button class="dropdown-item"
+                                                onclick="openEditDialog('DevOps & Cloud')"><svg width="13" height="13"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                                </svg> Edit</button>
+                                            <div class="dropdown-sep"></div>
+                                            <button class="dropdown-item destructive"
+                                                onclick="openDeleteDialog('DevOps & Cloud', this)"><svg width="13"
+                                                    height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M3 6h18" />
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                                </svg> Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr data-name="AI & Machine Learning">
+                                <td><span class="font-medium">AI &amp; Machine Learning</span></td>
+                                <td class="text-sm">9 posts</td>
+                                <td class="text-sm text-muted">Jan 15, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block">
+                                        <button class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem;letter-spacing:.05em">···</button>
+                                        <div class="dropdown-content">
+                                            <button class="dropdown-item"
+                                                onclick="openEditDialog('AI & Machine Learning')"><svg width="13"
+                                                    height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                                </svg> Edit</button>
+                                            <div class="dropdown-sep"></div>
+                                            <button class="dropdown-item destructive"
+                                                onclick="openDeleteDialog('AI & Machine Learning', this)"><svg
+                                                    width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M3 6h18" />
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                                </svg> Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr data-name="Database Design">
+                                <td><span class="font-medium">Database Design</span></td>
+                                <td class="text-sm">7 posts</td>
+                                <td class="text-sm text-muted">Jan 10, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block">
+                                        <button class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem;letter-spacing:.05em">···</button>
+                                        <div class="dropdown-content">
+                                            <button class="dropdown-item"
+                                                onclick="openEditDialog('Database Design')"><svg width="13" height="13"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                                </svg> Edit</button>
+                                            <div class="dropdown-sep"></div>
+                                            <button class="dropdown-item destructive"
+                                                onclick="openDeleteDialog('Database Design', this)"><svg width="13"
+                                                    height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M3 6h18" />
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                                </svg> Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr data-name="Security">
+                                <td><span class="font-medium">Security</span></td>
+                                <td class="text-sm">11 posts</td>
+                                <td class="text-sm text-muted">Jan 10, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block">
+                                        <button class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem;letter-spacing:.05em">···</button>
+                                        <div class="dropdown-content">
+                                            <button class="dropdown-item" onclick="openEditDialog('Security')"><svg
+                                                    width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                                </svg> Edit</button>
+                                            <div class="dropdown-sep"></div>
+                                            <button class="dropdown-item destructive"
+                                                onclick="openDeleteDialog('Security', this)"><svg width="13" height="13"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M3 6h18" />
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                                </svg> Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr data-name="Open Source">
+                                <td><span class="font-medium">Open Source</span></td>
+                                <td class="text-sm">6 posts</td>
+                                <td class="text-sm text-muted">Feb 3, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block">
+                                        <button class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem;letter-spacing:.05em">···</button>
+                                        <div class="dropdown-content">
+                                            <button class="dropdown-item" onclick="openEditDialog('Open Source')"><svg
+                                                    width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                                </svg> Edit</button>
+                                            <div class="dropdown-sep"></div>
+                                            <button class="dropdown-item destructive"
+                                                onclick="openDeleteDialog('Open Source', this)"><svg width="13"
+                                                    height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M3 6h18" />
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                                </svg> Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div><!-- /admin-layout -->
+
+    <!-- ── Add Category dialog ────────────────────────────────── -->
+    <div class="dialog-overlay" id="addDialog">
+        <div class="dialog">
+            <div class="dialog-header">
+                <div>
+                    <h2 class="dialog-title">Add category</h2>
+                    <p class="dialog-description">Create a new category for posts.</p>
+                </div>
+                <button class="dialog-close" onclick="closeDialog('addDialog')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="dialog-body">
+                <div class="form-group">
+                    <label class="label" for="newCatName">Category name <span
+                            style="color:var(--destructive)">*</span></label>
+                    <input class="input" type="text" id="newCatName" placeholder="e.g. Mobile Development" autofocus>
+                    <span class="form-description">Use a clear, descriptive name that authors will understand.</span>
+                </div>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn btn-outline btn-sm" onclick="closeDialog('addDialog')">Cancel</button>
+                <button class="btn btn-default btn-sm" onclick="addCategory()">Create category</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Edit Category dialog ───────────────────────────────── -->
+    <div class="dialog-overlay" id="editDialog">
+        <div class="dialog">
+            <div class="dialog-header">
+                <div>
+                    <h2 class="dialog-title">Edit category</h2>
+                    <p class="dialog-description">Update the category name.</p>
+                </div>
+                <button class="dialog-close" onclick="closeDialog('editDialog')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="dialog-body">
+                <div class="form-group">
+                    <label class="label" for="editCatName">Category name <span
+                            style="color:var(--destructive)">*</span></label>
+                    <input class="input" type="text" id="editCatName">
+                </div>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn btn-outline btn-sm" onclick="closeDialog('editDialog')">Cancel</button>
+                <button class="btn btn-default btn-sm" onclick="saveEdit()">Save changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Delete confirmation dialog ────────────────────────── -->
+    <div class="dialog-overlay" id="deleteDialog">
+        <div class="dialog" style="max-width:420px">
+            <div class="dialog-header">
+                <div>
+                    <h2 class="dialog-title">Delete category?</h2>
+                    <p class="dialog-description" id="deleteDesc">This cannot be undone.</p>
+                </div>
+                <button class="dialog-close" onclick="closeDialog('deleteDialog')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="dialog-body">
+                <div class="alert alert-destructive">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                    <span>Posts assigned to this category will be left without a category. Consider reassigning them
+                        first.</span>
+                </div>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn btn-outline btn-sm" onclick="closeDialog('deleteDialog')">Cancel</button>
+                <button class="btn btn-destructive btn-sm" onclick="deleteCategory()">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script>
+        let pendingDeleteRow = null;
+        let editingRow = null;
+
+        function openDialog(id) { document.getElementById(id).classList.add('open'); }
+        function closeDialog(id) { document.getElementById(id).classList.remove('open'); }
+
+        function toggleDropdown(elOrId) {
+            const el = typeof elOrId === 'string' ? document.getElementById(elOrId) : elOrId.closest('.dropdown');
+            const isOpen = el.classList.contains('open');
+            document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+            if (!isOpen) el.classList.add('open');
+        }
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.dropdown')) document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+        });
+
+        function openEditDialog(name) {
+            document.getElementById('editCatName').value = name;
+            editingRow = [...document.querySelectorAll('#catBody tr')].find(r => r.dataset.name === name);
+            openDialog('editDialog');
+        }
+
+        function openDeleteDialog(name, btn) {
+            pendingDeleteRow = btn.closest('tr');
+            document.getElementById('deleteDesc').textContent = `"${name}" will be permanently deleted.`;
+            openDialog('deleteDialog');
+        }
+
+        function addCategory() {
+            const name = document.getElementById('newCatName').value.trim();
+            if (!name) { showToast('Please enter a category name.', 'destructive'); return; }
+            const tbody = document.getElementById('catBody');
+            const tr = document.createElement('tr');
+            const colors = ['hsl(180,60%,50%)', 'hsl(260,60%,60%)', 'hsl(20,80%,55%)'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            tr.dataset.name = name;
+            tr.innerHTML = `
+      <td><span class="font-medium">${name}</span></td>
+      <td class="text-sm">0 posts</td>
+      <td class="text-sm text-muted">Just now</td>
+      <td style="text-align:right"><div class="dropdown" style="display:inline-block">
+        <button class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)" style="font-size:1.1rem;letter-spacing:.05em">···</button>
+        <div class="dropdown-content">
+          <button class="dropdown-item" onclick="openEditDialog('${name}')">Edit</button>
+          <div class="dropdown-sep"></div>
+          <button class="dropdown-item destructive" onclick="openDeleteDialog('${name}', this)">Delete</button>
+        </div>
+      </div></td>`;
+            tbody.appendChild(tr);
+            closeDialog('addDialog');
+            document.getElementById('newCatName').value = '';
+            showToast(`Category "${name}" created.`, 'success');
+        }
+
+        function saveEdit() {
+            const newName = document.getElementById('editCatName').value.trim();
+            if (!newName) { showToast('Name cannot be empty.', 'destructive'); return; }
+            if (editingRow) {
+                editingRow.querySelector('.font-medium').textContent = newName;
+                editingRow.dataset.name = newName;
+            }
+            closeDialog('editDialog');
+            showToast('Category updated.', 'success');
+        }
+
+        function deleteCategory() {
+            if (pendingDeleteRow) pendingDeleteRow.remove();
+            closeDialog('deleteDialog');
+            showToast('Category deleted.', 'destructive');
+            pendingDeleteRow = null;
+        }
+
+        function filterTable() {
+            const q = document.getElementById('catSearch').value.toLowerCase();
+            document.querySelectorAll('#catBody tr').forEach(r => {
+                r.style.display = r.dataset.name.toLowerCase().includes(q) ? '' : 'none';
+            });
+        }
+
+        function showToast(msg, type) {
+            const c = document.getElementById('toast-container');
+            const t = document.createElement('div');
+            t.className = 'toast' + (type ? ' toast-' + type : '');
+            t.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>${msg}`;
+            c.appendChild(t);
+            setTimeout(() => t.remove(), 3500);
+        }
+
+        // Focus input when dialog opens
+        document.getElementById('addDialog').addEventListener('transitionend', () => {
+            if (document.getElementById('addDialog').classList.contains('open')) document.getElementById('newCatName').focus();
+        });
+    </script>
+</body>
+
+</html>

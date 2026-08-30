@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readers — Codex Admin</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <div class="admin-layout">
+
+        <!-- ── Sidebar ──────────────────────────────────────────── -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="./admin-dashboard.html" class="nav-brand" style="font-size:1rem">
+                    <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+                        <rect width="28" height="28" rx="6" fill="hsl(240,5.9%,10%)" />
+                        <path d="M8 10l-3 4 3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M20 10l3 4-3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M16 8l-4 12" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity=".7" />
+                    </svg>
+                    Codex
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="./admin-dashboard.html" class="sidebar-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="7" height="9" x="3" y="3" rx="1" />
+                        <rect width="7" height="5" x="14" y="3" rx="1" />
+                        <rect width="7" height="9" x="14" y="12" rx="1" />
+                        <rect width="7" height="5" x="3" y="16" rx="1" />
+                    </svg>
+                    Dashboard
+                </a>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Content</div>
+                    <a href="./admin-categories.html" class="sidebar-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" />
+                            <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
+                        </svg>
+                        Categories
+                    </a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Users</div>
+                    <a href="./admin-authors.html" class="sidebar-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                            <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                            <path d="M10 9H8" />
+                            <path d="M16 13H8" />
+                            <path d="M16 17H8" />
+                        </svg>
+                        Authors
+                    </a>
+                    <a href="./admin-readers.html" class="sidebar-item active">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                        Readers
+                    </a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="./admin-login.html" class="sidebar-item" style="color:var(--muted-foreground)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    Sign out
+                </a>
+            </div>
+        </aside>
+
+        <!-- ── Main ─────────────────────────────────────────────── -->
+        <div class="admin-main">
+            <div class="admin-topbar">
+                <div class="flex items-center gap-3" style="margin-left:auto">
+                    <span class="text-sm text-muted">Admin</span>
+                    <div class="avatar avatar-sm" style="background:hsl(240,5.9%,10%);color:white;font-size:0.7rem">AD
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-content">
+                <div class="page-header">
+                    <div class="page-header-left">
+                        <h1 class="page-title">Readers</h1>
+                        <p class="page-desc">View and manage reader accounts and their comments.</p>
+                    </div>
+                </div>
+
+                <!-- Top 5 most active readers -->
+                <div style="margin-bottom:1.5rem">
+                    <p class="page-desc" style="margin-bottom:0.75rem;font-weight:500;color:var(--foreground)">Top 5
+                        most active readers</p>
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.75rem">
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div class="avatar"
+                                style="margin:0 auto 0.625rem;width:2.75rem;height:2.75rem;font-size:0.9375rem">JW</div>
+                            <div class="font-semibold text-sm">James Wilson</div>
+                            <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.04em;margin-top:0.375rem">47
+                            </div>
+                            <div class="text-xs text-muted">comments</div>
+                        </div>
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div class="avatar"
+                                style="margin:0 auto 0.625rem;width:2.75rem;height:2.75rem;font-size:0.9375rem">LP</div>
+                            <div class="font-semibold text-sm">Lisa Park</div>
+                            <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.04em;margin-top:0.375rem">31
+                            </div>
+                            <div class="text-xs text-muted">comments</div>
+                        </div>
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div class="avatar"
+                                style="margin:0 auto 0.625rem;width:2.75rem;height:2.75rem;font-size:0.9375rem">DB</div>
+                            <div class="font-semibold text-sm">David Brown</div>
+                            <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.04em;margin-top:0.375rem">18
+                            </div>
+                            <div class="text-xs text-muted">comments</div>
+                        </div>
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div class="avatar"
+                                style="margin:0 auto 0.625rem;width:2.75rem;height:2.75rem;font-size:0.9375rem">KT</div>
+                            <div class="font-semibold text-sm">Katie Torres</div>
+                            <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.04em;margin-top:0.375rem">9
+                            </div>
+                            <div class="text-xs text-muted">comments</div>
+                        </div>
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div class="avatar"
+                                style="margin:0 auto 0.625rem;width:2.75rem;height:2.75rem;font-size:0.9375rem">RN</div>
+                            <div class="font-semibold text-sm">Ryan Nguyen</div>
+                            <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.04em;margin-top:0.375rem">4
+                            </div>
+                            <div class="text-xs text-muted">comments</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toolbar -->
+                <div class="toolbar">
+                    <div class="search-wrap" style="max-width:320px;flex:1">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.35-4.35" />
+                        </svg>
+                        <input class="input" type="search" placeholder="Search readers&hellip;" style="height:2.25rem"
+                            oninput="filterReaders(this.value)">
+                    </div>
+                    <select class="select" style="width:175px;height:2.25rem">
+                        <option>Sort: Most comments</option>
+                        <option>Sort: Newest</option>
+                        <option>Sort: Name A to Z</option>
+                    </select>
+                </div>
+
+                <!-- Table -->
+                <div class="table-container" style="overflow:visible">
+                    <table class="table" id="readersTable">
+                        <thead>
+                            <tr>
+                                <th>Reader</th>
+                                <th>Comments</th>
+                                <th>Joined</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="readersBody">
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                        <div class="avatar">JW</div>
+                                        <div>
+                                            <div class="font-medium">James Wilson</div>
+                                            <div class="text-xs text-muted">james.wilson@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-sm">47</td>
+                                <td class="text-sm text-muted">Jan 20, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block"><button
+                                            class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem">...</button>
+                                        <div class="dropdown-content"><button class="dropdown-item"
+                                                onclick="viewReader('JW','James Wilson','james.wilson@email.com','Jan 20, 2025')">View</button><button
+                                                class="dropdown-item"
+                                                onclick="openEditReader('JW','James','Wilson','james.wilson@email.com')">Edit</button>
+                                            <div class="dropdown-sep"></div><button class="dropdown-item destructive"
+                                                onclick="openDeleteReader('James Wilson',this)">Remove</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                        <div class="avatar">LP</div>
+                                        <div>
+                                            <div class="font-medium">Lisa Park</div>
+                                            <div class="text-xs text-muted">lisa.park@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-sm">31</td>
+                                <td class="text-sm text-muted">Jan 25, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block"><button
+                                            class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem">...</button>
+                                        <div class="dropdown-content"><button class="dropdown-item"
+                                                onclick="viewReader('LP','Lisa Park','lisa.park@email.com','Jan 25, 2025')">View</button><button
+                                                class="dropdown-item"
+                                                onclick="openEditReader('LP','Lisa','Park','lisa.park@email.com')">Edit</button>
+                                            <div class="dropdown-sep"></div><button class="dropdown-item destructive"
+                                                onclick="openDeleteReader('Lisa Park',this)">Remove</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                        <div class="avatar">DB</div>
+                                        <div>
+                                            <div class="font-medium">David Brown</div>
+                                            <div class="text-xs text-muted">david.brown@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-sm">18</td>
+                                <td class="text-sm text-muted">Feb 3, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block"><button
+                                            class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem">...</button>
+                                        <div class="dropdown-content"><button class="dropdown-item"
+                                                onclick="viewReader('DB','David Brown','david.brown@email.com','Feb 3, 2025')">View</button><button
+                                                class="dropdown-item"
+                                                onclick="openEditReader('DB','David','Brown','david.brown@email.com')">Edit</button>
+                                            <div class="dropdown-sep"></div><button class="dropdown-item destructive"
+                                                onclick="openDeleteReader('David Brown',this)">Remove</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                        <div class="avatar">KT</div>
+                                        <div>
+                                            <div class="font-medium">Katie Torres</div>
+                                            <div class="text-xs text-muted">katie.torres@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-sm">9</td>
+                                <td class="text-sm text-muted">Feb 18, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block"><button
+                                            class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem">...</button>
+                                        <div class="dropdown-content"><button class="dropdown-item"
+                                                onclick="viewReader('KT','Katie Torres','katie.torres@email.com','Feb 18, 2025')">View</button><button
+                                                class="dropdown-item"
+                                                onclick="openEditReader('KT','Katie','Torres','katie.torres@email.com')">Edit</button>
+                                            <div class="dropdown-sep"></div><button class="dropdown-item destructive"
+                                                onclick="openDeleteReader('Katie Torres',this)">Remove</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                        <div class="avatar">RN</div>
+                                        <div>
+                                            <div class="font-medium">Ryan Nguyen</div>
+                                            <div class="text-xs text-muted">ryan.nguyen@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-sm">4</td>
+                                <td class="text-sm text-muted">Mar 1, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block"><button
+                                            class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem">...</button>
+                                        <div class="dropdown-content"><button class="dropdown-item"
+                                                onclick="viewReader('RN','Ryan Nguyen','ryan.nguyen@email.com','Mar 1, 2025')">View</button><button
+                                                class="dropdown-item"
+                                                onclick="openEditReader('RN','Ryan','Nguyen','ryan.nguyen@email.com')">Edit</button>
+                                            <div class="dropdown-sep"></div><button class="dropdown-item destructive"
+                                                onclick="openDeleteReader('Ryan Nguyen',this)">Remove</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div style="display:flex;justify-content:flex-end;margin-top:1rem">
+                    <nav class="pagination">
+                        <button class="pg-btn" disabled>&laquo;</button>
+                        <button class="pg-btn active">1</button>
+                        <button class="pg-btn">2</button>
+                        <button class="pg-btn">3</button>
+                        <span class="pg-ellipsis">...</span>
+                        <button class="pg-btn">25</button>
+                        <button class="pg-btn">&raquo;</button>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="dialog-overlay" id="editReaderDialog">
+        <div class="dialog">
+            <div class="dialog-header">
+                <div>
+                    <h2 class="dialog-title">Edit reader</h2>
+                    <p class="dialog-description">Update reader account details.</p>
+                </div>
+                <button class="dialog-close" onclick="closeDialog('editReaderDialog')">X</button>
+            </div>
+            <div class="dialog-body">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+                    <div class="form-group"><label class="label">First name</label><input class="input" type="text"
+                            id="rEditFirst"></div>
+                    <div class="form-group"><label class="label">Last name</label><input class="input" type="text"
+                            id="rEditLast"></div>
+                </div>
+                <div class="form-group"><label class="label">Email</label><input class="input" type="email"
+                        id="rEditEmail"></div>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn btn-outline btn-sm" onclick="closeDialog('editReaderDialog')">Cancel</button>
+                <button class="btn btn-default btn-sm" onclick="saveReader()">Save changes</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="dialog-overlay" id="deleteReaderDialog">
+        <div class="dialog" style="max-width:420px">
+            <div class="dialog-header">
+                <div>
+                    <h2 class="dialog-title">Remove reader?</h2>
+                    <p class="dialog-description" id="deleteReaderDesc">This will remove the reader account.</p>
+                </div>
+                <button class="dialog-close" onclick="closeDialog('deleteReaderDialog')">X</button>
+            </div>
+            <div class="dialog-body">
+                <div class="alert alert-destructive">All comments by this reader will be removed from posts.</div>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn btn-outline btn-sm" onclick="closeDialog('deleteReaderDialog')">Cancel</button>
+                <button class="btn btn-destructive btn-sm" onclick="deleteReader()">Remove reader</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+    <script>
+        let pendingDeleteRow = null;
+        function closeDialog(id) { document.getElementById(id).classList.remove('open'); }
+        function openDialog(id) { document.getElementById(id).classList.add('open'); }
+        function toggleDropdown(el) {
+            const d = el.closest('.dropdown');
+            const open = d.classList.contains('open');
+            document.querySelectorAll('.dropdown.open').forEach(x => x.classList.remove('open'));
+            if (!open) d.classList.add('open');
+        }
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.dropdown')) document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+        });
+        function viewReader(initials, name, email, joined) {
+            document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+            window.location.href = './admin-reader-detail.html?' + new URLSearchParams({ initials, name, email, joined });
+        }
+        function openEditReader(initials, first, last, email) {
+            document.getElementById('rEditFirst').value = first;
+            document.getElementById('rEditLast').value = last;
+            document.getElementById('rEditEmail').value = email;
+            openDialog('editReaderDialog');
+        }
+        function saveReader() { closeDialog('editReaderDialog'); showToast('Reader updated.', 'success'); }
+        function openDeleteReader(name, btn) {
+            pendingDeleteRow = btn.closest('tr');
+            document.getElementById('deleteReaderDesc').textContent = '"' + name + '" will be permanently removed.';
+            openDialog('deleteReaderDialog');
+            document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+        }
+        function deleteReader() {
+            if (pendingDeleteRow) pendingDeleteRow.remove();
+            closeDialog('deleteReaderDialog');
+            showToast('Reader removed.', 'destructive');
+        }
+        function filterReaders(q) {
+            q = q.toLowerCase();
+            document.querySelectorAll('#readersBody tr').forEach(r => {
+                const name = r.querySelector('.font-medium')?.textContent.toLowerCase() || '';
+                const email = r.querySelector('.text-xs')?.textContent.toLowerCase() || '';
+                r.style.display = (name.includes(q) || email.includes(q)) ? '' : 'none';
+            });
+        }
+        function showToast(msg, type) {
+            const c = document.getElementById('toast-container');
+            const t = document.createElement('div');
+            t.className = 'toast' + (type ? ' toast-' + type : '');
+            t.textContent = msg;
+            c.appendChild(t);
+            setTimeout(() => t.remove(), 3500);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Codex Admin</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <div class="admin-layout">
+
+        <!-- ── Sidebar ────────────────────────────────────────────── -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="./admin-dashboard.html" class="nav-brand" style="font-size:1rem">
+                    <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+                        <rect width="28" height="28" rx="6" fill="hsl(240,5.9%,10%)" />
+                        <path d="M8 10l-3 4 3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M20 10l3 4-3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M16 8l-4 12" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity=".7" />
+                    </svg>
+                    Codex
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="./admin-dashboard.html" class="sidebar-item active">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="7" height="9" x="3" y="3" rx="1" />
+                        <rect width="7" height="5" x="14" y="3" rx="1" />
+                        <rect width="7" height="9" x="14" y="12" rx="1" />
+                        <rect width="7" height="5" x="3" y="16" rx="1" />
+                    </svg>
+                    Dashboard
+                </a>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Content</div>
+                    <a href="./admin-categories.html" class="sidebar-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" />
+                            <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
+                        </svg>
+                        Categories
+                    </a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Users</div>
+                    <a href="./admin-authors.html" class="sidebar-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                            <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                            <path d="M10 9H8" />
+                            <path d="M16 13H8" />
+                            <path d="M16 17H8" />
+                        </svg>
+                        Authors
+                    </a>
+                    <a href="./admin-readers.html" class="sidebar-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                        Readers
+                    </a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="./admin-login.html" class="sidebar-item" style="color:var(--muted-foreground)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    Sign out
+                </a>
+            </div>
+        </aside>
+
+        <!-- ── Main ──────────────────────────────────────────────── -->
+        <div class="admin-main">
+
+            <!-- Top bar -->
+            <div class="admin-topbar">
+                <div class="flex items-center gap-3" style="margin-left:auto">
+                    <span class="text-sm text-muted">Admin</span>
+                    <div class="avatar avatar-sm" style="background:hsl(240,5.9%,10%);color:white;font-size:0.7rem">AD
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="admin-content">
+
+                <div class="page-header">
+                    <div class="page-header-left">
+                        <h1 class="page-title">Overview</h1>
+                        <p class="page-desc">Platform health at a glance</p>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="card stat-card">
+                        <div class="stat-label">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                            </svg>
+                            Total Posts
+                        </div>
+                        <div class="stat-value">84</div>
+                        <div class="stat-sub" style="gap:0.5rem;flex-wrap:wrap">
+                            <span class="badge badge-success" style="font-size:0.7rem">62 published</span>
+                            <span class="badge badge-warning" style="font-size:0.7rem">22 drafts</span>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-label">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                                <path d="M10 9H8" />
+                                <path d="M16 13H8" />
+                                <path d="M16 17H8" />
+                            </svg>
+                            Authors
+                        </div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-sub">
+                            <span class="badge badge-secondary" style="font-size:0.7rem">+2 this month</span>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-label">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                            Readers
+                        </div>
+                        <div class="stat-value">1,247</div>
+                        <div class="stat-sub">
+                            <span class="badge badge-secondary" style="font-size:0.7rem">+87 this month</span>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-label">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" />
+                                <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
+                            </svg>
+                            Categories
+                        </div>
+                        <div class="stat-value">6</div>
+                        <div class="stat-sub">
+                            <span class="badge badge-outline" style="font-size:0.7rem">6 active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Two column layout -->
+                <div style="display:grid;grid-template-columns:1fr 320px;gap:1.5rem;align-items:stretch">
+
+                    <!-- Recent posts table -->
+                    <div class="card" style="display:flex;flex-direction:column">
+                        <div class="card-header" style="padding-bottom:0.75rem">
+                            <div class="flex items-center justify-between w-full">
+                                <h3 class="card-title" style="font-size:0.9375rem">Recent Posts</h3>
+                                <a href="./admin-authors.html" class="btn btn-ghost btn-sm"
+                                    style="font-size:0.8125rem">View all</a>
+                            </div>
+                        </div>
+                        <div style="flex:1;overflow-x:auto">
+                            <table class="table" style="border-radius:0;border:none">
+                                <thead>
+                                    <tr>
+                                        <th style="width:38%">Title</th>
+                                        <th>Author</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-medium truncate" style="max-width:200px">Building Scalable APIs
+                                            with .NET 8</td>
+                                        <td>
+                                            <div class="flex items-center gap-2">
+                                                <div class="avatar avatar-xs">AC</div>
+                                                <span class="text-sm">Alex Chen</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-secondary" style="font-size:0.7rem">Web Dev</span>
+                                        </td>
+                                        <td><span class="badge badge-success" style="font-size:0.7rem">Published</span>
+                                        </td>
+                                        <td class="text-sm text-muted">Mar 15</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium">Docker Compose for Local Dev</td>
+                                        <td>
+                                            <div class="flex items-center gap-2">
+                                                <div class="avatar avatar-xs">SJ</div>
+                                                <span class="text-sm">Sarah Johnson</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-secondary" style="font-size:0.7rem">DevOps</span>
+                                        </td>
+                                        <td><span class="badge badge-success" style="font-size:0.7rem">Published</span>
+                                        </td>
+                                        <td class="text-sm text-muted">Mar 12</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium">Understanding RAG Patterns</td>
+                                        <td>
+                                            <div class="flex items-center gap-2">
+                                                <div class="avatar avatar-xs">MR</div>
+                                                <span class="text-sm">Mike Rodriguez</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-secondary" style="font-size:0.7rem">AI/ML</span>
+                                        </td>
+                                        <td><span class="badge badge-success" style="font-size:0.7rem">Published</span>
+                                        </td>
+                                        <td class="text-sm text-muted">Mar 10</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium">PostgreSQL Performance Tuning</td>
+                                        <td>
+                                            <div class="flex items-center gap-2">
+                                                <div class="avatar avatar-xs">EW</div>
+                                                <span class="text-sm">Emma Williams</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-secondary" style="font-size:0.7rem">Database</span>
+                                        </td>
+                                        <td><span class="badge badge-warning" style="font-size:0.7rem">Draft</span></td>
+                                        <td class="text-sm text-muted">Mar 8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium">Zero-Trust Architecture</td>
+                                        <td>
+                                            <div class="flex items-center gap-2">
+                                                <div class="avatar avatar-xs">AC</div>
+                                                <span class="text-sm">Alex Chen</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-secondary" style="font-size:0.7rem">Security</span>
+                                        </td>
+                                        <td><span class="badge badge-success" style="font-size:0.7rem">Published</span>
+                                        </td>
+                                        <td class="text-sm text-muted">Mar 5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Right column: Quick stats + top authors -->
+                    <div style="display:flex;flex-direction:column;gap:1.25rem">
+
+                        <!-- Comments summary -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title" style="font-size:0.9375rem">Recent Activity</h3>
+                            </div>
+                            <div class="card-content" style="display:flex;flex-direction:column;gap:0.75rem">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2 text-sm">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                                        </svg>
+                                        Comments today
+                                    </div>
+                                    <span class="font-semibold">23</span>
+                                </div>
+                                <div class="separator"></div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2 text-sm">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                            <circle cx="9" cy="7" r="4" />
+                                        </svg>
+                                        New readers today
+                                    </div>
+                                    <span class="font-semibold">7</span>
+                                </div>
+                                <div class="separator"></div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2 text-sm">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                                            <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                                        </svg>
+                                        Posts published today
+                                    </div>
+                                    <span class="font-semibold">2</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top authors -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title" style="font-size:0.9375rem">Top Authors</h3>
+                            </div>
+                            <div class="card-content" style="display:flex;flex-direction:column;gap:0.75rem">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <div class="avatar avatar-xs">MR</div>
+                                        <span class="text-sm font-medium">Mike Rodriguez</span>
+                                    </div>
+                                    <span class="text-sm text-muted">21 posts</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <div class="avatar avatar-xs">AC</div>
+                                        <span class="text-sm font-medium">Alex Chen</span>
+                                    </div>
+                                    <span class="text-sm text-muted">15 posts</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <div class="avatar avatar-xs">SJ</div>
+                                        <span class="text-sm font-medium">Sarah Johnson</span>
+                                    </div>
+                                    <span class="text-sm text-muted">8 posts</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <div class="avatar avatar-xs">EW</div>
+                                        <span class="text-sm font-medium">Emma Williams</span>
+                                    </div>
+                                    <span class="text-sm text-muted">5 posts</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div><!-- /admin-layout -->
+
+    <div id="toast-container"></div>
+</body>
+
+</html>

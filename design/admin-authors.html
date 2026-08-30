@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors — Codex Admin</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <div class="admin-layout">
+
+        <!-- ── Sidebar ────────────────────────────────────────────── -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="./admin-dashboard.html" class="nav-brand" style="font-size:1rem">
+                    <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+                        <rect width="28" height="28" rx="6" fill="hsl(240,5.9%,10%)" />
+                        <path d="M8 10l-3 4 3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M20 10l3 4-3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M16 8l-4 12" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity=".7" />
+                    </svg>
+                    Codex
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="./admin-dashboard.html" class="sidebar-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="7" height="9" x="3" y="3" rx="1" />
+                        <rect width="7" height="5" x="14" y="3" rx="1" />
+                        <rect width="7" height="9" x="14" y="12" rx="1" />
+                        <rect width="7" height="5" x="3" y="16" rx="1" />
+                    </svg>
+                    Dashboard
+                </a>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Content</div>
+                    <a href="./admin-categories.html" class="sidebar-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" />
+                            <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
+                        </svg>
+                        Categories
+                    </a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Users</div>
+                    <a href="./admin-authors.html" class="sidebar-item active">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                            <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                            <path d="M10 9H8" />
+                            <path d="M16 13H8" />
+                            <path d="M16 17H8" />
+                        </svg>
+                        Authors
+                    </a>
+                    <a href="./admin-readers.html" class="sidebar-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                        Readers
+                    </a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="./admin-login.html" class="sidebar-item" style="color:var(--muted-foreground)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    Sign out
+                </a>
+            </div>
+        </aside>
+
+        <!-- ── Main ──────────────────────────────────────────────── -->
+        <div class="admin-main">
+
+            <div class="admin-topbar">
+                <div class="flex items-center gap-3" style="margin-left:auto">
+                    <span class="text-sm text-muted">Admin</span>
+                    <div class="avatar avatar-sm" style="background:hsl(240,5.9%,10%);color:white;font-size:0.7rem">AD
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-content">
+
+                <div class="page-header">
+                    <div class="page-header-left">
+                        <h1 class="page-title">Authors</h1>
+                        <p class="page-desc">View and manage author accounts and their posts.</p>
+                    </div>
+                </div>
+
+                <!-- Top contributors -->
+                <div style="margin-bottom:1.5rem">
+                    <p class="page-desc" style="margin-bottom:0.75rem;font-weight:500;color:var(--foreground)">Top 5
+                        contributors</p>
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.75rem">
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div class="avatar"
+                                style="margin:0 auto 0.625rem;width:2.75rem;height:2.75rem;font-size:0.9375rem">MR</div>
+                            <div class="font-semibold text-sm">Mike Rodriguez</div>
+                            <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.04em;margin-top:0.375rem">21
+                            </div>
+                            <div class="text-xs text-muted">posts</div>
+                        </div>
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div class="avatar"
+                                style="margin:0 auto 0.625rem;width:2.75rem;height:2.75rem;font-size:0.9375rem">AC</div>
+                            <div class="font-semibold text-sm">Alex Chen</div>
+                            <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.04em;margin-top:0.375rem">15
+                            </div>
+                            <div class="text-xs text-muted">posts</div>
+                        </div>
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div class="avatar"
+                                style="margin:0 auto 0.625rem;width:2.75rem;height:2.75rem;font-size:0.9375rem">SJ</div>
+                            <div class="font-semibold text-sm">Sarah Johnson</div>
+                            <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.04em;margin-top:0.375rem">8
+                            </div>
+                            <div class="text-xs text-muted">posts</div>
+                        </div>
+                        <div class="card" style="padding:1.25rem;text-align:center">
+                            <div class="avatar"
+                                style="margin:0 auto 0.625rem;width:2.75rem;height:2.75rem;font-size:0.9375rem">EW</div>
+                            <div class="font-semibold text-sm">Emma Williams</div>
+                            <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.04em;margin-top:0.375rem">5
+                            </div>
+                            <div class="text-xs text-muted">posts</div>
+                        </div>
+                        <div class="card" style="padding:1.25rem;text-align:center;border-style:dashed">
+                            <div class="avatar"
+                                style="margin:0 auto 0.625rem;width:2.75rem;height:2.75rem;font-size:0.9375rem;opacity:0.3">
+                                …</div>
+                            <div class="font-semibold text-sm text-muted">Others</div>
+                            <div
+                                style="font-size:1.5rem;font-weight:700;letter-spacing:-0.04em;margin-top:0.375rem;color:var(--muted-foreground)">
+                                8</div>
+                            <div class="text-xs text-muted">authors</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toolbar -->
+                <div class="toolbar">
+                    <div class="search-wrap" style="max-width:320px;flex:1">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.35-4.35" />
+                        </svg>
+                        <input class="input" type="search" placeholder="Search authors…" style="height:2.25rem"
+                            oninput="filterAuthors(this.value)">
+                    </div>
+                    <select class="select" style="width:165px;height:2.25rem">
+                        <option>Sort: Most posts</option>
+                        <option>Sort: Newest</option>
+                        <option>Sort: Name A → Z</option>
+                    </select>
+                </div>
+
+                <!-- Table -->
+                <div class="table-container" style="overflow:visible">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Author</th>
+                                <th>Posts</th>
+                                <th>Published</th>
+                                <th>Joined</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                        <div class="avatar">MR</div>
+                                        <div>
+                                            <div class="font-medium">Mike Rodriguez</div>
+                                            <div class="text-xs text-muted">mike.rodriguez@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-sm">21 posts</td>
+                                <td class="text-sm"><span class="badge badge-success" style="font-size:0.7rem">18
+                                        published</span></td>
+                                <td class="text-sm text-muted">Jan 8, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block">
+                                        <button class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem;letter-spacing:.05em">···</button>
+                                        <div class="dropdown-content">
+                                            <button class="dropdown-item"
+                                                onclick="viewAuthor('MR','Mike Rodriguez','mike.rodriguez@email.com','Jan 8, 2025','Senior developer and open source enthusiast with 10 years of experience building distributed systems.')"><svg
+                                                    width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                                    <circle cx="12" cy="12" r="3" />
+                                                </svg> View</button>
+                                            <button class="dropdown-item"
+                                                onclick="openEditAuthor('MR','Mike','Rodriguez','mike.rodriguez@email.com','Senior developer and open source enthusiast with 10 years of experience building distributed systems.')"><svg
+                                                    width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                                </svg> Edit</button>
+                                            <div class="dropdown-sep"></div>
+                                            <button class="dropdown-item destructive"
+                                                onclick="openDeleteAuthor('Mike Rodriguez', this)"><svg width="13"
+                                                    height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M3 6h18" />
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                                </svg> Remove</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                        <div class="avatar">AC</div>
+                                        <div>
+                                            <div class="font-medium">Alex Chen</div>
+                                            <div class="text-xs text-muted">alex.chen@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-sm">15 posts</td>
+                                <td class="text-sm"><span class="badge badge-success" style="font-size:0.7rem">12
+                                        published</span></td>
+                                <td class="text-sm text-muted">Jan 10, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block">
+                                        <button class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem;letter-spacing:.05em">···</button>
+                                        <div class="dropdown-content">
+                                            <button class="dropdown-item"
+                                                onclick="viewAuthor('AC','Alex Chen','alex.chen@email.com','Jan 10, 2025','Full-stack .NET developer focused on clean architecture, security, and developer experience.')"><svg
+                                                    width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                                    <circle cx="12" cy="12" r="3" />
+                                                </svg> View</button>
+                                            <button class="dropdown-item"
+                                                onclick="openEditAuthor('AC','Alex','Chen','alex.chen@email.com','Full-stack .NET developer focused on clean architecture, security, and developer experience.')"><svg
+                                                    width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                                </svg> Edit</button>
+                                            <div class="dropdown-sep"></div>
+                                            <button class="dropdown-item destructive"
+                                                onclick="openDeleteAuthor('Alex Chen', this)"><svg width="13"
+                                                    height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M3 6h18" />
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                                </svg> Remove</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                        <div class="avatar">SJ</div>
+                                        <div>
+                                            <div class="font-medium">Sarah Johnson</div>
+                                            <div class="text-xs text-muted">sarah.johnson@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-sm">8 posts</td>
+                                <td class="text-sm"><span class="badge badge-success" style="font-size:0.7rem">8
+                                        published</span></td>
+                                <td class="text-sm text-muted">Jan 22, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block">
+                                        <button class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem;letter-spacing:.05em">···</button>
+                                        <div class="dropdown-content">
+                                            <button class="dropdown-item"
+                                                onclick="viewAuthor('SJ','Sarah Johnson','sarah.johnson@email.com','Jan 22, 2025','DevOps engineer and technical writer. Passionate about developer productivity and open source communities.')"><svg
+                                                    width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                                    <circle cx="12" cy="12" r="3" />
+                                                </svg> View</button>
+                                            <button class="dropdown-item"
+                                                onclick="openEditAuthor('SJ','Sarah','Johnson','sarah.johnson@email.com','DevOps engineer and technical writer. Passionate about developer productivity and open source communities.')"><svg
+                                                    width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                                </svg> Edit</button>
+                                            <div class="dropdown-sep"></div>
+                                            <button class="dropdown-item destructive"
+                                                onclick="openDeleteAuthor('Sarah Johnson', this)"><svg width="13"
+                                                    height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M3 6h18" />
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                                </svg> Remove</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                        <div class="avatar">EW</div>
+                                        <div>
+                                            <div class="font-medium">Emma Williams</div>
+                                            <div class="text-xs text-muted">emma.williams@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-sm">5 posts</td>
+                                <td class="text-sm"><span class="badge badge-warning" style="font-size:0.7rem">3
+                                        published</span></td>
+                                <td class="text-sm text-muted">Feb 14, 2025</td>
+                                <td style="text-align:right">
+                                    <div class="dropdown" style="display:inline-block">
+                                        <button class="btn btn-ghost btn-sm btn-icon" onclick="toggleDropdown(this)"
+                                            style="font-size:1.1rem;letter-spacing:.05em">···</button>
+                                        <div class="dropdown-content">
+                                            <button class="dropdown-item"
+                                                onclick="viewAuthor('EW','Emma Williams','emma.williams@email.com','Feb 14, 2025','Database architect with a love for PostgreSQL, ORMs, and everything data.')"><svg
+                                                    width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                                    <circle cx="12" cy="12" r="3" />
+                                                </svg> View</button>
+                                            <button class="dropdown-item"
+                                                onclick="openEditAuthor('EW','Emma','Williams','emma.williams@email.com','Database architect with a love for PostgreSQL, ORMs, and everything data.')"><svg
+                                                    width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                                </svg> Edit</button>
+                                            <div class="dropdown-sep"></div>
+                                            <button class="dropdown-item destructive"
+                                                onclick="openDeleteAuthor('Emma Williams', this)"><svg width="13"
+                                                    height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M3 6h18" />
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                                </svg> Remove</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- end table -->
+
+            </div>
+        </div>
+    </div><!-- /admin-layout -->
+
+    <!-- ── Edit Author dialog ─────────────────────────────────── -->
+    <div class="dialog-overlay" id="editAuthorDialog">
+        <div class="dialog">
+            <div class="dialog-header">
+                <div>
+                    <h2 class="dialog-title">Edit author</h2>
+                    <p class="dialog-description">Update author profile information.</p>
+                </div>
+                <button class="dialog-close" onclick="closeDialog('editAuthorDialog')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="dialog-body">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+                    <div class="form-group">
+                        <label class="label">First name</label>
+                        <input class="input" type="text" id="editFirst">
+                    </div>
+                    <div class="form-group">
+                        <label class="label">Last name</label>
+                        <input class="input" type="text" id="editLast">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label">Email</label>
+                    <input class="input" type="email" id="editEmail">
+                </div>
+                <div class="form-group">
+                    <label class="label">Biography</label>
+                    <textarea class="textarea" id="editBio" rows="3" style="min-height:80px"></textarea>
+                </div>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn btn-outline btn-sm" onclick="closeDialog('editAuthorDialog')">Cancel</button>
+                <button class="btn btn-default btn-sm" onclick="saveAuthor()">Save changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Delete Author dialog ───────────────────────────────── -->
+    <div class="dialog-overlay" id="deleteAuthorDialog">
+        <div class="dialog" style="max-width:420px">
+            <div class="dialog-header">
+                <div>
+                    <h2 class="dialog-title">Remove author?</h2>
+                    <p class="dialog-description" id="deleteAuthorDesc">This will remove the author account.</p>
+                </div>
+                <button class="dialog-close" onclick="closeDialog('deleteAuthorDialog')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="dialog-body">
+                <div class="alert alert-destructive">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                    <span>Removing this author will not delete their posts. Posts will remain but show no author.</span>
+                </div>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn btn-outline btn-sm" onclick="closeDialog('deleteAuthorDialog')">Cancel</button>
+                <button class="btn btn-destructive btn-sm" onclick="deleteAuthor()">Remove author</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script>
+        let pendingDeleteRow = null;
+
+        function closeDialog(id) { document.getElementById(id).classList.remove('open'); }
+        function openDialog(id) { document.getElementById(id).classList.add('open'); }
+
+        function openEditAuthor(initials, first, last, email, bio) {
+            document.getElementById('editFirst').value = first;
+            document.getElementById('editLast').value = last;
+            document.getElementById('editEmail').value = email;
+            document.getElementById('editBio').value = bio;
+            openDialog('editAuthorDialog');
+        }
+
+        function saveAuthor() {
+            closeDialog('editAuthorDialog');
+            showToast('Author updated successfully.', 'success');
+        }
+
+        function openDeleteAuthor(name, btn) {
+            pendingDeleteRow = btn.closest('tr');
+            document.getElementById('deleteAuthorDesc').textContent = `"${name}" will be removed from the platform.`;
+            openDialog('deleteAuthorDialog');
+            document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+        }
+
+        function deleteAuthor() {
+            if (pendingDeleteRow) pendingDeleteRow.remove();
+            closeDialog('deleteAuthorDialog');
+            showToast('Author removed.', 'destructive');
+        }
+
+        function filterAuthors(q) {
+            q = q.toLowerCase();
+            document.querySelectorAll('tbody tr').forEach(r => {
+                const name = r.querySelector('.font-medium')?.textContent.toLowerCase() || '';
+                const email = r.querySelector('.text-xs')?.textContent.toLowerCase() || '';
+                r.style.display = (name.includes(q) || email.includes(q)) ? '' : 'none';
+            });
+        }
+
+        const authorPosts = {
+            'Mike Rodriguez': [
+                { title: 'Understanding RAG Patterns in Production AI Applications', cat: 'AI/ML', status: 'Published', date: 'Mar 10' },
+                { title: 'React Server Components: What They Are', cat: 'Web Dev', status: 'Published', date: 'Feb 28' },
+                { title: 'Building a CI/CD Pipeline with GitHub Actions', cat: 'DevOps', status: 'Published', date: 'Feb 15' },
+            ],
+            'Alex Chen': [
+                { title: 'Building Scalable APIs with .NET 8 and Minimal APIs', cat: 'Web Dev', status: 'Published', date: 'Mar 15' },
+                { title: 'Zero-Trust Architecture in Modern Web Applications', cat: 'Security', status: 'Published', date: 'Mar 5' },
+                { title: 'Event Sourcing with .NET and EventStoreDB', cat: 'Database', status: 'Published', date: 'Feb 22' },
+                { title: 'CQRS Pattern: Separating Commands and Queries', cat: 'Web Dev', status: 'Draft', date: 'Apr 1' },
+            ],
+            'Sarah Johnson': [
+                { title: 'Docker Compose for Local Development: A Complete Guide', cat: 'DevOps', status: 'Published', date: 'Mar 12' },
+                { title: 'Your First Open Source Contribution', cat: 'Open Source', status: 'Published', date: 'Mar 2' },
+            ],
+            'Emma Williams': [
+                { title: 'PostgreSQL Performance Tuning', cat: 'Database', status: 'Draft', date: 'Mar 8' },
+                { title: 'Kubernetes Cost Optimization Strategies', cat: 'DevOps', status: 'Published', date: 'Feb 25' },
+                { title: 'Index Strategies for High-Traffic Tables', cat: 'Database', status: 'Draft', date: 'Mar 20' },
+            ],
+        };
+
+        function viewAuthor(initials, name, email, joined, bio) {
+            document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+            const params = new URLSearchParams({ initials, name, email, joined, bio });
+            window.location.href = './admin-author-detail.html?' + params.toString();
+        }
+
+        function toggleDropdown(elOrId) {
+            const el = typeof elOrId === 'string' ? document.getElementById(elOrId) : elOrId.closest('.dropdown');
+            const isOpen = el.classList.contains('open');
+            document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+            if (!isOpen) el.classList.add('open');
+        }
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.dropdown')) document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+        });
+
+        function showToast(msg, type) {
+            const c = document.getElementById('toast-container');
+            const t = document.createElement('div');
+            t.className = 'toast' + (type ? ' toast-' + type : '');
+            t.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>${msg}`;
+            c.appendChild(t);
+            setTimeout(() => t.remove(), 3500);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Scalable APIs with .NET 8 — Codex</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+    <!-- ── Navigation (reader logged in) ─────────────────────── -->
+    <header class="nav-header">
+        <div class="container nav-container">
+            <a href="./index.html" class="nav-brand">
+                <svg class="nav-logo" viewBox="0 0 28 28" fill="none">
+                    <rect width="28" height="28" rx="6" fill="hsl(240,5.9%,10%)" />
+                    <path d="M8 10l-3 4 3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M20 10l3 4-3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M16 8l-4 12" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity=".7" />
+                </svg>
+                Codex
+            </a>
+            <nav class="nav-links">
+                <a href="./index.html" class="nav-link">Posts</a>
+            </nav>
+            <div class="nav-actions">
+                <!-- Logged in as reader: James Wilson -->
+                <div class="dropdown" id="userDropdown">
+                    <button class="flex items-center gap-2"
+                        style="background:none;border:none;cursor:pointer;padding:0.25rem"
+                        onclick="toggleDropdown('userDropdown')">
+                        <div class="avatar avatar-sm" style="background:hsl(240,5.9%,10%);color:white">JW</div>
+                        <span class="text-sm font-medium"
+                            style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">James
+                            Wilson</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="dropdown-content">
+                        <div class="dropdown-label">James Wilson</div>
+                        <div class="dropdown-sep"></div>
+                        <a href="#" class="dropdown-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                            Profile
+                        </a>
+                        <div class="dropdown-sep"></div>
+                        <a href="./auth.html" class="dropdown-item destructive">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                <polyline points="16 17 21 12 16 7" />
+                                <line x1="21" y1="12" x2="9" y2="12" />
+                            </svg>
+                            Sign out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── Post content ───────────────────────────────────────── -->
+    <main class="container container-md">
+        <div class="post-detail-wrap">
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb" style="margin-bottom:1.5rem">
+                <a href="./index.html">Posts</a>
+                <span class="breadcrumb-sep">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m9 18 6-6-6-6" />
+                    </svg>
+                </span>
+                <span>Web Development</span>
+            </nav>
+
+            <!-- Meta bar -->
+            <div class="post-meta-bar">
+                <span class="badge badge-secondary">Web Development</span>
+                <span class="post-meta-sep">·</span>
+                <span>March 15, 2025</span>
+                <span class="post-meta-sep">·</span>
+                <span>8 min read</span>
+                <span class="post-meta-sep">·</span>
+                <span class="badge badge-success">Published</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="post-title">Building Scalable APIs with .NET 8 and Minimal APIs</h1>
+
+            <!-- Author bar -->
+            <div class="post-author-bar">
+                <div class="avatar avatar-lg">AC</div>
+                <div class="post-author-info">
+                    <span class="post-author-name">Alex Chen</span>
+                    <span class="post-author-date">Published March 15, 2025 · Updated March 18, 2025</span>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <article class="post-body">
+                <p>
+                    .NET 8 brought a significant evolution to Minimal APIs — moving from a novelty to a
+                    production-ready approach for building HTTP services. If you've been building APIs with
+                    traditional MVC controllers, this guide will show you how to migrate — and why you might
+                    want to.
+                </p>
+
+                <h2>Why Minimal APIs?</h2>
+                <p>
+                    Traditional MVC controller-based APIs come with ceremony: base classes, action filters,
+                    convention-based routing. Minimal APIs strip all that away. You write a handler, register a
+                    route, and ship it. Less indirection means fewer places for bugs to hide.
+                </p>
+                <p>
+                    The real win is startup performance. Minimal APIs can start in under 10 ms on modest
+                    hardware, making them ideal for serverless functions, sidecar services, and anything where
+                    cold-start time matters.
+                </p>
+
+                <h2>Setting Up Your First Endpoint</h2>
+                <p>
+                    A minimal API project starts with a single <code>Program.cs</code> file. Here's a fully
+                    working example with dependency injection and validation:
+                </p>
+                <pre><code>var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddScoped&lt;IPostRepository, PostRepository&gt;();
+
+var app = builder.Build();
+
+app.MapGet("/posts", async (IPostRepository repo) =&gt;
+    await repo.GetPublishedAsync())
+   .WithName("GetPosts")
+   .WithOpenApi();
+
+app.MapPost("/posts", async (CreatePostRequest req, IPostRepository repo) =&gt; {
+    var post = await repo.CreateAsync(req);
+    return Results.CreatedAtRoute("GetPost", new { id = post.Id }, post);
+})
+.WithName("CreatePost")
+.WithOpenApi();
+
+app.Run();</code></pre>
+
+                <h2>Dependency Injection the Right Way</h2>
+                <p>
+                    Minimal API handlers support full DI through their parameter list. Any service registered in
+                    <code>builder.Services</code> can be injected directly — no <code>[FromServices]</code>
+                    attribute needed as of .NET 7+.
+                </p>
+                <p>
+                    For complex endpoints, consider <em>endpoint groups</em> to keep your code organized without
+                    falling back to controllers:
+                </p>
+                <pre><code>var posts = app.MapGroup("/posts").RequireAuthorization();
+
+posts.MapGet("/", GetAllPosts);
+posts.MapGet("/{id:guid}", GetPostById);
+posts.MapPost("/", CreatePost);
+posts.MapPut("/{id:guid}", UpdatePost);
+posts.MapDelete("/{id:guid}", DeletePost);</code></pre>
+
+                <h2>Validation with FluentValidation</h2>
+                <p>
+                    ASP.NET Core 8 added built-in support for <code>IEndpointFilter</code>, which makes
+                    pre-request validation trivial:
+                </p>
+                <pre><code>app.MapPost("/posts", CreatePost)
+   .AddEndpointFilter&lt;ValidationFilter&lt;CreatePostRequest&gt;&gt;();</code></pre>
+
+                <blockquote>
+                    <p>
+                        <strong>Tip:</strong> Use the <code>TypedResults</code> class instead of <code>Results</code>
+                        to get compile-time type safety on your return types — this is picked up by Swagger
+                        automatically.
+                    </p>
+                </blockquote>
+
+                <h2>Benchmarks</h2>
+                <p>
+                    In our internal benchmarks, Minimal APIs handle roughly <strong>20–30% more requests per
+                        second</strong> than equivalent controller-based endpoints, primarily due to reduced
+                    middleware overhead and faster route matching.
+                </p>
+
+                <h2>When to Stick With Controllers</h2>
+                <ul>
+                    <li>Your team is deeply familiar with the MVC pattern and productivity matters more than raw
+                        throughput</li>
+                    <li>You rely heavily on action filters and model binding conventions</li>
+                    <li>You need view rendering (Razor Pages or MVC views)</li>
+                </ul>
+
+                <p>
+                    Otherwise, for pure API services, Minimal APIs are the way forward. They're leaner, faster to
+                    write, and the tooling has caught up. Give them a try on your next greenfield service.
+                </p>
+            </article>
+
+            <!-- ── Comments ─────────────────────────────────────────── -->
+            <section class="comments-section">
+                <h2 class="comments-title">Comments <span
+                        style="color:var(--muted-foreground);font-weight:400;font-size:1rem">(3)</span></h2>
+
+                <!-- Comment 1 -->
+                <div class="comment">
+                    <div class="avatar avatar-sm">LP</div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="comment-author">Lisa Park</span>
+                            <span class="comment-date">March 16, 2025</span>
+                        </div>
+                        <p class="comment-text">
+                            Great writeup! I switched our team's internal service to Minimal APIs last quarter and the
+                            startup time improvement was immediately noticeable. One thing worth mentioning is that
+                            <code>WithOpenApi()</code> requires the <code>Microsoft.AspNetCore.OpenApi</code> package
+                            separately in .NET 8.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Comment 2 -->
+                <div class="comment">
+                    <div class="avatar avatar-sm">DB</div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="comment-author">David Brown</span>
+                            <span class="comment-date">March 17, 2025</span>
+                        </div>
+                        <p class="comment-text">
+                            The endpoint groups section is what I was looking for — I've been struggling to organise a
+                            larger minimal API project. Is there a recommended file structure when you start having
+                            20+ endpoint groups?
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Comment 3 -->
+                <div class="comment">
+                    <div class="avatar avatar-sm">JW</div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="comment-author">James Wilson</span>
+                            <span class="comment-date">March 18, 2025</span>
+                        </div>
+                        <p class="comment-text">
+                            This is excellent. The TypedResults tip alone saved me an hour of debugging missing Swagger
+                            response types. Bookmarked.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ── Comment form (reader logged in) ───────────────── -->
+                <div class="comment-form" style="border-top:none;padding-top:1.5rem">
+                    <h3>Add a comment</h3>
+                    <div class="flex gap-3 items-start">
+                        <div class="avatar avatar-sm"
+                            style="margin-top:0.25rem;background:hsl(240,5.9%,10%);color:white">JW</div>
+                        <div style="flex:1;display:flex;flex-direction:column;gap:0.75rem">
+                            <textarea class="textarea" placeholder="Write a thoughtful comment…" rows="4"
+                                id="commentInput" style="min-height:100px"></textarea>
+                            <div class="flex justify-end">
+                                <button class="btn btn-default btn-sm" onclick="submitComment()">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="m22 2-7 20-4-9-9-4Z" />
+                                        <path d="M22 2 11 13" />
+                                    </svg>
+                                    Post comment
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div><!-- /post-detail-wrap -->
+    </main>
+
+    <!-- ── Toast container ───────────────────────────────────── -->
+    <div id="toast-container"></div>
+
+    <script>
+        function toggleDropdown(id) {
+            const el = document.getElementById(id);
+            const isOpen = el.classList.contains('open');
+            document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+            if (!isOpen) el.classList.add('open');
+        }
+
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+            }
+        });
+
+        function showToast(msg, type) {
+            const c = document.getElementById('toast-container');
+            const t = document.createElement('div');
+            t.className = 'toast' + (type ? ' toast-' + type : '');
+            t.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      ${msg}
+    `;
+            c.appendChild(t);
+            setTimeout(() => t.remove(), 3500);
+        }
+
+        function submitComment() {
+            const input = document.getElementById('commentInput');
+            if (!input.value.trim()) return;
+            showToast('Comment posted!', 'success');
+            input.value = '';
+        }
+    </script>
+</body>
+
+</html>

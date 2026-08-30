@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Post — Codex</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+    <!-- ── Navigation ────────────────────────────────────────── -->
+    <header class="nav-header">
+        <div class="container nav-container">
+            <a href="./index.html" class="nav-brand">
+                <svg class="nav-logo" viewBox="0 0 28 28" fill="none">
+                    <rect width="28" height="28" rx="6" fill="hsl(240,5.9%,10%)" />
+                    <path d="M8 10l-3 4 3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M20 10l3 4-3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M16 8l-4 12" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity=".7" />
+                </svg>
+                Codex
+            </a>
+            <nav class="nav-links"></nav>
+            <div class="nav-actions">
+                <!-- Last saved -->
+                <span class="text-sm text-muted" id="lastSaved" style="display:none">Saved just now</span>
+                <div class="dropdown" id="userDropdown">
+                    <button class="flex items-center gap-2"
+                        style="background:none;border:none;cursor:pointer;padding:0.25rem"
+                        onclick="toggleDropdown('userDropdown')">
+                        <div class="avatar avatar-sm" style="background:hsl(240,5.9%,10%);color:white">AC</div>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="dropdown-content">
+                        <div class="dropdown-label">Alex Chen</div>
+                        <div class="dropdown-sep"></div>
+                        <a href="./author-posts.html" class="dropdown-item">My Posts</a>
+                        <div class="dropdown-sep"></div>
+                        <a href="./auth.html" class="dropdown-item destructive">Sign out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── Editor ─────────────────────────────────────────────── -->
+    <main class="container" style="padding-top:2rem;padding-bottom:5rem">
+
+        <!-- Back link -->
+        <a href="./author-posts.html" class="flex items-center gap-2 text-sm text-muted"
+            style="width:fit-content;margin-bottom:1.75rem;transition:color 120ms"
+            onmouseover="this.style.color='var(--foreground)'" onmouseout="this.style.color='var(--muted-foreground)'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m12 19-7-7 7-7" />
+                <path d="M19 12H5" />
+            </svg>
+            Back to My Posts
+        </a>
+
+        <div class="editor-layout">
+
+            <!-- ── Main editor ──────────────────────────────────────── -->
+            <div class="editor-main">
+
+                <!-- Title -->
+                <input class="editor-title" type="text" id="postTitle" placeholder="Post title…"
+                    value="CQRS Pattern: Separating Commands and Queries in .NET">
+
+                <!-- Content textarea -->
+                <textarea class="textarea editor-content" id="postContent"
+                    placeholder="Write your post here… Markdown is supported.">## Introduction
+
+CQRS (Command Query Responsibility Segregation) is an architectural pattern that separates read operations from write operations. While it sounds simple, applying it correctly can significantly simplify complex domains and improve scalability.
+
+## What Problem Does CQRS Solve?
+
+In a traditional CRUD application, the same model is used for both reads and writes. This works fine for simple cases, but as complexity grows you start seeing friction:
+
+- Read models need denormalised data for performance
+- Write models need rich domain logic and invariants
+- The two concerns fight each other for the same class
+
+## Commands vs Queries
+
+A **Command** changes state and returns nothing (or just an ID). A **Query** reads state and returns data without side-effects.
+
+```csharp
+// Command
+public record CreatePostCommand(string Title, string Content, Guid CategoryId);
+
+// Query  
+public record GetPublishedPostsQuery(int Page, int PageSize, string? Category);
+```
+
+## Implementing with MediatR
+
+MediatR is the most popular library for CQRS in .NET. Install it via NuGet:
+
+```bash
+dotnet add package MediatR
+dotnet add package MediatR.Extensions.Microsoft.DependencyInjection
+```
+
+Then define your handler:
+
+```csharp
+public class CreatePostHandler : IRequestHandler&lt;CreatePostCommand, Guid&gt;
+{
+    private readonly IPostRepository _repo;
+    public CreatePostHandler(IPostRepository repo) => _repo = repo;
+
+    public async Task&lt;Guid&gt; Handle(CreatePostCommand cmd, CancellationToken ct)
+    {
+        var post = Post.Create(cmd.Title, cmd.Content, cmd.CategoryId);
+        await _repo.SaveAsync(post, ct);
+        return post.Id;
+    }
+}
+```
+
+## When NOT to Use CQRS
+
+CQRS adds complexity. Don't reach for it on simple CRUD apps. The pattern shines when:
+
+- Your read and write models naturally diverge
+- You need separate scaling for reads vs writes
+- You're combining it with Event Sourcing</textarea>
+
+            </div>
+
+            <!-- ── Sidebar ──────────────────────────────────────────── -->
+            <div class="editor-sidebar">
+
+                <!-- Publish card -->
+                <div class="card">
+                    <div class="card-header" style="padding-bottom:1rem">
+                        <h3 class="card-title" style="font-size:1rem">Publish settings</h3>
+                    </div>
+                    <div class="card-content" style="display:flex;flex-direction:column;gap:0.875rem">
+                        <div class="form-group">
+                            <label class="label">Status</label>
+                            <div class="flex items-center gap-2" style="padding:0.5rem 0">
+                                <span class="badge badge-warning" id="sidebarStatus">Draft</span>
+                                <span class="text-xs text-muted">Not yet visible to readers</span>
+                            </div>
+                        </div>
+                        <div class="separator"></div>
+                        <button class="btn btn-outline w-full" onclick="saveDraft()">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                                <polyline points="17 21 17 13 7 13 7 21" />
+                                <polyline points="7 3 7 8 15 8" />
+                            </svg>
+                            Save draft
+                        </button>
+                        <button class="btn btn-default w-full" onclick="publishPost()">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M5 12h14" />
+                                <path d="m12 5 7 7-7 7" />
+                            </svg>
+                            Publish post
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Category card -->
+                <div class="card">
+                    <div class="card-header" style="padding-bottom:0.75rem">
+                        <h3 class="card-title" style="font-size:1rem">Category</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <select class="select" id="postCategory">
+                                <option value="">Select a category…</option>
+                                <option value="web" selected>Web Development</option>
+                                <option value="devops">DevOps &amp; Cloud</option>
+                                <option value="ai">AI &amp; Machine Learning</option>
+                                <option value="db">Database Design</option>
+                                <option value="sec">Security</option>
+                                <option value="oss">Open Source</option>
+                            </select>
+                            <span class="form-description">Choose the category that best fits your post.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Danger zone card -->
+                <div class="card" style="border-color:hsl(0,84%,90%)">
+                    <div class="card-header" style="padding-bottom:0.75rem">
+                        <h3 class="card-title" style="font-size:0.9375rem;color:var(--destructive)">Danger zone</h3>
+                    </div>
+                    <div class="card-content">
+                        <button class="btn btn-outline w-full"
+                            style="border-color:var(--destructive);color:var(--destructive)" onclick="confirmDiscard()"
+                            onmouseover="this.style.background='hsl(0,100%,97%)'"
+                            onmouseout="this.style.background='transparent'">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M3 6h18" />
+                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                            </svg>
+                            Delete post
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div><!-- /editor-layout -->
+
+    </main>
+
+    <!-- ── Discard confirmation dialog ───────────────────────── -->
+    <div class="dialog-overlay" id="discardDialog">
+        <div class="dialog" style="max-width:400px">
+            <div class="dialog-header">
+                <div>
+                    <h2 class="dialog-title">Delete post?</h2>
+                    <p class="dialog-description">This will permanently delete the post and cannot be undone.</p>
+                </div>
+                <button class="dialog-close" onclick="closeDialog('discardDialog')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn btn-outline btn-sm" onclick="closeDialog('discardDialog')">Keep editing</button>
+                <button class="btn btn-destructive btn-sm" onclick="discardPost()">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Publish confirmation dialog ───────────────────────── -->
+    <div class="dialog-overlay" id="publishDialog">
+        <div class="dialog" style="max-width:420px">
+            <div class="dialog-header">
+                <div>
+                    <h2 class="dialog-title">Publish post?</h2>
+                    <p class="dialog-description">Your post will be visible to all readers immediately.</p>
+                </div>
+                <button class="dialog-close" onclick="closeDialog('publishDialog')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="dialog-body" style="gap:0.75rem">
+                <p class="text-sm text-muted">Double-check your post before publishing. You can unpublish it later from
+                    My Posts.</p>
+                <div
+                    style="border:1px solid var(--border);border-radius:var(--radius);padding:0.875rem;background:var(--muted)">
+                    <p class="font-semibold text-sm" id="publishPreviewTitle">CQRS Pattern: Separating Commands and
+                        Queries in .NET</p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="badge badge-secondary" style="font-size:0.7rem">Web Development</span>
+                        <span class="text-xs text-muted">by Alex Chen</span>
+                    </div>
+                </div>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn btn-outline btn-sm" onclick="closeDialog('publishDialog')">Cancel</button>
+                <button class="btn btn-success btn-sm" onclick="confirmPublish()">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                    </svg>
+                    Publish now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script>
+        function toggleDropdown(id) {
+            const el = document.getElementById(id);
+            const isOpen = el.classList.contains('open');
+            document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+            if (!isOpen) el.classList.add('open');
+        }
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.dropdown')) document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+        });
+
+        function showToast(msg, type) {
+            const c = document.getElementById('toast-container');
+            const t = document.createElement('div');
+            t.className = 'toast' + (type ? ' toast-' + type : '');
+            t.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>${msg}`;
+            c.appendChild(t);
+            setTimeout(() => t.remove(), 3500);
+        }
+
+        function closeDialog(id) { document.getElementById(id).classList.remove('open'); }
+
+        function saveDraft() {
+            const saved = document.getElementById('lastSaved');
+            saved.style.display = 'inline';
+            saved.textContent = 'Saved just now';
+            showToast('Draft saved.', '');
+        }
+
+        function publishPost() {
+            const title = document.getElementById('postTitle').value.trim();
+            if (!title) { showToast('Please add a title before publishing.', 'destructive'); return; }
+            document.getElementById('publishPreviewTitle').textContent = title;
+            document.getElementById('publishDialog').classList.add('open');
+        }
+
+        function confirmPublish() {
+            closeDialog('publishDialog');
+            document.getElementById('sidebarStatus').className = 'badge badge-success';
+            document.getElementById('sidebarStatus').textContent = 'Published';
+            document.querySelector('#sidebarStatus + span').textContent = 'Visible to all readers';
+            showToast('Post published successfully!', 'success');
+            setTimeout(() => { window.location.href = './author-posts.html'; }, 1500);
+        }
+
+        function confirmDiscard() { document.getElementById('discardDialog').classList.add('open'); }
+
+        function discardPost() {
+            closeDialog('discardDialog');
+            window.location.href = './author-posts.html';
+        }
+    </script>
+</body>
+
+</html>

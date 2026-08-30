@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codex — Developer Publishing Platform</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+    <!-- ── Navigation (reader logged in) ────────────────────── -->
+    <header class="nav-header">
+        <div class="container nav-container">
+            <a href="./index.html" class="nav-brand">
+                <svg class="nav-logo" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="28" height="28" rx="6" fill="hsl(240,5.9%,10%)" />
+                    <path d="M8 10l-3 4 3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M20 10l3 4-3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M16 8l-4 12" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity=".7" />
+                </svg>
+                Codex
+            </a>
+            <div class="nav-actions">
+                <div class="dropdown" id="userDropdown">
+                    <button class="flex items-center gap-2"
+                        style="background:none;border:none;cursor:pointer;padding:0.25rem"
+                        onclick="toggleDropdown('userDropdown')">
+                        <div class="avatar avatar-sm" style="background:hsl(240,5.9%,10%);color:white">JW</div>
+                        <span class="text-sm font-medium">James Wilson</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="dropdown-content">
+                        <div class="dropdown-label">James Wilson</div>
+                        <span class="text-xs text-muted" style="padding:0 0.75rem 0.5rem;display:block">Reader</span>
+                        <div class="dropdown-sep"></div>
+                        <a href="#" class="dropdown-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                            Profile
+                        </a>
+                        <div class="dropdown-sep"></div>
+                        <a href="./auth.html" class="dropdown-item destructive">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                <polyline points="16 17 21 12 16 7" />
+                                <line x1="21" y1="12" x2="9" y2="12" />
+                            </svg>
+                            Sign out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── Hero ──────────────────────────────────────────────── -->
+    <section class="hero">
+        <div class="container">
+            <h1>Developer Stories<br>&amp; Insights</h1>
+            <p class="hero-sub">Discover posts written by developers — practical guides, deep dives, and lessons
+                learned.</p>
+            <div class="hero-search">
+                <div class="search-wrap">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                    <input class="input" type="search" placeholder="Search posts…" id="searchInput">
+                </div>
+                <select class="select" style="width:175px" id="sortSelect">
+                    <option value="newest">Newest first</option>
+                    <option value="oldest">Oldest first</option>
+                    <option value="az">Title A → Z</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Main ──────────────────────────────────────────────── -->
+    <main class="container" style="padding-bottom:5rem">
+
+        <!-- Category filter -->
+        <div class="cat-filter" id="catFilter">
+            <button class="cat-pill active" data-cat="all">All posts</button>
+            <button class="cat-pill" data-cat="web">Web Development</button>
+            <button class="cat-pill" data-cat="devops">DevOps &amp; Cloud</button>
+            <button class="cat-pill" data-cat="ai">AI &amp; Machine Learning</button>
+            <button class="cat-pill" data-cat="db">Database Design</button>
+            <button class="cat-pill" data-cat="sec">Security</button>
+            <button class="cat-pill" data-cat="oss">Open Source</button>
+        </div>
+
+        <!-- Posts grid -->
+        <div class="posts-grid" id="postsGrid">
+
+            <!-- Card 1 -->
+            <a href="./post.html" class="card post-card">
+                <div class="post-card-body">
+                    <div class="post-card-cat">
+                        <span class="badge badge-secondary">Web Development</span>
+                    </div>
+                    <h2 class="post-card-title">Building Scalable APIs with .NET 8 and Minimal APIs</h2>
+                    <p class="post-card-excerpt">Learn how to build high-performance REST APIs using .NET 8 Minimal APIs
+                        — covering routing, dependency injection, validation, and middleware patterns for production.
+                    </p>
+                </div>
+                <div class="post-card-footer">
+                    <div class="post-card-author">
+                        <div class="avatar avatar-xs">AC</div>
+                        <span>Alex Chen</span>
+                    </div>
+                    <span class="post-card-date">Mar 15, 2025</span>
+                </div>
+            </a>
+
+            <!-- Card 2 -->
+            <a href="./post.html" class="card post-card">
+                <div class="post-card-body">
+                    <div class="post-card-cat">
+                        <span class="badge badge-secondary">DevOps &amp; Cloud</span>
+                    </div>
+                    <h2 class="post-card-title">Docker Compose for Local Development: A Complete Guide</h2>
+                    <p class="post-card-excerpt">Stop fighting environment setup. This guide walks you through Docker
+                        Compose for reproducible development environments that work the same on every machine your team
+                        uses.</p>
+                </div>
+                <div class="post-card-footer">
+                    <div class="post-card-author">
+                        <div class="avatar avatar-xs">SJ</div>
+                        <span>Sarah Johnson</span>
+                    </div>
+                    <span class="post-card-date">Mar 12, 2025</span>
+                </div>
+            </a>
+
+            <!-- Card 3 -->
+            <a href="./post.html" class="card post-card">
+                <div class="post-card-body">
+                    <div class="post-card-cat">
+                        <span class="badge badge-secondary">AI &amp; Machine Learning</span>
+                    </div>
+                    <h2 class="post-card-title">Understanding RAG Patterns in Production AI Applications</h2>
+                    <p class="post-card-excerpt">Retrieval-Augmented Generation has become essential for building AI
+                        apps with custom knowledge. This post covers real-world patterns and optimizations from
+                        production deployments.</p>
+                </div>
+                <div class="post-card-footer">
+                    <div class="post-card-author">
+                        <div class="avatar avatar-xs">MR</div>
+                        <span>Mike Rodriguez</span>
+                    </div>
+                    <span class="post-card-date">Mar 10, 2025</span>
+                </div>
+            </a>
+
+            <!-- Card 4 -->
+            <a href="./post.html" class="card post-card">
+                <div class="post-card-body">
+                    <div class="post-card-cat">
+                        <span class="badge badge-secondary">Database Design</span>
+                    </div>
+                    <h2 class="post-card-title">PostgreSQL Performance Tuning: From Basics to Advanced Indexing</h2>
+                    <p class="post-card-excerpt">Most PostgreSQL performance issues come down to missing indexes or slow
+                        queries. This guide takes you from reading query plans to implementing partial and expression
+                        indexes.</p>
+                </div>
+                <div class="post-card-footer">
+                    <div class="post-card-author">
+                        <div class="avatar avatar-xs">EW</div>
+                        <span>Emma Williams</span>
+                    </div>
+                    <span class="post-card-date">Mar 8, 2025</span>
+                </div>
+            </a>
+
+            <!-- Card 5 -->
+            <a href="./post.html" class="card post-card">
+                <div class="post-card-body">
+                    <div class="post-card-cat">
+                        <span class="badge badge-secondary">Security</span>
+                    </div>
+                    <h2 class="post-card-title">Zero-Trust Architecture in Modern Web Applications</h2>
+                    <p class="post-card-excerpt">The perimeter-based security model is dead. Learn how to implement a
+                        zero-trust architecture that verifies every request regardless of network location.</p>
+                </div>
+                <div class="post-card-footer">
+                    <div class="post-card-author">
+                        <div class="avatar avatar-xs">AC</div>
+                        <span>Alex Chen</span>
+                    </div>
+                    <span class="post-card-date">Mar 5, 2025</span>
+                </div>
+            </a>
+
+            <!-- Card 6 -->
+            <a href="./post.html" class="card post-card">
+                <div class="post-card-body">
+                    <div class="post-card-cat">
+                        <span class="badge badge-secondary">Open Source</span>
+                    </div>
+                    <h2 class="post-card-title">Your First Open Source Contribution: A Practical Guide</h2>
+                    <p class="post-card-excerpt">Contributing to open source can feel intimidating but is incredibly
+                        rewarding. Learn to find good first issues, navigate codebases quickly, and write PRs that
+                        actually get merged.</p>
+                </div>
+                <div class="post-card-footer">
+                    <div class="post-card-author">
+                        <div class="avatar avatar-xs">SJ</div>
+                        <span>Sarah Johnson</span>
+                    </div>
+                    <span class="post-card-date">Mar 2, 2025</span>
+                </div>
+            </a>
+
+            <!-- Card 7 -->
+            <a href="./post.html" class="card post-card">
+                <div class="post-card-body">
+                    <div class="post-card-cat">
+                        <span class="badge badge-secondary">Web Development</span>
+                    </div>
+                    <h2 class="post-card-title">React Server Components: What They Are and When to Use Them</h2>
+                    <p class="post-card-excerpt">React Server Components change the mental model for data fetching. This
+                        post explains when RSCs shine, when they don't, and how to migrate existing code gradually.</p>
+                </div>
+                <div class="post-card-footer">
+                    <div class="post-card-author">
+                        <div class="avatar avatar-xs">MR</div>
+                        <span>Mike Rodriguez</span>
+                    </div>
+                    <span class="post-card-date">Feb 28, 2025</span>
+                </div>
+            </a>
+
+            <!-- Card 8 -->
+            <a href="./post.html" class="card post-card">
+                <div class="post-card-body">
+                    <div class="post-card-cat">
+                        <span class="badge badge-secondary">DevOps &amp; Cloud</span>
+                    </div>
+                    <h2 class="post-card-title">Kubernetes Cost Optimization: Practical Strategies That Actually Work
+                    </h2>
+                    <p class="post-card-excerpt">Cloud bills spiraling out of control? These are the Kubernetes cost
+                        optimizations we used to cut our monthly spend by 40% without reducing reliability or
+                        performance.</p>
+                </div>
+                <div class="post-card-footer">
+                    <div class="post-card-author">
+                        <div class="avatar avatar-xs">EW</div>
+                        <span>Emma Williams</span>
+                    </div>
+                    <span class="post-card-date">Feb 25, 2025</span>
+                </div>
+            </a>
+
+            <!-- Card 9 -->
+            <a href="./post.html" class="card post-card">
+                <div class="post-card-body">
+                    <div class="post-card-cat">
+                        <span class="badge badge-secondary">Database Design</span>
+                    </div>
+                    <h2 class="post-card-title">Event Sourcing with .NET and EventStoreDB: A Hands-On Tutorial</h2>
+                    <p class="post-card-excerpt">Event sourcing is a powerful pattern that captures all changes to
+                        application state as a sequence of events. This tutorial builds a real working example from
+                        scratch.</p>
+                </div>
+                <div class="post-card-footer">
+                    <div class="post-card-author">
+                        <div class="avatar avatar-xs">AC</div>
+                        <span>Alex Chen</span>
+                    </div>
+                    <span class="post-card-date">Feb 22, 2025</span>
+                </div>
+            </a>
+
+        </div><!-- /posts-grid -->
+
+        <!-- Pagination -->
+        <nav class="pagination" style="margin-top:3rem" aria-label="Posts navigation">
+            <button class="pg-btn" disabled aria-label="Previous page">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m15 18-6-6 6-6" />
+                </svg>
+            </button>
+            <button class="pg-btn active">1</button>
+            <button class="pg-btn">2</button>
+            <button class="pg-btn">3</button>
+            <span class="pg-ellipsis">…</span>
+            <button class="pg-btn">9</button>
+            <button class="pg-btn" aria-label="Next page">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
+            </button>
+        </nav>
+
+    </main>
+
+    <!-- ── Footer ─────────────────────────────────────────────── -->
+    <footer style="border-top:1px solid var(--border);padding:2rem 0;background:var(--muted)">
+        <div class="container flex items-center justify-between" style="flex-wrap:wrap;gap:1rem">
+            <div class="nav-brand" style="font-size:0.9375rem">
+                <svg width="20" height="20" viewBox="0 0 28 28" fill="none">
+                    <rect width="28" height="28" rx="6" fill="hsl(240,5.9%,10%)" />
+                    <path d="M8 10l-3 4 3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M20 10l3 4-3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M16 8l-4 12" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity=".7" />
+                </svg>
+                Codex
+            </div>
+            <p class="text-sm text-muted">© 2025 Codex. The developer publishing platform.</p>
+        </div>
+    </footer>
+
+    <!-- ── Toast container ───────────────────────────────────── -->
+    <div id="toast-container"></div>
+
+    <script>
+        function toggleDropdown(id) {
+            const el = document.getElementById(id);
+            const isOpen = el.classList.contains('open');
+            document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+            if (!isOpen) el.classList.add('open');
+        }
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.dropdown')) document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+        });
+
+        // Category filter pills
+        document.getElementById('catFilter').addEventListener('click', e => {
+            const pill = e.target.closest('.cat-pill');
+            if (!pill) return;
+            document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+        });
+
+        // Pagination
+        document.querySelectorAll('.pg-btn:not([disabled])').forEach(btn => {
+            btn.addEventListener('click', function () {
+                if (this.querySelector('svg')) return; // prev/next arrows
+                document.querySelectorAll('.pg-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

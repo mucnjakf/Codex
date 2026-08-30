@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reader — Codex Admin</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <div class="admin-layout">
+
+        <!-- ── Sidebar ──────────────────────────────────────────── -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="./admin-dashboard.html" class="nav-brand" style="font-size:1rem">
+                    <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+                        <rect width="28" height="28" rx="6" fill="hsl(240,5.9%,10%)" />
+                        <path d="M8 10l-3 4 3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M20 10l3 4-3 4" stroke="white" stroke-width="1.75" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M16 8l-4 12" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity=".7" />
+                    </svg>
+                    Codex
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="./admin-dashboard.html" class="sidebar-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="7" height="9" x="3" y="3" rx="1" />
+                        <rect width="7" height="5" x="14" y="3" rx="1" />
+                        <rect width="7" height="9" x="14" y="12" rx="1" />
+                        <rect width="7" height="5" x="3" y="16" rx="1" />
+                    </svg>
+                    Dashboard
+                </a>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Content</div>
+                    <a href="./admin-categories.html" class="sidebar-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" />
+                            <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
+                        </svg>
+                        Categories
+                    </a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Users</div>
+                    <a href="./admin-authors.html" class="sidebar-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                            <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                            <path d="M10 9H8" />
+                            <path d="M16 13H8" />
+                            <path d="M16 17H8" />
+                        </svg>
+                        Authors
+                    </a>
+                    <a href="./admin-readers.html" class="sidebar-item active">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                        Readers
+                    </a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="./admin-login.html" class="sidebar-item" style="color:var(--muted-foreground)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    Sign out
+                </a>
+            </div>
+        </aside>
+
+        <!-- ── Main ─────────────────────────────────────────────── -->
+        <div class="admin-main">
+
+            <div class="admin-topbar">
+                <div class="flex items-center gap-3" style="margin-left:auto">
+                    <span class="text-sm text-muted">Admin</span>
+                    <div class="avatar avatar-sm" style="background:hsl(240,5.9%,10%);color:white;font-size:0.7rem">AD
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-content">
+
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" style="margin-bottom:1.5rem">
+                    <a href="./admin-readers.html">Readers</a>
+                    <span class="breadcrumb-sep">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="m9 18 6-6-6-6" />
+                        </svg>
+                    </span>
+                    <span id="breadcrumbName">Reader</span>
+                </nav>
+
+                <!-- Profile card -->
+                <div class="card" style="margin-bottom:1.5rem">
+                    <div class="card-content" style="padding-top:1.5rem">
+                        <div style="display:grid;grid-template-columns:auto 1fr auto;gap:1.5rem;align-items:start">
+
+                            <!-- Avatar -->
+                            <div class="avatar" id="readerAvatar"
+                                style="width:5rem;height:5rem;font-size:1.5rem;border:2px solid var(--border)"></div>
+
+                            <!-- Info -->
+                            <div style="display:flex;flex-direction:column;gap:0.5rem">
+                                <h1 id="readerName" style="font-size:1.5rem;font-weight:700;letter-spacing:-0.025em">
+                                </h1>
+                                <div class="flex items-center gap-2 text-sm text-muted">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect width="20" height="16" x="2" y="4" rx="2" />
+                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                                    </svg>
+                                    <span id="readerEmail"></span>
+                                </div>
+                                <div class="flex items-center gap-2 text-sm text-muted">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                                        <line x1="16" x2="16" y1="2" y2="6" />
+                                        <line x1="8" x2="8" y1="2" y2="6" />
+                                        <line x1="3" x2="21" y1="10" y2="10" />
+                                    </svg>
+                                    Member since <span id="readerJoined"></span>
+                                </div>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="flex gap-2">
+                                <button class="btn btn-outline btn-sm" onclick="openEditDialog()">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                    </svg>
+                                    Edit
+                                </button>
+                                <button class="btn btn-outline btn-sm"
+                                    style="border-color:var(--destructive);color:var(--destructive)"
+                                    onclick="openRemoveDialog()">
+                                    Remove
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div style="display:grid;grid-template-columns:repeat(2,minmax(0,180px));gap:1rem;margin-bottom:1.5rem">
+                    <div class="card" style="padding:1.25rem">
+                        <div class="stat-label">Total comments</div>
+                        <div id="statComments" style="font-size:2rem;font-weight:700;letter-spacing:-0.04em"></div>
+                    </div>
+                    <div class="" style="padding:1.25rem">
+                        <div id="statPosts" style="font-size:2rem;font-weight:700;letter-spacing:-0.04em"></div>
+                    </div>
+                </div>
+
+                <!-- Comments table -->
+                <div class="page-header" style="margin-bottom:0.875rem">
+                    <h2 style="font-size:1rem;font-weight:600">Comments</h2>
+                </div>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width:50%">Comment</th>
+                                <th>Post</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="commentsBody"></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div><!-- /admin-layout -->
+
+    <!-- ── Edit Reader dialog ────────────────────────────────── -->
+    <div class="dialog-overlay" id="editReaderDialog">
+        <div class="dialog">
+            <div class="dialog-header">
+                <div>
+                    <h2 class="dialog-title">Edit reader</h2>
+                    <p class="dialog-description">Update reader account details.</p>
+                </div>
+                <button class="dialog-close" onclick="closeDialog('editReaderDialog')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="dialog-body">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+                    <div class="form-group"><label class="label">First name</label><input class="input" type="text"
+                            id="editFirst"></div>
+                    <div class="form-group"><label class="label">Last name</label><input class="input" type="text"
+                            id="editLast"></div>
+                </div>
+                <div class="form-group"><label class="label">Email</label><input class="input" type="email"
+                        id="editEmail"></div>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn btn-outline btn-sm" onclick="closeDialog('editReaderDialog')">Cancel</button>
+                <button class="btn btn-default btn-sm" onclick="saveEdit()">Save changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Remove Reader dialog ───────────────────────────────── -->
+    <div class="dialog-overlay" id="removeReaderDialog">
+        <div class="dialog" style="max-width:420px">
+            <div class="dialog-header">
+                <div>
+                    <h2 class="dialog-title">Remove reader?</h2>
+                    <p class="dialog-description">This will remove the reader account.</p>
+                </div>
+                <button class="dialog-close" onclick="closeDialog('removeReaderDialog')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="dialog-body">
+                <div class="alert alert-destructive">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                    <span>All comments by this reader will be removed from posts.</span>
+                </div>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn btn-outline btn-sm" onclick="closeDialog('removeReaderDialog')">Cancel</button>
+                <button class="btn btn-destructive btn-sm" onclick="removeReader()">Remove reader</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script>
+        // ── Data ──────────────────────────────────────────────────
+        const allComments = {
+            'James Wilson': [
+                { text: 'The TypedResults tip alone saved me an hour of debugging. Bookmarked.', post: 'Building Scalable APIs', date: 'Mar 18, 2025' },
+                { text: 'Very clear explanation of endpoint groups. Helped me restructure our project.', post: 'Building Scalable APIs', date: 'Mar 19, 2025' },
+                { text: 'Thanks for covering the limitations too — most posts skip that.', post: 'Zero-Trust Architecture', date: 'Mar 6, 2025' },
+            ],
+            'Lisa Park': [
+                { text: 'Worth mentioning that WithOpenApi() needs the Microsoft.AspNetCore.OpenApi package in .NET 8.', post: 'Building Scalable APIs', date: 'Mar 16, 2025' },
+                { text: 'I switched our team to Minimal APIs last quarter. Great experience overall.', post: 'Docker Compose for Local Dev', date: 'Mar 13, 2025' },
+            ],
+            'David Brown': [
+                { text: 'Is there a recommended file structure when you have 20+ endpoint groups?', post: 'Building Scalable APIs', date: 'Mar 17, 2025' },
+                { text: 'The RAG pattern explanation was excellent. Looking forward to the follow-up post.', post: 'Understanding RAG Patterns', date: 'Mar 11, 2025' },
+            ],
+            'Katie Torres': [
+                { text: 'The partial index example was exactly what I needed for our reporting table.', post: 'PostgreSQL Performance Tuning', date: 'Mar 9, 2025' },
+            ],
+            'Ryan Nguyen': [
+                { text: 'Great intro to event sourcing. Would love a Part 2 on projections and snapshots.', post: 'Event Sourcing with EventStoreDB', date: 'Feb 23, 2025' },
+            ],
+        };
+
+        // ── Load from URL params ───────────────────────────────────
+        const params = new URLSearchParams(location.search);
+        const initials = params.get('initials') || '??';
+        const name = params.get('name') || 'Unknown Reader';
+        const email = params.get('email') || '';
+        const joined = params.get('joined') || '';
+
+        document.title = name + ' — Codex Admin';
+
+        document.getElementById('readerAvatar').textContent = initials;
+        document.getElementById('readerName').textContent = name;
+        document.getElementById('readerEmail').textContent = email;
+        document.getElementById('readerJoined').textContent = joined;
+        document.getElementById('breadcrumbName').textContent = name;
+        document.getElementById('editFirst').value = name.split(' ')[0] || '';
+        document.getElementById('editLast').value = name.split(' ').slice(1).join(' ') || '';
+        document.getElementById('editEmail').value = email;
+
+        const comments = allComments[name] || [];
+        const uniquePosts = new Set(comments.map(c => c.post)).size;
+
+        document.getElementById('statComments').textContent = comments.length;
+
+
+        document.getElementById('commentsBody').innerHTML = comments.length
+            ? comments.map(c => `
+        <tr>
+          <td class="text-sm">${c.text}</td>
+          <td><span class="badge badge-secondary" style="font-size:0.7rem">${c.post}</span></td>
+          <td class="text-sm text-muted">${c.date}</td>
+          <td style="text-align:right">
+            <button class="btn btn-ghost btn-sm btn-icon" style="color:var(--destructive)"
+              onclick="deleteComment(this)" title="Delete comment">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+              </svg>
+            </button>
+          </td>
+        </tr>`).join('')
+            : `<tr><td colspan="4" class="text-center text-muted" style="padding:2rem">No comments yet.</td></tr>`;
+
+        // ── Helpers ───────────────────────────────────────────────
+        function closeDialog(id) { document.getElementById(id).classList.remove('open'); }
+        function openDialog(id) { document.getElementById(id).classList.add('open'); }
+        function openEditDialog() { openDialog('editReaderDialog'); }
+        function openRemoveDialog() { openDialog('removeReaderDialog'); }
+
+        function saveEdit() {
+            closeDialog('editReaderDialog');
+            showToast('Reader updated successfully.', 'success');
+        }
+
+        function removeReader() {
+            closeDialog('removeReaderDialog');
+            showToast('Reader removed.', 'destructive');
+            setTimeout(() => { window.location.href = './admin-readers.html'; }, 1200);
+        }
+
+        function deleteComment(btn) {
+            btn.closest('tr').remove();
+            showToast('Comment deleted.', 'destructive');
+        }
+
+        function showToast(msg, type) {
+            const c = document.getElementById('toast-container');
+            const t = document.createElement('div');
+            t.className = 'toast' + (type ? ' toast-' + type : '');
+            t.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>${msg}`;
+            c.appendChild(t);
+            setTimeout(() => t.remove(), 3500);
+        }
+    </script>
+</body>
+
+</html>
