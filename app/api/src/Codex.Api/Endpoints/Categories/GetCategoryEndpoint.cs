@@ -1,3 +1,4 @@
+using Codex.Api.Configuration;
 using Codex.Api.Extensions;
 using Codex.Application.Dtos;
 using Codex.Application.Queries.Categories;

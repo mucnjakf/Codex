@@ -1,10 +1,9 @@
 using System.Reflection;
-using Codex.Api.Endpoints;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Codex.Api.Extensions;
+namespace Codex.Api.Configuration;
 
-internal static class EndpointExtensions
+internal static class EndpointConfiguration
 {
     internal static IServiceCollection AddEndpoints(this IServiceCollection services, Assembly assembly)
     {
@@ -32,9 +31,4 @@ internal static class EndpointExtensions
 
         return app;
     }
-}
-
-internal interface IEndpoint
-{
-    void MapEndpoint(IEndpointRouteBuilder app);
 }

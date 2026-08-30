@@ -1,3 +1,4 @@
+using Codex.Api.Configuration;
 using Codex.Api.Extensions;
 using Codex.Application.Commands.Posts;
 using Codex.Application.Dtos;

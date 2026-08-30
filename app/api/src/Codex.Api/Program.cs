@@ -1,4 +1,5 @@
 using System.Reflection;
+using Codex.Api.Configuration;
 using Codex.Api.Exceptions;
 using Codex.Api.Extensions;
 using Codex.Application;
@@ -15,6 +16,14 @@ builder.AddServiceDefaults();
 // API docs
 builder.Services.AddOpenApi();
 
+// Cors
+builder.Services.AddCors(options =>
+    options.AddPolicy("AllowAll", configure
+        => configure
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin()));
+
 // Error handling
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<RequestValidationExceptionHandler>();
@@ -24,7 +33,7 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 
 // FluentValidation
-builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>(includeInternalTypes: true);
 
 // Modules
 builder.Services.AddApplicationModule(builder.Configuration);
@@ -50,6 +59,9 @@ app.MapScalarApiReference(options =>
 
     options.HideClientButton = true;
 });
+
+// Cors
+app.UseCors("AllowAll");
 
 // Database
 app.ApplyMigrations();
